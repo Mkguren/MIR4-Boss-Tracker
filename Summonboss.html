@@ -3,29 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <style>
+ /* Estilização Global da Barra de Rolagem */
  *::-webkit-scrollbar {width:4px;}
  *::-webkit-scrollbar-thumb {background:#ff9800;border-radius:10px;}
- body{background:#0f0f0f;color:#ddd;font-family:'Segoe UI',sans-serif;margin:0;padding:10px;width:350px;border:1px solid #ff9800;border-radius:8px}
+ *::-webkit-scrollbar-track {background: #1a1a1a;}
+
+ body{background:#0f0f0f;color:#ddd;font-family:'Segoe UI',sans-serif;margin:0;padding:10px;width:325px;border:1px solid #ff9800;border-radius:8px}
  .header{position:sticky;top:0;background:#0f0f0f;padding-bottom:10px;border-bottom:1px solid #333;z-index:10}
  h4{margin:0 0 8px 0;color:#ff9800;text-align:center;text-transform:uppercase;font-size:13px}
  
+ /* MENU DE NAVEGAÇÃO */
+ .nav-menu{display:flex; gap:5px; margin-bottom:10px;}
+ .nav-btn{flex:1; text-decoration:none; text-align:center; font-size:10px; font-weight:bold; padding:6px; border-radius:3px; transition: 0.3s;}
+ .btn-active{background:#ff9800; color:#000;}
+ .btn-inactive{background:#252525; color:#fff; border:1px solid #444;}
+
  .filter-container{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px}
  .f-btn{flex:1;border:none;padding:5px;font-size:9px;font-weight:bold;cursor:pointer;border-radius:3px;text-transform:uppercase;min-width:55px;opacity:0.4;transition:0.2s}
  .f-btn.active{opacity:1;box-shadow:0 0 8px rgba(255,152,0,0.5);transform:scale(1.05)}
  
- /* Cores da sua Planilha */
- .m8{background:#f28d8d;color:#000} /* Vermelho claro */
- .m7{background:#add8e6;color:#000} /* Azul claro */
- .m4{background:#90ee90;color:#000} /* Verde claro */
- .m2{background:#ffcc80;color:#000} /* Laranja/Pêssego */
- .m1{background:#e1bee7;color:#000} /* Roxo claro */
- .m155{background:#ff5252;color:#fff} /* Vermelho Intenso para 155+ */
+ /* Cores dos Mundos */
+ .m8{background:#f28d8d;color:#000} .m7{background:#add8e6;color:#000} 
+ .m4{background:#90ee90;color:#000} .m2{background:#ffcc80;color:#000} 
+ .m1{background:#e1bee7;color:#000} .m155{background:#ff5252;color:#fff}
  .all{background:#444;color:#fff}
 
- .scroll{height:550px;overflow-y:auto;margin-top:10px;padding-right:5px}
+ .scroll{height:500px;overflow-y:auto;margin-top:10px;padding-right:5px}
  .boss-card{background:rgba(255,255,255,0.03);border:1px solid #222;border-radius:5px;margin-bottom:12px;display:block;border-left:4px solid transparent}
  
- /* Cores das bordas laterais para identificar mundo mesmo no 'Todos' */
  [data-mundo="M8"]{border-left-color:#f28d8d} [data-mundo="M7"]{border-left-color:#add8e6}
  [data-mundo="M4"]{border-left-color:#90ee90} [data-mundo="M2"]{border-left-color:#ffcc80}
  [data-mundo="M1"]{border-left-color:#e1bee7} [data-mundo="M155"]{border-left-color:#ff5252}
@@ -48,10 +53,12 @@
 
 <div class="header">
  <h4>MIR4 Summon Tracker</h4>
-<div style="display:flex; gap:5px; margin-bottom:10px;">
-  <a href="index.html" style="flex:1.2; background:#ff9800; color:#000; text-decoration:none; text-align:center; font-size:10px; font-weight:bold; padding:6px; border-radius:3px;">BOSSES DE CAMPO</a>
-  <a href="Summonboss.html" style="flex:1; background:#252525; color:#fff; text-decoration:none; text-align:center; font-size:10px; font-weight:bold; padding:6px; border-radius:3px; border:1px solid #444;">INVOCAÇÃO</a>
-</div>
+ 
+ <div class="nav-menu">
+  <a href="index.html" class="nav-btn btn-inactive">BOSSES DE CAMPO</a>
+  <a href="Summonboss.html" class="nav-btn btn-active">INVOCAÇÃO</a>
+ </div>
+
  <div class="filter-container">
   <button class="f-btn all active" onclick="filter('all', this)">Todos</button>
   <button class="f-btn m8" onclick="filter('M8', this)">M8</button>
@@ -102,75 +109,7 @@
   </div>
  </div>
 
- <div class="boss-card" data-mundo="M4">
-  <div class="boss-header">
-   <img src="img/boss_phantasia.png" class="boss-img" onerror="this.src='https://via.placeholder.com/45?text=BOSS'">
-   <div><span class="boss-name">Selo do Labirinto</span><span class="npc-info">NPC: Jong Heo</span></div>
-  </div>
-  <div class="detail-sec">
-   <span class="label">Requisitos</span>
-   <div class="item-row">
-    <div class="item-slot"><img src="img/item_pedra.png"><span class="qty">40</span></div>
-   </div>
-   <span class="label">Recompensas</span>
-   <div class="item-row">
-    <div class="item-slot"><img src="img/drop_coin.png"></div>
-   </div>
-  </div>
  </div>
-
- <div class="boss-card" data-mundo="M2">
-  <div class="boss-header">
-   <img src="img/boss_sabuk.png" class="boss-img" onerror="this.src='https://via.placeholder.com/45?text=BOSS'">
-   <div><span class="boss-name">Prisão Abandonada</span><span class="npc-info">NPC: Sup Chul</span></div>
-  </div>
-  <div class="detail-sec">
-   <span class="label">Requisitos</span>
-   <div class="item-row">
-    <div class="item-slot"><img src="img/item_couro.png"><span class="qty">200</span></div>
-   </div>
-   <span class="label">Recompensas</span>
-   <div class="item-row">
-    <div class="item-slot"><img src="img/drop_steel.png"></div>
-   </div>
-  </div>
- </div>
-
- <div class="boss-card" data-mundo="M1">
-  <div class="boss-header">
-   <img src="img/boss_unseo.png" class="boss-img" onerror="this.src='https://via.placeholder.com/45?text=BOSS'">
-   <div><span class="boss-name">Vale das Serpentes</span><span class="npc-info">NPC: Oh Ryung</span></div>
-  </div>
-  <div class="detail-sec">
-   <span class="label">Requisitos</span>
-   <div class="item-row">
-    <div class="item-slot"><img src="img/item_chifre.png"><span class="qty">150</span></div>
-   </div>
-   <span class="label">Recompensas</span>
-   <div class="item-row">
-    <div class="item-slot"><img src="img/drop_darksteel.png"></div>
-   </div>
-  </div>
- </div>
-
- <div class="boss-card" data-mundo="M155">
-  <div class="boss-header">
-   <img src="img/boss_template.png" class="boss-img" onerror="this.src='https://via.placeholder.com/45?text=155+'">
-   <div><span class="boss-name">Novo Boss 155+ (Exemplo)</span><span class="npc-info">NPC: Nome do NPC</span></div>
-  </div>
-  <div class="detail-sec">
-   <span class="label">Requisitos</span>
-   <div class="item-row">
-    <div class="item-slot"><img src="img/item_exemplo.png"><span class="qty">0</span></div>
-   </div>
-   <span class="label">Recompensas</span>
-   <div class="item-row">
-    <div class="item-slot"><img src="img/drop_exemplo.png"></div>
-   </div>
-  </div>
- </div>
-
-</div>
 
 <script>
 function filter(mundo, btn) {
