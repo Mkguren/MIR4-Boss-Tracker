@@ -11,10 +11,19 @@
         *::-webkit-scrollbar-thumb {background: #ff9800; border-radius: 10px;}
         
         body {
-            background: #0f0f0f; color: #ddd; font-family: 'Segoe UI', sans-serif;
-            margin: 0 auto; padding: 10px; width: 330px; 
-            border: 1px solid #ff9800; border-radius: 8px;
-        }
+    background: #0f0f0f;
+    color: #ddd;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;           /* Remove o auto, trava na esquerda */
+    padding: 10px;
+    width: 330px;        /* Mantém a largura fixa */
+    border: 1px solid #ff9800;
+    border-radius: 8px;
+    overflow-x: hidden;  /* Evita que o site balance para os lados */
+    position: absolute;  /* Garante que ele não saia do lugar */
+    top: 0;
+    left: 0;
+}
         .header { position: sticky; top: 0; background: #0f0f0f; padding-bottom: 10px; border-bottom: 1px solid #333; z-index: 10; }
         h4 { margin: 0 0 8px 0; color: #ff9800; text-align: center; text-transform: uppercase; font-size: 13px; }
         
