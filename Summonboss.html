@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <style>
- /* ESTILIZAÇÃO GLOBAL - MANTIDA */
+ /* ESTILIZAÇÃO GLOBAL */
  *::-webkit-scrollbar {width: 4px; height: 4px;}
  *::-webkit-scrollbar-thumb {background: #ff9800; border-radius: 10px;}
  *::-webkit-scrollbar-track {background: #1a1a1a;}
@@ -46,7 +46,6 @@
  }
  .f-btn.active { opacity: 1; box-shadow: 0 0 8px rgba(255,152,0,0.5); transform: scale(1.05); }
  
- /* CORES DOS MUNDOS */
  .all { background: #444; color: #fff; }
  .mc { background: #607d8b; color: #fff; } 
  .m2 { background: #ffcc80; color: #000; } .m3 { background: #a5d6a7; color: #000; } 
@@ -104,13 +103,13 @@
  </div>
 
  <div id="menuMC" class="filter-container hidden">
-  <button class="f-btn btn-voltar" onclick="trocarMenu('principal')">← Voltar para Mundos</button>
+  <button class="f-btn btn-voltar" onclick="trocarMenu('principal')">← Voltar</button>
   <button class="f-btn mc" onclick="filter('MC', this)">Bosses MC</button>
   <button class="f-btn mc" style="background:#7e57c2; color:white;" onclick="filter('PURGATORIO', this)">Purgatório</button>
  </div>
 
  <div id="menu155" class="filter-container hidden">
-  <button class="f-btn btn-voltar" onclick="trocarMenu('principal')">← Voltar para Mundos</button>
+  <button class="f-btn btn-voltar" onclick="trocarMenu('principal')">← Voltar</button>
   <button class="f-btn m155" onclick="filter('Unseo', this)">Unseo</button>
   <button class="f-btn m155" onclick="filter('Vales', this)">Vales</button>
   <button class="f-btn m155" onclick="filter('Fogo', this)">Fogo</button>
@@ -119,3 +118,104 @@
 </div>
 
 <div class="scroll" id="bossList">
+
+ <div class="boss-card" data-mundo="M5">
+  <div class="boss-header">
+   <img src="img/bosses/m5_gufa.png" loading="lazy" class="boss-img">
+   <div><span class="boss-name">Ruína do Demônio</span><span class="npc-info">Campo de Gelo - Gufa</span></div>
+  </div>
+  <div class="detail-sec">
+   <span class="label">Requisitos</span>
+   <div class="item-row">
+    <div class="item-slot"><img src="img/itens/item1_m5.png"><span class="qty">60</span></div>
+    <div class="item-slot"><img src="img/itens/item2_m5.png"><span class="qty">100</span></div>
+   </div>
+  </div>
+ </div>
+
+ <div class="boss-card" data-mundo="M3">
+  <div class="boss-header">
+   <img src="img/bosses/m3_tatu.png" loading="lazy" class="boss-img">
+   <div><span class="boss-name">Tatu Sombrio</span><span class="npc-info">Necrópole Nefariox</span></div>
+  </div>
+  <div class="detail-sec">
+   <span class="label">Requisitos</span>
+   <div class="item-row">
+    <div class="item-slot"><img src="img/itens/item1_m3.png"><span class="qty">20</span></div>
+   </div>
+  </div>
+ </div>
+
+ <div class="boss-card" data-mundo="M6">
+  <div class="boss-header">
+   <img src="img/bosses/m6_jo.png" loading="lazy" class="boss-img">
+   <div><span class="boss-name">Jo Gyu</span><span class="npc-info">Cidade de Bicheon</span></div>
+  </div>
+  <div class="detail-sec">
+   <span class="label">Requisitos</span>
+   <div class="item-row">
+    <div class="item-slot"><img src="img/itens/item1_m6.png"><span class="qty">20</span></div>
+   </div>
+  </div>
+ </div>
+
+ <div class="boss-card" data-mundo="PURGATORIO">
+  <div class="boss-header">
+   <img src="img/bosses/purgatorio_icon.png" loading="lazy" class="boss-img">
+   <div><span class="boss-name">Missão Mensal Purgatório</span><span class="npc-info">Mapa Especial: Purgatório 1F</span></div>
+  </div>
+  <div class="detail-sec">
+   <span class="label">Objetivos Mensais</span>
+   <div class="item-row">
+    <div class="item-slot"><img src="img/itens/bau_purgatorio.png"></div>
+    <div class="item-slot"><img src="img/itens/purgatorio_scroll.png"></div>
+   </div>
+  </div>
+ </div>
+
+</div>
+
+<script>
+// Troca de menus
+function trocarMenu(alvo) {
+  const menus = ['menuPrincipal', 'menuMC', 'menu155'];
+  menus.forEach(m => document.getElementById(m).classList.add('hidden'));
+
+  if (alvo === 'mc') {
+    document.getElementById('menuMC').classList.remove('hidden');
+    filter('MC', document.querySelector('#menuMC .mc'));
+  } else if (alvo === 'm155') {
+    document.getElementById('menu155').classList.remove('hidden');
+    filter('M155', document.querySelector('#menu155 .m155'));
+  } else {
+    document.getElementById('menuPrincipal').classList.remove('hidden');
+    filter('all', document.querySelector('#menuPrincipal .all'));
+  }
+}
+
+// Filtro Otimizado
+function filter(termo, btn) {
+  document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  
+  const cards = document.querySelectorAll('.boss-card');
+  window.requestAnimationFrame(() => {
+    cards.forEach(card => {
+      const mundo = card.getAttribute('data-mundo') || "";
+      const match = (termo === 'all' || mundo.includes(termo));
+      card.classList.toggle('hidden', !match);
+    });
+  });
+}
+
+// Limpa carregamento infinito da aba caso imagens não existam
+window.onload = () => {
+  document.querySelectorAll('img').forEach(img => {
+    img.onerror = () => {
+      img.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';
+    };
+  });
+};
+</script>
+</body>
+</html>
