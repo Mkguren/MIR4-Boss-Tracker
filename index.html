@@ -8,7 +8,7 @@
  *::-webkit-scrollbar-thumb {background: #ff9800; border-radius: 10px;}
  *::-webkit-scrollbar-track {background: #1a1a1a;}
  
- /* Layout Travado: box-sizing garante que o padding não aumente o tamanho total */
+ /* Trava de Layout */
  * { box-sizing: border-box; }
 
  body {
@@ -17,17 +17,17 @@
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
     padding: 10px;
-    width: 325px;       /* Largura que você definiu */
-    height: 600px;      /* Altura fixa para o widget */
+    width: 325px;       /* Mantido seu padrão */
+    height: 580px;      /* Altura fixa para não variar entre páginas */
     border: 1px solid #ff9800;
     border-radius: 8px;
-    overflow: hidden;   /* Impede que o corpo estique */
+    overflow: hidden;   /* Impede o widget de esticar */
  }
 
  .header { position: sticky; top: 0; background: #0f0f0f; padding-bottom: 10px; border-bottom: 1px solid #333; z-index: 10; }
  h4 { margin: 0 0 8px 0; color: #ff9800; text-align: center; text-transform: uppercase; font-size: 13px; }
- 
- /* Menu de Navegação para manter o padrão visual */
+
+ /* Menu de Navegação */
  .nav-menu { display: flex; gap: 5px; margin-bottom: 10px; }
  .nav-btn { flex: 1; text-decoration: none; text-align: center; font-size: 10px; font-weight: bold; padding: 6px; border-radius: 3px; transition: 0.3s; }
  .btn-active { background: #ff9800; color: #000; }
@@ -38,8 +38,8 @@
  input { flex: 2; }
  select { flex: 1.5; cursor: pointer; }
 
- /* Área de scroll com altura fixa para não quebrar o layout */
- .scroll { height: 440px; overflow-y: auto; margin-top: 10px; padding-right: 2px; }
+ /* Área de scroll ajustada para a altura fixa do body */
+ .scroll { height: 430px; overflow-y: auto; margin-top: 10px; }
  
  .section-title { font-size: 10px; color: #ff9800; text-transform: uppercase; margin: 12px 0 5px 0; font-weight: bold; border-left: 2px solid #ff9800; padding-left: 5px; }
  .item { padding: 8px 5px; border-bottom: 1px solid #222; border-left: 4px solid #444; margin-bottom: 4px; background: rgba(255,255,255,0.02); }
@@ -60,7 +60,7 @@
 <div class="header">
  <h4>MIR4 Boss Tracker</h4>
  <div class="nav-menu">
-  <a href="index.html" class="nav-btn btn-active">BOSSES DE CAMPO</a>
+  <a href="index.html" class="nav-btn btn-active">BOSSES</a>
   <a href="Summonboss.html" class="nav-btn btn-inactive">INVOCAÇÃO</a>
  </div>
  <div class="search-container">
@@ -83,11 +83,4 @@
   ["L141","Gigantes Brancos","141-","M8-Selo",["01:00","05:00","09:00","13:00","17:00","21:00"],"C3"],
   ["L141","Teahyul","141+","M7-Jardim",["01:00","03:00","05:00","07:00","09:00","11:00","13:00","15:00","17:00","19:00","21:00","23:00"],"C3"],
   ["L141","Construcao","141+","M7-Culto",["02:00","05:00","08:00","11:00","14:00","17:00","20:00","23:00"],"C3"],
-  ["L141","Nefariox","141+","M4-Phantasia",["00:00","02:00","04:00","06:00","08:00","10:00","12:00","14:00","16:00","18:00","20:00","22:00"],"C3"],
-  ["L141","Kurilaika","141+","M4-Suserano",["00:00","03:00","06:00","09:00","12:00","15:00","18:00","21:00"],"C3"],
-  ["L143","Juhui","143+","M2-Lunula",["02:30","05:30","08:30","11:30","14:30","17:30","20:30","23:30"],"C3"],
-  ["L143","Faluk","143+","M5-Sabuk",["03:30","06:30","09:30","12:30","15:30","18:30","21:30","00:30"],"C3"],
-  ["L143","Assombracao","143+","M5-Templo",["01:30","04:30","07:30","10:30","13:30","16:30","19:30","22:30"],"C3"],
-  ["L150","Gyo Besta","150+","M3-Necropole",["02:30","08:30","14:30","20:30"],"C3"],
-  ["L150","Tatu Sombrio","150+","M3-Planicie",["01:30","03:30","05:30","07:30","09:30","11:30","13:30","15:30","17:30","19:30","21:30","23:30"],"C3"],
-  ["L150","Budu","150+","M3-
+  ["L141","Nefariox","141+","M4-Phantasia",["00:00","02:00","04:00","06:00","08:00","10:00","12:00","14:00","16:00","18:00","
