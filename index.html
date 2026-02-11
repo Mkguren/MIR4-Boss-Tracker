@@ -4,140 +4,109 @@
 <meta charset="UTF-8">
 <style>
  /* Estilização Global da Barra de Rolagem */
- *::-webkit-scrollbar {width: 4px; height: 4px;}
- *::-webkit-scrollbar-thumb {background: #ff9800; border-radius: 10px;}
+ *::-webkit-scrollbar {width:4px;}
+ *::-webkit-scrollbar-thumb {background:#ff9800;border-radius:10px;}
  *::-webkit-scrollbar-track {background: #1a1a1a;}
+
+ body {
+    background: #0f0f0f;
+    color: #ddd;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 10px;
+    width: 330px; /* Padronizado */
+    height: 580px; /* Padronizado */
+    border: 1px solid #ff9800;
+    border-radius: 8px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
  
- body{background:#0f0f0f;color:#ddd;font-family:'Segoe UI',sans-serif;margin:0;padding:10px;width:325px;border:1px solid #ff9800;border-radius:8px}
- .header{position:sticky;top:0;background:#0f0f0f;padding-bottom:10px;border-bottom:1px solid #333;z-index:10}
- h4{margin:0 0 8px 0;color:#ff9800;text-align:center;text-transform:uppercase;font-size:13px}
- .search-container{display:flex;gap:5px;width:100%}
- input,select{padding:7px;background:#252525;border:1px solid #444;color:#fff;border-radius:4px;font-size:11px;outline:none;box-sizing:border-box}
- input{flex:2}
- select{flex:1.5; cursor: pointer;}
- .scroll{height:480px;overflow-y:auto;margin-top:10px}
- .section-title{font-size:10px;color:#ff9800;text-transform:uppercase;margin:12px 0 5px 0;font-weight:bold;border-left:2px solid #ff9800;padding-left:5px}
- .item{padding:8px 5px;border-bottom:1px solid #222;border-left:4px solid #444;margin-bottom:4px;background:rgba(255,255,255,0.02)}
- .name{color:#fff;font-weight:bold;font-size:12px;display:block}
- .lvl-orange{color:#ff9800;font-weight:bold}
- .loc{color:#777;font-size:10px;display:block;margin-top:2px}
- .camada{color:#ff9800;font-size:9px;font-weight:bold;display:block;margin-bottom:2px;text-transform:uppercase}
- .time-box{background:rgba(0,230,118,0.1);padding:5px;border-radius:4px;margin-top:5px}
- .badge{display:inline-block;font-family:monospace;font-size:11px;margin-right:6px;color:#00e676}
- .item-alert{border-left-color:#ff3d00!important;background:rgba(255,61,0,0.1)}
- .alert-active{color:#ff3d00!important;font-weight:bold;text-decoration:underline;animation:blink 1s infinite}
- @keyframes blink{50%{opacity:.5}}
- .L141{border-left-color:#4caf50} .L143{border-left-color:#2196f3}
- .L150{border-left-color:#9c27b0} .L155{border-left-color:#f44336}
+ .header { border-bottom: 1px solid #333; padding-bottom: 10px; }
+ h4 { margin: 0 0 8px 0; color: #ff9800; text-align: center; text-transform: uppercase; font-size: 13px; }
+
+ /* MENU DE NAVEGAÇÃO PADRONIZADO */
+ .nav-menu { display: flex; gap: 5px; margin-bottom: 10px; }
+ .nav-btn { flex: 1; text-decoration: none; text-align: center; font-size: 10px; font-weight: bold; padding: 6px; border-radius: 3px; transition: 0.3s; }
+ .btn-active { background: #ff9800; color: #000; }
+ .btn-inactive { background: #252525; color: #fff; border: 1px solid #444; }
+
+ .filter-container { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
+ .f-btn { flex: 1; border: none; padding: 5px; font-size: 9px; font-weight: bold; cursor: pointer; border-radius: 3px; text-transform: uppercase; min-width: 50px; opacity: 0.4; transition: 0.2s; }
+ .f-btn.active { opacity: 1; box-shadow: 0 0 8px rgba(255,152,0,0.5); transform: scale(1.05); }
+ 
+ /* Cores dos Mundos */
+ .m8{background:#f28d8d;color:#000} .m7{background:#add8e6;color:#000} 
+ .m4{background:#90ee90;color:#000} .m2{background:#ffcc80;color:#000} 
+ .m1{background:#e1bee7;color:#000} .m155{background:#ff5252;color:#fff}
+ .all{background:#444;color:#fff}
+
+ .scroll { height: 440px; overflow-y: auto; margin-top: 10px; padding-right: 5px; }
+ .boss-card { background: rgba(255,255,255,0.03); border: 1px solid #222; border-radius: 5px; margin-bottom: 12px; display: block; border-left: 4px solid transparent; }
+ 
+ [data-mundo="M8"]{border-left-color:#f28d8d} [data-mundo="M7"]{border-left-color:#add8e6}
+ [data-mundo="M4"]{border-left-color:#90ee90} [data-mundo="M2"]{border-left-color:#ffcc80}
+ [data-mundo="M1"]{border-left-color:#e1bee7} [data-mundo="M155"]{border-left-color:#ff5252}
+
+ .boss-header{display:flex;align-items:center;padding:8px;gap:10px;background:rgba(255,255,255,0.02)}
+ .boss-img{width:45px;height:45px;border:1px solid #444;border-radius:4px;background:#111;object-fit:cover}
+ .boss-name{font-size:12px;font-weight:bold;color:#fff;display:block}
+ .npc-info{font-size:9px;color:#ff9800;display:block}
+
+ .detail-sec{padding:8px;border-top:1px solid #222}
+ .label{font-size:9px;color:#777;text-transform:uppercase;margin-bottom:5px;display:block;letter-spacing:1px}
+ .item-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+ .item-slot{width:32px;height:32px;background:#1a1a1a;border:1px solid #333;border-radius:3px;position:relative}
+ .item-slot img{width:100%;height:100%;border-radius:2px}
+ .qty{position:absolute;bottom:-2px;right:0px;font-size:9px;background:rgba(0,0,0,0.85);color:#00e676;padding:0 2px;font-weight:bold;border-radius:2px}
+ .hidden{display:none}
 </style>
 </head>
-<body onclick="itA()">
+<body>
+
 <div class="header">
- <h4>MIR4 Boss Tracker</h4>
- <div class="search-container">
-  <input type="text" id="ib" placeholder="Buscar Boss..." onkeyup="up()">
-  <select id="sh" onchange="up()">
-   <option value="">Horários</option>
-   <option value="00:00">00:00</option><option value="00:30">00:30</option><option value="01:00">01:00</option>
-   <option value="01:30">01:30</option><option value="02:00">02:00</option><option value="02:30">02:30</option>
-   <option value="03:00">03:00</option><option value="03:30">03:30</option><option value="04:00">04:00</option>
-   <option value="04:30">04:30</option><option value="05:00">05:00</option><option value="05:30">05:30</option>
-   <option value="06:00">06:00</option><option value="06:30">06:30</option><option value="07:00">07:00</option>
-   <option value="07:30">07:30</option><option value="08:00">08:00</option><option value="08:30">08:30</option>
-   <option value="09:00">09:00</option><option value="09:30">09:30</option><option value="10:00">10:00</option>
-   <option value="10:30">10:30</option><option value="11:00">11:00</option><option value="11:30">11:30</option>
-   <option value="12:00">12:00</option><option value="12:30">12:30</option><option value="13:00">13:00</option>
-   <option value="13:30">13:30</option><option value="14:00">14:00</option><option value="14:30">14:30</option>
-   <option value="15:00">15:00</option><option value="15:30">15:30</option><option value="16:00">16:00</option>
-   <option value="16:30">16:30</option><option value="17:00">17:00</option><option value="17:30">17:30</option>
-   <option value="18:00">18:00</option><option value="18:30">18:30</option><option value="19:00">19:00</option>
-   <option value="19:30">19:30</option><option value="20:00">20:00</option><option value="20:30">20:30</option>
-   <option value="21:00">21:00</option><option value="21:30">21:30</option><option value="22:00">22:00</option>
-   <option value="22:30">22:30</option><option value="23:00">23:00</option><option value="23:30">23:30</option>
-  </select>
+ <h4>MIR4 Summon Tracker</h4>
+ <div class="nav-menu">
+  <a href="index.html" class="nav-btn btn-inactive">BOSSES DE CAMPO</a>
+  <a href="Summonboss.html" class="nav-btn btn-active">INVOCAÇÃO</a>
+ </div>
+ <div class="filter-container">
+  <button class="f-btn all active" onclick="filter('all', this)">Todos</button>
+  <button class="f-btn m8" onclick="filter('M8', this)">M8</button>
+  <button class="f-btn m7" onclick="filter('M7', this)">M7</button>
+  <button class="f-btn m4" onclick="filter('M4', this)">M4</button>
+  <button class="f-btn m2" onclick="filter('M2', this)">M2</button>
+  <button class="f-btn m1" onclick="filter('M1', this)">M1</button>
+  <button class="f-btn m155" onclick="filter('M155', this)">155+</button>
  </div>
 </div>
-<div class="scroll" id="lb"></div>
+
+<div class="scroll" id="bossList">
+ <div class="boss-card" data-mundo="M8">
+  <div class="boss-header">
+   <img src="img/boss_pakua.png" class="boss-img" onerror="this.src='https://via.placeholder.com/45?text=BOSS'">
+   <div><span class="boss-name">Salão de Pedra de Pakua</span><span class="npc-info">NPC: Buman</span></div>
+  </div>
+  <div class="detail-sec">
+   <span class="label">Requisitos</span>
+   <div class="item-row">
+    <div class="item-slot"><img src="img/item_escama_r.png" onerror="this.src='https://via.placeholder.com/32?text=IT'"><span class="qty">20</span></div>
+    <div class="item-slot"><img src="img/item_estatua_r.png"><span class="qty">100</span></div>
+   </div>
+  </div>
+ </div>
+</div>
+
 <script>
- var ctx=null;function itA(){if(!ctx)ctx=new(AudioContext||webkitAudioContext)()}
- function bp(){if(!ctx)return;var o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=800;g.gain.setValueAtTime(.1,ctx.currentTime);o.start();o.stop(ctx.currentTime+.3)}
- 
- var ds=[
-  ["L141","Matha","141-","M1-Floresta",["00:00","02:00","04:00","06:00","08:00","10:00","12:00","14:00","16:00","18:00","20:00","22:00"],"C3"],
-  ["L141","Touro Demoniaco","141-","M1-Templo",["01:00","03:00","05:00","07:00","09:00","11:00","13:00","15:00","17:00","19:00","21:00","23:00"],"C3"],
-  ["L141","Rei dos Touros","141-","M1-Santuario",["00:00","03:00","06:00","09:00","12:00","15:00","18:00","21:00"],"C3"],
-  ["L141","Gigantes Brancos","141-","M8-Selo",["01:00","05:00","09:00","13:00","17:00","21:00"],"C3"],
-  ["L141","Teahyul","141+","M7-Jardim",["01:00","03:00","05:00","07:00","09:00","11:00","13:00","15:00","17:00","19:00","21:00","23:00"],"C3"],
-  ["L141","Construcao","141+","M7-Culto",["02:00","05:00","08:00","11:00","14:00","17:00","20:00","23:00"],"C3"],
-  ["L141","Nefariox","141+","M4-Phantasia",["00:00","02:00","04:00","06:00","08:00","10:00","12:00","14:00","16:00","18:00","20:00","22:00"],"C3"],
-  ["L141","Kurilaika","141+","M4-Suserano",["00:00","03:00","06:00","09:00","12:00","15:00","18:00","21:00"],"C3"],
-  ["L143","Juhui","143+","M2-Lunula",["02:30","05:30","08:30","11:30","14:30","17:30","20:30","23:30"],"C3"],
-  ["L143","Faluk","143+","M5-Sabuk",["03:30","06:30","09:30","12:30","15:30","18:30","21:30","00:30"],"C3"],
-  ["L143","Assombracao","143+","M5-Templo",["01:30","04:30","07:30","10:30","13:30","16:30","19:30","22:30"],"C3"],
-  ["L150","Gyo Besta","150+","M3-Necropole",["02:30","08:30","14:30","20:30"],"C3"],
-  ["L150","Tatu Sombrio","150+","M3-Planicie",["01:30","03:30","05:30","07:30","09:30","11:30","13:30","15:30","17:30","19:30","21:30","23:30"],"C3"],
-  ["L150","Budu","150+","M3-Rockcut",["03:30","09:30","15:30","21:30"],"C3"],
-  ["L150","Mara","150+","M3-Rockcut",["02:30","05:30","08:30","11:30","14:30","17:30","20:30","23:30"],"C3"],
-  ["L150","Cheol Mokgang","150+","M6-Bicheon",["00:30","02:30","04:30","06:30","08:30","10:30","12:30","14:30","16:30","18:30","20:30","22:30"],"C3"],
-  ["L150","Asura","150+","M6-Bicheon",["04:30","10:30","16:30","22:30"],"C3"],
-  ["L150","Wuihan","150+","M6-Bosques",["05:30","11:30","17:30","23:30"],"C3"],
-  ["L150","Mina Demoniaca","150+","M6-Abisso",["01:30","03:30","05:30","07:30","09:30","11:30","13:30","15:30","17:30","19:30","21:30","23:30"],"C3"],
-  ["L150","Yeticlops","150+","M6-Labirinto",["06:30","12:30","18:30","00:30"],"C3"],
-  ["L155","Jihwa","155+","M1-Unseo",["02:30","05:30","08:30","11:30","14:30","17:30","20:30","23:30"],"C1"],
-  ["L155","Tatu Gigante","155+","M1-Vales",["03:30","06:30","09:30","12:30","15:30","18:30","21:30","00:30"],"C1"],
-  ["L155","Yaksha","155+","M1-Vales",["03:30","09:30","15:30","21:30"],"C1"],
-  ["L155","Bulhu","155+","M1-Fogo",["04:30","10:30","16:30","22:30"],"C1"],
-  ["L155","Gwe Mukang","155+","M2-Gelo",["05:30","11:30","17:30","23:30"],"C1"],
-  ["L155","Molgrash","155+","M2-Prisao",["01:30","04:30","07:30","10:30","13:30","16:30","19:30","22:30"],"C1"],
-  ["L155","Maeongryong","155+","M2-Prisao",["06:30","12:30","18:30","00:30"],"C1"],
-  ["L155","WI Kwangryong","155+","M2-Palacio",["02:30","05:30","08:30","11:30","14:30","17:30","20:30","23:30"],"C1"]
- ];
-
- var alertedTimes = new Set(); // Armazena horários que já apitaram
-
- function up(){
-  var c=document.getElementById('lb'),q=document.getElementById('ib').value.toLowerCase(),f=document.getElementById('sh').value,now=new Date(),win=[],hA="",hN="",anyA=false;
-  var currentMin = now.getHours() + ":" + now.getMinutes();
-  
-  // Janela de 10 minutos
-  for(var i=0;i<=10;i++){
-    var d=new Date(now.getTime()+(i*60000));
-    win.push(("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2));
-  }
-
-  for(var i=0;i<ds.length;i++){
-   var b=ds[i];
-   if((b[1]+b[3]).toLowerCase().indexOf(q)==-1||(f&&b[4].indexOf(f)==-1))continue;
-   
-   var isA=false, tH="";
-   for(var j=0;j<b[4].length;j++){
-     var act=(win.indexOf(b[4][j])>-1);
-     if(act){
-       isA=true;
-       // Se o horário do boss está na janela e ainda não foi alertado NESTE minuto
-       var alertKey = b[1] + b[4][j];
-       if(!alertedTimes.has(alertKey)){
-         anyA=true;
-         alertedTimes.add(alertKey);
-       }
-     }
-     tH+='<span class="badge '+(act?'alert-active':'')+'">'+b[4][j]+'</span> ';
-   }
-   
-   var card='<div class="item '+b[0]+' '+(isA?'item-alert':'')+'"><span class="camada">'+b[5]+' ('+b[3].split('-')[0]+')</span><span class="name">'+b[1]+' <span class="lvl-orange">'+b[2]+'</span></span><span class="loc">'+b[3]+'</span><div class="time-box">'+tH+'</div></div>';
-   if(isA)hA+=card;else hN+=card;
-  }
-  
-  c.innerHTML=(hA?'<div class="section-title">Prox. Bosses</div>'+hA:'')+'<div class="section-title">Todos os Bosses</div>'+hN;
-  
-  if(anyA){ bp(); }
-  
-  // Limpa o cache de alertas a cada hora para não sobrecarregar a memória
-  if(now.getMinutes() == 0 && now.getSeconds() < 30) alertedTimes.clear();
- }
-
- setInterval(up,30000); 
- window.onload=up;
+function filter(mundo, btn) {
+ document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
+ btn.classList.add('active');
+ const cards = document.querySelectorAll('.boss-card');
+ cards.forEach(card => {
+  if(mundo === 'all' || card.getAttribute('data-mundo') === mundo) card.classList.remove('hidden');
+  else card.classList.add('hidden');
+ });
+}
 </script>
 </body>
 </html>
