@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <style>
+    /* ESTRUTURA BASE */
     * { box-sizing: border-box; }
     body {
         background: #0f0f0f; color: #ddd; font-family: 'Segoe UI', sans-serif;
@@ -12,6 +13,7 @@
     .header { position: sticky; top: 0; background: #0f0f0f; padding-bottom: 10px; border-bottom: 1px solid #333; z-index: 10; }
     h4 { margin: 0 0 8px 0; color: #ff9800; text-align: center; text-transform: uppercase; font-size: 13px; }
 
+    /* NAVEGAÇÃO E FILTROS */
     .nav-menu { display: flex; gap: 5px; margin-bottom: 10px; }
     .nav-btn { flex: 1; text-decoration: none; text-align: center; font-size: 10px; font-weight: bold; padding: 6px; border-radius: 3px; }
     .btn-active { background: #ff9800; color: #000; }
@@ -23,16 +25,22 @@
         font-weight: bold; cursor: pointer; border-radius: 3px; text-transform: uppercase; 
         opacity: 0.5; transition: 0.2s; text-align: center; 
     }
-    .f-btn.active { opacity: 1; box-shadow: 0 0 8px rgba(255,152,0,0.5); transform: scale(1.05); }
-    
+    .f-btn.active { opacity: 1; box-shadow: 0 0 8px rgba(255,152,0,0.5); }
     .all { background: #444; color: #fff; }
     .mc-color { background: #607d8b; color: #fff; } 
     .m155-color { background: #ff5252; color: #fff; }
     .btn-voltar { background: #444; color: #fff; flex: 1 1 100%; margin-bottom: 4px; font-size: 10px; }
 
+    /* ESTILO DOS CARDS */
     .scroll { height: 385px; overflow-y: auto; margin-top: 10px; padding-right: 5px; }
-    .boss-card { background: rgba(255,255,255,0.03); border: 1px solid #222; border-radius: 5px; margin-bottom: 12px; border-left: 4px solid #444; }
+    .boss-card { 
+        background: rgba(255,255,255,0.03); border: 1px solid #222; border-radius: 5px; 
+        margin-bottom: 8px; border-left: 4px solid #444; cursor: pointer;
+        transition: background 0.2s; overflow: hidden;
+    }
+    .boss-card:hover { background: rgba(255,255,255,0.08); }
     
+    /* CORES LATERAIS POR MUNDO */
     [data-mundo*="M2"]{border-left-color:#ffcc80} [data-mundo*="M3"]{border-left-color:#a5d6a7}
     [data-mundo*="M4"]{border-left-color:#90ee90} [data-mundo*="M5"]{border-left-color:#ffe082}
     [data-mundo*="M6"]{border-left-color:#ce93d8} [data-mundo*="M7"]{border-left-color:#add8e6}
@@ -44,8 +52,18 @@
     .boss-name { font-size: 10px; font-weight: bold; color: #fff; display: block; }
     .npc-info { font-size: 8px; color: #ff9800; display: block; }
 
+    /* EXPANSÃO E ITENS */
+    .items-container { 
+        display: none; padding: 8px; background: rgba(0,0,0,0.3); 
+        border-top: 1px solid #222; flex-direction: row; gap: 8px; overflow-x: auto;
+    }
+    .boss-card.expanded .items-container { display: flex; }
+    .item-box { text-align: center; min-width: 45px; }
+    .item-img { width: 35px; height: 35px; border: 1px solid #444; border-radius: 3px; object-fit: cover; }
+    .item-qty { font-size: 8px; color: #aaa; display: block; margin-top: 2px; }
+
     .hidden { display: none !important; }
-    *::-webkit-scrollbar { width: 4px; }
+    *::-webkit-scrollbar { width: 4px; height: 4px; }
     *::-webkit-scrollbar-thumb { background: #ff9800; }
 </style>
 </head>
@@ -85,52 +103,58 @@
 </div>
 
 <div class="scroll" id="bossList">
-    <div class="boss-card" data-mundo="C1"><div class="boss-header"><img src="img/bosses/c1_songkwang.webp" class="boss-img"><div><span class="boss-name">Sete Vales</span><span class="npc-info">Camada 1 - Mundo Unseo</span></div></div></div>
-    <div class="boss-card" data-mundo="C1"><div class="boss-header"><img src="img/bosses/c1_porung.webp" class="boss-img"><div><span class="boss-name">Ilha Fogo Ardente</span><span class="npc-info">Camada 1 - Mundo Unseo</span></div></div></div>
-    <div class="boss-card" data-mundo="C1"><div class="boss-header"><img src="img/bosses/c2_kangmuhyeon.webp" class="boss-img"><div><span class="boss-name">Campo de dragao noveno</span><span class="npc-info">Camada 1 - Mundo Dragão Noveno</span></div></div></div>
-    <div class="boss-card" data-mundo="C1"><div class="boss-header"><img src="img/bosses/c2_grandor.webp" class="boss-img"><div><span class="boss-name">Riacho do sangue</span><span class="npc-info">Camada 1 - Mundo Dragão Noveno</span></div></div></div>
+    <div class="boss-card" data-mundo="C1" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/c1_songkwang.webp" class="boss-img"><div><span class="boss-name">Sete Vales</span><span class="npc-info">Camada 1 - Mundo Unseo</span></div></div><div class="items-container"></div></div>
+    <div class="boss-card" data-mundo="C1" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/c1_porung.webp" class="boss-img"><div><span class="boss-name">Ilha Fogo Ardente</span><span class="npc-info">Camada 1 - Mundo Unseo</span></div></div><div class="items-container"></div></div>
+    <div class="boss-card" data-mundo="C1" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/c2_kangmuhyeon.webp" class="boss-img"><div><span class="boss-name">Campo de dragao noveno</span><span class="npc-info">Camada 1 - Mundo Dragão Noveno</span></div></div><div class="items-container"></div></div>
+    <div class="boss-card" data-mundo="C1" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/c2_grandor.webp" class="boss-img"><div><span class="boss-name">Riacho do sangue</span><span class="npc-info">Camada 1 - Mundo Dragão Noveno</span></div></div><div class="items-container"></div></div>
 
-    <div class="boss-card" data-mundo="M8"><div class="boss-header"><img src="img/bosses/m8_pakua_rainha_viboras.webp" class="boss-img"><div><span class="boss-name">Rainha das Víboras</span><span class="npc-info">Camada 3 - Mundo 8</span></div></div></div>
-    <div class="boss-card" data-mundo="M8"><div class="boss-header"><img src="img/bosses/m8_pakua_arahan.webp" class="boss-img"><div><span class="boss-name">Arahan Supremo</span><span class="npc-info">Camada 3 - Mundo 8</span></div></div></div>
-    <div class="boss-card" data-mundo="M8"><div class="boss-header"><img src="img/bosses/m8_mina_faccao_trovao.webp" class="boss-img"><div><span class="boss-name">Facção Trovão</span><span class="npc-info">Camada 3 - Mundo 8</span></div></div></div>
-    <div class="boss-card" data-mundo="M8"><div class="boss-header"><img src="img/bosses/m8_mina_faccao_terrestre.webp" class="boss-img"><div><span class="boss-name">Facção Terrestre</span><span class="npc-info">Camada 3 - Mundo 8</span></div></div></div>
-    <div class="boss-card" data-mundo="M8"><div class="boss-header"><img src="img/bosses/m8_mina_primeiro_anciao.webp" class="boss-img"><div><span class="boss-name">Primeiro Ancião</span><span class="npc-info">Camada 3 - Mundo 8</span></div></div></div>
+    <div class="boss-card" data-mundo="M8" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m8_pakua_rainha_viboras.webp" class="boss-img"><div><span class="boss-name">Rainha das Víboras</span><span class="npc-info">Camada 3 - Mundo 8</span></div></div><div class="items-container"></div></div>
+    <div class="boss-card" data-mundo="M8" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m8_pakua_arahan.webp" class="boss-img"><div><span class="boss-name">Arahan Supremo</span><span class="npc-info">Camada 3 - Mundo 8</span></div></div><div class="items-container"></div></div>
+    <div class="boss-card" data-mundo="M8" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m8_mina_faccao_trovao.webp" class="boss-img"><div><span class="boss-name">Facção Trovão</span><span class="npc-info">Camada 3 - Mundo 8</span></div></div><div class="items-container"></div></div>
+    <div class="boss-card" data-mundo="M8" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m8_mina_faccao_terrestre.webp" class="boss-img"><div><span class="boss-name">Facção Terrestre</span><span class="npc-info">Camada 3 - Mundo 8</span></div></div><div class="items-container"></div></div>
+    <div class="boss-card" data-mundo="M8" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m8_mina_primeiro_anciao.webp" class="boss-img"><div><span class="boss-name">Primeiro Ancião</span><span class="npc-info">Camada 3 - Mundo 8</span></div></div><div class="items-container"></div></div>
 
-    <div class="boss-card" data-mundo="M7"><div class="boss-header"><img src="img/bosses/m7_lunula_lobo_fantasma.webp" class="boss-img"><div><span class="boss-name">Lobo Fantasma</span><span class="npc-info">Camada 3 - Mundo 7</span></div></div></div>
-    <div class="boss-card" data-mundo="M7"><div class="boss-header"><img src="img/bosses/m7_lunula_demonio_de_sangue.webp" class="boss-img"><div><span class="boss-name">Demônio de Sangue</span><span class="npc-info">Camada 3 - Mundo 7</span></div></div></div>
-    <div class="boss-card" data-mundo="M7"><div class="boss-header"><img src="img/bosses/m7_prisao.webp" class="boss-img"><div><span class="boss-name">Prisão Subterrânea</span><span class="npc-info">Camada 3 - Mundo 7</span></div></div></div>
+    <div class="boss-card" data-mundo="M7" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m7_lunula_lobo_fantasma.webp" class="boss-img"><div><span class="boss-name">Lobo Fantasma</span><span class="npc-info">Camada 3 - Mundo 7</span></div></div><div class="items-container"></div></div>
+    <div class="boss-card" data-mundo="M7" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m7_lunula_demonio_de_sangue.webp" class="boss-img"><div><span class="boss-name">Demônio de Sangue</span><span class="npc-info">Camada 3 - Mundo 7</span></div></div><div class="items-container"></div></div>
+    <div class="boss-card" data-mundo="M7" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m7_prisao.webp" class="boss-img"><div><span class="boss-name">Prisão Subterrânea</span><span class="npc-info">Camada 3 - Mundo 7</span></div></div><div class="items-container"></div></div>
 
-    <div class="boss-card" data-mundo="M4"><div class="boss-header"><img src="img/bosses/m4_sabuk_tesouro_dourado.webp" class="boss-img"><div><span class="boss-name">Tesouro Dourado</span><span class="npc-info">Camada 3 - Mundo 4</span></div></div></div>
-    <div class="boss-card" data-mundo="M4"><div class="boss-header"><img src="img/bosses/m4_paraiso_trovejante_nefariox.webp" class="boss-img"><div><span class="boss-name">Trovejante Nefariox</span><span class="npc-info">Camada 3 - Mundo 4</span></div></div></div>
-    <div class="boss-card" data-mundo="M4"><div class="boss-header"><img src="img/bosses/m4_paraiso_sangue_contaminado.webp" class="boss-img"><div><span class="boss-name">Sangue Contaminado</span><span class="npc-info">Camada 3 - Mundo 4</span></div></div></div>
-    <div class="boss-card" data-mundo="M4"><div class="boss-header"><img src="img/bosses/m4_monge.webp" class="boss-img"><div><span class="boss-name">Monge Sangue Negro</span><span class="npc-info">Camada 3 - Mundo 4</span></div></div></div>
+    <div class="boss-card" data-mundo="M4" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m4_sabuk_tesouro_dorado.webp" class="boss-img"><div><span class="boss-name">Tesouro Dourado</span><span class="npc-info">Camada 3 - Mundo 4</span></div></div><div class="items-container"></div></div>
+    <div class="boss-card" data-mundo="M4" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m4_paraiso_trovejante_nefariox.webp" class="boss-img"><div><span class="boss-name">Trovejante Nefariox</span><span class="npc-info">Camada 3 - Mundo 4</span></div></div><div class="items-container"></div></div>
+    <div class="boss-card" data-mundo="M4" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m4_paraiso_sangue_contaminado.webp" class="boss-img"><div><span class="boss-name">Sangue Contaminado</span><span class="npc-info">Camada 3 - Mundo 4</span></div></div><div class="items-container"></div></div>
+    <div class="boss-card" data-mundo="M4" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m4_monge.webp" class="boss-img"><div><span class="boss-name">Monge Sangue Negro</span><span class="npc-info">Camada 3 - Mundo 4</span></div></div><div class="items-container"></div></div>
 
-    <div class="boss-card" data-mundo="M2"><div class="boss-header"><img src="img/bosses/m2_seocheon.webp" class="boss-img"><div><span class="boss-name">Feitoria Seocheon</span><span class="npc-info">Camada 3 - Mundo 2</span></div></div></div>
-    <div class="boss-card" data-mundo="M2"><div class="boss-header"><img src="img/bosses/m2_montanha.webp" class="boss-img"><div><span class="boss-name">Montanha de lunula</span><span class="npc-info">Camada 3 - Mundo 2</span></div></div></div>
-    <div class="boss-card" data-mundo="M2"><div class="boss-header"><img src="img/bosses/m2_twinway.webp" class="boss-img"><div><span class="boss-name">Caminho Twinway</span><span class="npc-info">Camada 3 - Mundo 2</span></div></div></div>
-    <div class="boss-card" data-mundo="M2"><div class="boss-header"><img src="img/bosses/m2_touro.webp" class="boss-img"><div><span class="boss-name">Rei dos Touros Maldados</span><span class="npc-info">Camada 3 - Mundo 2</span></div></div></div>
+    <div class="boss-card" data-mundo="M2" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m2_seocheon.webp" class="boss-img"><div><span class="boss-name">Feitoria Seocheon</span><span class="npc-info">Camada 3 - Mundo 2</span></div></div><div class="items-container"></div></div>
+    <div class="boss-card" data-mundo="M2" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m2_montanha.webp" class="boss-img"><div><span class="boss-name">Montanha de lunula</span><span class="npc-info">Camada 3 - Mundo 2</span></div></div><div class="items-container"></div></div>
+    <div class="boss-card" data-mundo="M2" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m2_twinway.webp" class="boss-img"><div><span class="boss-name">Caminho Twinway</span><span class="npc-info">Camada 3 - Mundo 2</span></div></div><div class="items-container"></div></div>
+    <div class="boss-card" data-mundo="M2" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m2_touro.webp" class="boss-img"><div><span class="boss-name">Rei dos Touros Maldados</span><span class="npc-info">Camada 3 - Mundo 2</span></div></div><div class="items-container"></div></div>
 
-    <div class="boss-card" data-mundo="M5"><div class="boss-header"><img src="img/bosses/m5_gufa.webp" class="boss-img"><div><span class="boss-name">Campo de Gelo</span><span class="npc-info">Camada 3 - Mundo 5</span></div></div></div>
-    <div class="boss-card" data-mundo="M5"><div class="boss-header"><img src="img/bosses/m5_ruina.webp" class="boss-img"><div><span class="boss-name">Ruína do Demônio</span><span class="npc-info">Camada 3 - Mundo 5</span></div></div></div>
-    <div class="boss-card" data-mundo="M5"><div class="boss-header"><img src="img/bosses/m5_aranha.webp" class="boss-img"><div><span class="boss-name">Demônio Aracnídeo</span><span class="npc-info">Camada 3 - Mundo 5</span></div></div></div>
-    <div class="boss-card" data-mundo="M5"><div class="boss-header"><img src="img/bosses/m5_templo.webp" class="boss-img"><div><span class="boss-name">Templo Ilusório</span><span class="npc-info">Camada 3 - Mundo 5</span></div></div></div>
+    <div class="boss-card" data-mundo="M5" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m5_gufa.webp" class="boss-img"><div><span class="boss-name">Campo de Gelo</span><span class="npc-info">Camada 3 - Mundo 5</span></div></div><div class="items-container"></div></div>
+    <div class="boss-card" data-mundo="M5" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m5_ruina.webp" class="boss-img"><div><span class="boss-name">Ruína do Demônio</span><span class="npc-info">Camada 3 - Mundo 5</span></div></div><div class="items-container"></div></div>
+    <div class="boss-card" data-mundo="M5" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m5_aranha.webp" class="boss-img"><div><span class="boss-name">Demônio Aracnídeo</span><span class="npc-info">Camada 3 - Mundo 5</span></div></div><div class="items-container"></div></div>
+    <div class="boss-card" data-mundo="M5" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m5_templo.webp" class="boss-img"><div><span class="boss-name">Templo Ilusório</span><span class="npc-info">Camada 3 - Mundo 5</span></div></div><div class="items-container"></div></div>
 
-    <div class="boss-card" data-mundo="M3"><div class="boss-header"><img src="img/bosses/m3_tatu.webp" class="boss-img"><div><span class="boss-name">Necropole nefariox</span><span class="npc-info">Camada 3 - Mundo 3</span></div></div></div>
-    <div class="boss-card" data-mundo="M3"><div class="boss-header"><img src="img/bosses/m3_planicia_kaya.webp" class="boss-img"><div><span class="boss-name">Planicie da viboras</span><span class="npc-info">Camada 3 - Mundo 3</span></div></div></div>
-    <div class="boss-card" data-mundo="M3"><div class="boss-header"><img src="img/bosses/m3_covil_tatu.webp" class="boss-img"><div><span class="boss-name">Covil do tatu sombrio</span><span class="npc-info">Camada 3 - Mundo 3</span></div></div></div>
-    <div class="boss-card" data-mundo="M3"><div class="boss-header"><img src="img/bosses/m3_espectro.webp" class="boss-img"><div><span class="boss-name">Espectro do Osso</span><span class="npc-info">Camada 3 - Mundo 3</span></div></div></div>
+    <div class="boss-card" data-mundo="M3" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m3_tatu.webp" class="boss-img"><div><span class="boss-name">Necropole nefariox</span><span class="npc-info">Camada 3 - Mundo 3</span></div></div><div class="items-container"></div></div>
+    <div class="boss-card" data-mundo="M3" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m3_planicia_kaya.webp" class="boss-img"><div><span class="boss-name">Planicie da viboras</span><span class="npc-info">Camada 3 - Mundo 3</span></div></div><div class="items-container"></div></div>
+    <div class="boss-card" data-mundo="M3" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m3_covil_tatu.webp" class="boss-img"><div><span class="boss-name">Covil do tatu sombrio</span><span class="npc-info">Camada 3 - Mundo 3</span></div></div><div class="items-container"></div></div>
+    <div class="boss-card" data-mundo="M3" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m3_espectro.webp" class="boss-img"><div><span class="boss-name">Espectro do Osso</span><span class="npc-info">Camada 3 - Mundo 3</span></div></div><div class="items-container"></div></div>
 
-    <div class="boss-card" data-mundo="M6"><div class="boss-header"><img src="img/bosses/m6_hangga.webp" class="boss-img"><div><span class="boss-name">Labirinto hangga</span><span class="npc-info">Camada 3 - Mundo 6</span></div></div></div>
-    <div class="boss-card" data-mundo="M6"><div class="boss-header"><img src="img/bosses/m6_jogyu.webp" class="boss-img"><div><span class="boss-name">Jo Gyu</span><span class="npc-info">Camada 3 - Mundo 6</span></div></div></div>
-    <div class="boss-card" data-mundo="M6"><div class="boss-header"><img src="img/bosses/m6_mina.webp" class="boss-img"><div><span class="boss-name">Mina Demoníaca</span><span class="npc-info">Camada 3 - Mundo 6</span></div></div></div>
-    <div class="boss-card" data-mundo="M6"><div class="boss-header"><img src="img/bosses/m6_centopeia.webp" class="boss-img"><div><span class="boss-name">Grande Centopeia</span><span class="npc-info">Camada 3 - Mundo 6</span></div></div></div>
+    <div class="boss-card" data-mundo="M6" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m6_hangga.webp" class="boss-img"><div><span class="boss-name">Labirinto hangga</span><span class="npc-info">Camada 3 - Mundo 6</span></div></div><div class="items-container"></div></div>
+    <div class="boss-card" data-mundo="M6" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m6_jogyu.webp" class="boss-img"><div><span class="boss-name">Jo Gyu</span><span class="npc-info">Camada 3 - Mundo 6</span></div></div><div class="items-container"></div></div>
+    <div class="boss-card" data-mundo="M6" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m6_mina.webp" class="boss-img"><div><span class="boss-name">Mina Demoníaca</span><span class="npc-info">Camada 3 - Mundo 6</span></div></div><div class="items-container"></div></div>
+    <div class="boss-card" data-mundo="M6" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m6_centopeia.webp" class="boss-img"><div><span class="boss-name">Grande Centopeia</span><span class="npc-info">Camada 3 - Mundo 6</span></div></div><div class="items-container"></div></div>
 
-    <div class="boss-card" data-mundo="MC"><div class="boss-header"><img src="img/bosses/mc_geral.webp" class="boss-img"><div><span class="boss-name">Invocação MC</span><span class="npc-info">Camada 3 - Mundo MC</span></div></div></div>
-    <div class="boss-card" data-mundo="HYDRA"><div class="boss-header"><img src="img/bosses/mc_hydra.webp" class="boss-img"><div><span class="boss-name">Hydra</span><span class="npc-info">Camada 3 - Mundo MC</span></div></div></div>
-    <div class="boss-card" data-mundo="PURGA"><div class="boss-header"><img src="img/bosses/mc_purgatorio.webp" class="boss-img"><div><span class="boss-name">Purgatório</span><span class="npc-info">Camada 3 - Mundo MC</span></div></div></div>
+    <div class="boss-card" data-mundo="MC" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/mc_geral.webp" class="boss-img"><div><span class="boss-name">Invocação MC</span><span class="npc-info">Camada 3 - Mundo MC</span></div></div><div class="items-container"></div></div>
+    <div class="boss-card" data-mundo="HYDRA" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/mc_hydra.webp" class="boss-img"><div><span class="boss-name">Hydra</span><span class="npc-info">Camada 3 - Mundo MC</span></div></div><div class="items-container"></div></div>
+    <div class="boss-card" data-mundo="PURGA" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/mc_purgatorio.webp" class="boss-img"><div><span class="boss-name">Purgatório</span><span class="npc-info">Camada 3 - Mundo MC</span></div></div><div class="items-container"></div></div>
 </div>
 
 <script>
+    // FUNÇÃO PARA EXPANDIR O CARD
+    function toggleExpand(card) {
+        card.classList.toggle('expanded');
+    }
+
+    // NAVEGAÇÃO ENTRE MENUS
     function trocarMenu(alvo) {
         document.getElementById('menuPrincipal').classList.add('hidden');
         document.getElementById('menuMC').classList.add('hidden');
@@ -148,6 +172,7 @@
         }
     }
 
+    // FILTRO DE BOSSES
     function filterBoss(termo, btn) {
         document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
         if(btn) btn.classList.add('active');
@@ -159,10 +184,12 @@
                 card.classList.remove('hidden');
             } else {
                 card.classList.add('hidden');
+                card.classList.remove('expanded');
             }
         });
     }
 
+    // FALLBACK PARA IMAGENS
     window.onload = () => {
         document.querySelectorAll('img').forEach(img => {
             img.onerror = () => { img.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='; };
