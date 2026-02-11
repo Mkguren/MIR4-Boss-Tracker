@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <style>
- /* ESTILIZAÇÃO COMPLETA */
+ /* ESTILIZAÇÃO MANTIDA */
  *::-webkit-scrollbar {width: 4px; height: 4px;}
  *::-webkit-scrollbar-thumb {background: #ff9800; border-radius: 10px;}
  *::-webkit-scrollbar-track {background: #1a1a1a;}
@@ -44,10 +44,11 @@
  .boss-card { background: rgba(255,255,255,0.03); border: 1px solid #222; border-radius: 5px; margin-bottom: 12px; border-left: 4px solid transparent; }
  
  [data-mundo*="MC"]{border-left-color:#607d8b} [data-mundo*="PURGATORIO"]{border-left-color:#7e57c2}
- [data-mundo*="HYDRA"]{border-left-color:#00bcd4} [data-mundo*="M2"]{border-left-color:#ffcc80}
- [data-mundo*="M3"]{border-left-color:#a5d6a7} [data-mundo*="M4"]{border-left-color:#90ee90}
- [data-mundo*="M5"]{border-left-color:#ffe082} [data-mundo*="M6"]{border-left-color:#ce93d8}
- [data-mundo*="M7"]{border-left-color:#add8e6} [data-mundo*="M8"]{border-left-color:#f28d8d}
+ [data-mundo*="HYDRA"]{border-left-color:#00bcd4} [data-mundo*="M155"]{border-left-color:#ff5252}
+ [data-mundo*="M2"]{border-left-color:#ffcc80} [data-mundo*="M3"]{border-left-color:#a5d6a7}
+ [data-mundo*="M4"]{border-left-color:#90ee90} [data-mundo*="M5"]{border-left-color:#ffe082}
+ [data-mundo*="M6"]{border-left-color:#ce93d8} [data-mundo*="M7"]{border-left-color:#add8e6}
+ [data-mundo*="M8"]{border-left-color:#f28d8d}
 
  .boss-header { display: flex; align-items: center; padding: 8px; gap: 10px; }
  .boss-img { width: 42px; height: 42px; border: 1px solid #444; border-radius: 4px; object-fit: cover; background: #111; }
@@ -82,6 +83,7 @@
   <button class="f-btn m6" onclick="filter('M6', this)">M6</button>
   <button class="f-btn m7" onclick="filter('M7', this)">M7</button>
   <button class="f-btn m8" onclick="filter('M8', this)">M8</button>
+  <button class="f-btn m155" onclick="trocarMenu('m155')">155+</button>
  </div>
 
  <div id="menuMC" class="filter-container hidden">
@@ -89,6 +91,14 @@
   <button class="f-btn mc" onclick="filter('MC-Geral', this)">Bosses MC</button>
   <button class="f-btn mc" style="background:#00bcd4; color:white;" onclick="filter('HYDRA', this)">Santuário Hydra</button>
   <button class="f-btn mc" style="background:#7e57c2; color:white;" onclick="filter('PURGATORIO', this)">Purgatório</button>
+ </div>
+
+ <div id="menu155" class="filter-container hidden">
+  <button class="f-btn btn-voltar" onclick="trocarMenu('principal')">← Voltar</button>
+  <button class="f-btn m155" onclick="filter('UNSEO', this)">Unseo</button>
+  <button class="f-btn m155" onclick="filter('VALES', this)">Vales</button>
+  <button class="f-btn m155" onclick="filter('FOGO', this)">Fogo</button>
+  <button class="f-btn m155" onclick="filter('GELO', this)">Gelo</button>
  </div>
 </div>
 
@@ -116,119 +126,38 @@
   </div>
  </div>
 
- <div class="boss-card" data-mundo="PURGATORIO">
+ <div class="boss-card" data-mundo="M155-UNSEO">
   <div class="boss-header">
-   <img src="img/bosses/mc_purgatorio.webp" class="boss-img">
-   <div><span class="boss-name">Purgatório 1F</span><span class="npc-info">Invocação Especial</span></div>
+   <img src="img/bosses/unseo.webp" class="boss-img">
+   <div><span class="boss-name">Boss Unseo 155+</span><span class="npc-info">Região: Unseo</span></div>
   </div>
   <div class="detail-sec">
    <span class="label">Requisitos</span>
-   <div class="item-row"><div class="item-slot"><img src="img/itens/scroll_purg.webp"></div></div>
+   <div class="item-row"><div class="item-slot"><img src="img/itens/m155_item.webp"></div></div>
   </div>
  </div>
 
- <div class="boss-card" data-mundo="M8">
-  <div class="boss-header">
-   <img src="img/bosses/m8_pakua.webp" class="boss-img">
-   <div><span class="boss-name">Salão de Pedra de Pakua</span><span class="npc-info">NPC: Buman</span></div>
-  </div>
-  <div class="detail-sec">
-   <span class="label">Requisitos</span>
-   <div class="item-row"><div class="item-slot"><img src="img/itens/m8_item.webp"></div></div>
-  </div>
  </div>
-
- <div class="boss-card" data-mundo="M8">
-  <div class="boss-header">
-   <img src="img/bosses/m8_mina.webp" class="boss-img">
-   <div><span class="boss-name">3F Mina Abandonada</span><span class="npc-info">Yong Munki</span></div>
-  </div>
-  <div class="detail-sec">
-   <span class="label">Requisitos</span>
-   <div class="item-row"><div class="item-slot"><img src="img/itens/m8_item2.webp"></div></div>
-  </div>
- </div>
-
- <div class="boss-card" data-mundo="M7">
-  <div class="boss-header">
-   <img src="img/bosses/m7_lunula.webp" class="boss-img">
-   <div><span class="boss-name">Desfiladeiro Lunula</span><span class="npc-info">Braço Direito</span></div>
-  </div>
-  <div class="detail-sec">
-   <span class="label">Requisitos</span>
-   <div class="item-row"><div class="item-slot"><img src="img/itens/m7_item.webp"></div></div>
-  </div>
- </div>
-
- <div class="boss-card" data-mundo="M4">
-  <div class="boss-header">
-   <img src="img/bosses/m4_sabuk.webp" class="boss-img">
-   <div><span class="boss-name">Província de Sabuk</span><span class="npc-info">NPC: Dangpo</span></div>
-  </div>
-  <div class="detail-sec">
-   <span class="label">Requisitos</span>
-   <div class="item-row"><div class="item-slot"><img src="img/itens/m4_item.webp"><span class="qty">20</span></div></div>
-  </div>
- </div>
-
- <div class="boss-card" data-mundo="M2">
-  <div class="boss-header">
-   <img src="img/bosses/m2_touro.webp" class="boss-img">
-   <div><span class="boss-name">Rei dos Touros</span><span class="npc-info">Condutor de Almas</span></div>
-  </div>
-  <div class="detail-sec">
-   <span class="label">Requisitos</span>
-   <div class="item-row"><div class="item-slot"><img src="img/itens/m2_item.webp"><span class="qty">20</span></div></div>
-  </div>
- </div>
-
- <div class="boss-card" data-mundo="M3">
-  <div class="boss-header">
-   <img src="img/bosses/m3_tatu.webp" class="boss-img">
-   <div><span class="boss-name">Tatu Sombrio</span><span class="npc-info">Necrópole Nefariox</span></div>
-  </div>
-  <div class="detail-sec">
-   <span class="label">Requisitos</span>
-   <div class="item-row"><div class="item-slot"><img src="img/itens/m3_item.webp"><span class="qty">20</span></div></div>
-  </div>
- </div>
-
- <div class="boss-card" data-mundo="M5">
-  <div class="boss-header">
-   <img src="img/bosses/m5_gufa.webp" class="boss-img">
-   <div><span class="boss-name">Campo de Gelo Gufa</span><span class="npc-info">NPC: Gufa</span></div>
-  </div>
-  <div class="detail-sec">
-   <span class="label">Requisitos</span>
-   <div class="item-row"><div class="item-slot"><img src="img/itens/m5_item.webp"><span class="qty">60</span></div></div>
-  </div>
- </div>
-
- <div class="boss-card" data-mundo="M6">
-  <div class="boss-header">
-   <img src="img/bosses/m6_jogyu.webp" class="boss-img">
-   <div><span class="boss-name">Jo Gyu</span><span class="npc-info">Cidade de Bicheon</span></div>
-  </div>
-  <div class="detail-sec">
-   <span class="label">Requisitos</span>
-   <div class="item-row"><div class="item-slot"><img src="img/itens/m6_item.webp"><span class="qty">20</span></div></div>
-  </div>
- </div>
-
-</div>
 
 <script>
 function trocarMenu(alvo) {
   const principal = document.getElementById('menuPrincipal');
   const menuMC = document.getElementById('menuMC');
+  const menu155 = document.getElementById('menu155');
 
   principal.classList.add('hidden');
   menuMC.classList.add('hidden');
+  menu155.classList.add('hidden');
 
   if (alvo === 'mc') {
     menuMC.classList.remove('hidden');
     filter('MC-Geral', menuMC.querySelector('.mc'));
-  } else {
+  } 
+  else if (alvo === 'm155') {
+    menu155.classList.remove('hidden');
+    filter('M155', menu155.querySelector('.m155'));
+  }
+  else {
     principal.classList.remove('hidden');
     filter('all', principal.querySelector('.all'));
   }
