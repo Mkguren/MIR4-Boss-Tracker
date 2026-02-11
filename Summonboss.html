@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <style>
-    /* RESET E SCROLL */
     * { box-sizing: border-box; }
     *::-webkit-scrollbar { width: 4px; height: 4px; }
     *::-webkit-scrollbar-thumb { background: #ff9800; border-radius: 10px; }
@@ -15,7 +14,6 @@
         border: 1px solid #ff9800; border-radius: 8px; overflow: hidden;
     }
 
-    /* HEADER E NAV */
     .header { position: sticky; top: 0; background: #0f0f0f; padding-bottom: 10px; border-bottom: 1px solid #333; z-index: 10; }
     h4 { margin: 0 0 8px 0; color: #ff9800; text-align: center; text-transform: uppercase; font-size: 13px; }
     .nav-menu { display: flex; gap: 5px; margin-bottom: 10px; }
@@ -23,7 +21,6 @@
     .btn-active { background: #ff9800; color: #000; }
     .btn-inactive { background: #252525; color: #fff; border: 1px solid #444; }
 
-    /* FILTROS */
     .filter-container { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
     .f-btn { 
         flex: 1 1 calc(20% - 4px); border: none; padding: 8px 0; font-size: 8px; 
@@ -40,16 +37,14 @@
     .m8 { background: #f28d8d; color: #000; } .m155 { background: #ff5252; color: #fff; }
     .btn-voltar { background: #444; color: #fff; flex: 1 1 100%; margin-bottom: 4px; font-size: 10px; }
 
-    /* LISTA DE CARDS */
     .scroll { height: 385px; overflow-y: auto; margin-top: 10px; padding-right: 5px; }
     .boss-card { background: rgba(255,255,255,0.03); border: 1px solid #222; border-radius: 5px; margin-bottom: 12px; border-left: 4px solid transparent; }
     
-    /* CORES LATERAIS POR MUNDO */
-    [data-mundo="M2"]{border-left-color:#ffcc80} [data-mundo="M3"]{border-left-color:#a5d6a7}
-    [data-mundo="M4"]{border-left-color:#90ee90} [data-mundo="M5"]{border-left-color:#ffe082}
-    [data-mundo="M6"]{border-left-color:#ce93d8} [data-mundo="M7"]{border-left-color:#add8e6}
-    [data-mundo="M8"]{border-left-color:#f28d8d} [data-mundo*="MC"]{border-left-color:#607d8b}
-    [data-mundo="HYDRA"]{border-left-color:#00bcd4} [data-mundo="PURGATORIO"]{border-left-color:#7e57c2}
+    [data-mundo*="M2"]{border-left-color:#ffcc80} [data-mundo*="M3"]{border-left-color:#a5d6a7}
+    [data-mundo*="M4"]{border-left-color:#90ee90} [data-mundo*="M5"]{border-left-color:#ffe082}
+    [data-mundo*="M6"]{border-left-color:#ce93d8} [data-mundo*="M7"]{border-left-color:#add8e6}
+    [data-mundo*="M8"]{border-left-color:#f28d8d} [data-mundo*="MC"]{border-left-color:#607d8b}
+    [data-mundo*="HYDRA"]{border-left-color:#00bcd4} [data-mundo*="PURGATORIO"]{border-left-color:#7e57c2}
     [data-mundo*="M155"]{border-left-color:#ff5252}
 
     .boss-header { display: flex; align-items: center; padding: 8px; gap: 10px; }
@@ -59,11 +54,9 @@
 
     .detail-sec { padding: 8px; border-top: 1px solid #222; background: rgba(0,0,0,0.2); }
     .label { font-size: 8px; color: #777; text-transform: uppercase; margin-bottom: 5px; display: block; }
-    .item-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+    .item-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; min-height: 32px; }
     .item-slot { width: 32px; height: 32px; background: #1a1a1a; border: 1px solid #333; border-radius: 3px; position: relative; }
     .item-slot img { width: 100%; height: 100%; padding: 2px; }
-    .qty { position: absolute; bottom: -2px; right: 0px; font-size: 9px; background: rgba(0,0,0,0.85); color: #00e676; padding: 0 2px; font-weight: bold; border-radius: 2px; }
-    
     .hidden { display: none !important; }
 </style>
 </head>
@@ -91,9 +84,9 @@
 
     <div id="menuMC" class="filter-container hidden">
         <button class="f-btn btn-voltar" onclick="trocarMenu('principal')">← Voltar</button>
-        <button class="f-btn mc" onclick="filter('MC-Geral', this)">Bosses MC</button>
-        <button class="f-btn mc" style="background:#00bcd4; color:white;" onclick="filter('HYDRA', this)">Santuário Hydra</button>
-        <button class="f-btn mc" style="background:#7e57c2; color:white;" onclick="filter('PURGATORIO', this)">Purgatório</button>
+        <button class="f-btn mc" onclick="filter('MC-GERAL', this)">Bosses MC</button>
+        <button class="f-btn" style="background:#00bcd4; color:white;" onclick="filter('HYDRA', this)">Santuário Hydra</button>
+        <button class="f-btn" style="background:#7e57c2; color:white;" onclick="filter('PURGATORIO', this)">Purgatório</button>
     </div>
 
     <div id="menu155" class="filter-container hidden">
@@ -110,149 +103,35 @@
     <div class="boss-card" data-mundo="M8">
         <div class="boss-header">
             <img src="img/bosses/m8_pakua_rainha_viboras.webp" class="boss-img">
-            <div><span class="boss-name">Rainha das Víboras</span><span class="npc-info">Pakua - Buman</span></div>
+            <div><span class="boss-name">Rainha das Víboras</span><span class="npc-info">Buman - Convés do Navio</span></div>
         </div>
         <div class="detail-sec"><span class="label">Requisitos</span><div class="item-row"></div></div>
     </div>
     <div class="boss-card" data-mundo="M8">
         <div class="boss-header">
             <img src="img/bosses/m8_pakua_arahan.webp" class="boss-img">
-            <div><span class="boss-name">Arahan Supremo</span><span class="npc-info">Pakua - Buman</span></div>
+            <div><span class="boss-name">Arahan Supremo</span><span class="npc-info">Buman - Convés do Navio</span></div>
         </div>
         <div class="detail-sec"><span class="label">Requisitos</span><div class="item-row"></div></div>
     </div>
     <div class="boss-card" data-mundo="M8">
         <div class="boss-header">
             <img src="img/bosses/m8_mina_faccao_trovao.webp" class="boss-img">
-            <div><span class="boss-name">Líder Facção Trovão</span><span class="npc-info">3F Mina - Yong Munki</span></div>
+            <div><span class="boss-name">Facção do Trovão</span><span class="npc-info">Yong Munki - Pakua</span></div>
         </div>
         <div class="detail-sec"><span class="label">Requisitos</span><div class="item-row"></div></div>
     </div>
     <div class="boss-card" data-mundo="M8">
         <div class="boss-header">
             <img src="img/bosses/m8_mina_faccao_terrestre.webp" class="boss-img">
-            <div><span class="boss-name">Líder Facção Terrestre</span><span class="npc-info">3F Mina - Yong Munki</span></div>
+            <div><span class="boss-name">Facção Terrestre</span><span class="npc-info">Yong Munki - Pakua</span></div>
         </div>
         <div class="detail-sec"><span class="label">Requisitos</span><div class="item-row"></div></div>
     </div>
     <div class="boss-card" data-mundo="M8">
         <div class="boss-header">
             <img src="img/bosses/m8_mina_primeiro_anciao.webp" class="boss-img">
-            <div><span class="boss-name">Primeiro Ancião</span><span class="npc-info">3F Mina - Yong Munki</span></div>
+            <div><span class="boss-name">Primeiro Ancião</span><span class="npc-info">Yong Munki - Pakua</span></div>
         </div>
         <div class="detail-sec"><span class="label">Requisitos</span><div class="item-row"></div></div>
     </div>
-
-    <div class="boss-card" data-mundo="M7">
-        <div class="boss-header">
-            <img src="img/bosses/m7_lunula_lobo_fantasma.webp" class="boss-img">
-            <div><span class="boss-name">Lobo Fantasma Lunula</span><span class="npc-info">2F Lunula - Braço Direito</span></div>
-        </div>
-        <div class="detail-sec"><span class="label">Requisitos</span><div class="item-row"></div></div>
-    </div>
-    <div class="boss-card" data-mundo="M7">
-        <div class="boss-header">
-            <img src="img/bosses/m7_lunula_demonio_de_sangue.webp" class="boss-img">
-            <div><span class="boss-name">Demônio de Sangue</span><span class="npc-info">2F Lunula - Braço Direito</span></div>
-        </div>
-        <div class="detail-sec"><span class="label">Requisitos</span><div class="item-row"></div></div>
-    </div>
-    <div class="boss-card" data-mundo="M7">
-        <div class="boss-header">
-            <img src="img/bosses/m7_prisao.webp" class="boss-img">
-            <div><span class="boss-name">Prisão Subterrânea</span><span class="npc-info">Convés - Buman</span></div>
-        </div>
-        <div class="detail-sec"><span class="label">Requisitos</span><div class="item-row"></div></div>
-    </div>
-
-    <div class="boss-card" data-mundo="M4">
-        <div class="boss-header">
-            <img src="img/bosses/m4_sabuk_tesouro_dorado.webp" class="boss-img">
-            <div><span class="boss-name">Besta Tesouro Dourado</span><span class="npc-info">Sabuk - Dangpo</span></div>
-        </div>
-        <div class="detail-sec"><span class="label">Requisitos</span><div class="item-row"></div></div>
-    </div>
-    <div class="boss-card" data-mundo="M4">
-        <div class="boss-header">
-            <img src="img/bosses/m4_paraiso_trovejante_nefariox.webp" class="boss-img">
-            <div><span class="boss-name">Trovejante Nefariox</span><span class="npc-info">Paraíso - Dangpo</span></div>
-        </div>
-        <div class="detail-sec"><span class="label">Requisitos</span><div class="item-row"></div></div>
-    </div>
-    <div class="boss-card" data-mundo="M4">
-        <div class="boss-header">
-            <img src="img/bosses/m4_paraiso_sangue_contaminado.webp" class="boss-img">
-            <div><span class="boss-name">Sangue Contaminado</span><span class="npc-info">Paraíso - Karungka</span></div>
-        </div>
-        <div class="detail-sec"><span class="label">Requisitos</span><div class="item-row"></div></div>
-    </div>
-    <div class="boss-card" data-mundo="M4">
-        <div class="boss-header">
-            <img src="img/bosses/m4_monge.webp" class="boss-img">
-            <div><span class="boss-name">Monge Sangue Negro</span><span class="npc-info">Convés - Buman</span></div>
-        </div>
-        <div class="detail-sec"><span class="label">Requisitos</span><div class="item-row"></div></div>
-    </div>
-
-    <div class="boss-card" data-mundo="M2">
-        <div class="boss-header">
-            <img src="img/bosses/m2_seocheon.webp" class="boss-img">
-            <div><span class="boss-name">Feitoria Seocheon</span><span class="npc-info">Condutor de Almas</span></div>
-        </div>
-        <div class="detail-sec"><span class="label">Requisitos</span><div class="item-row"></div></div>
-    </div>
-    <div class="boss-card" data-mundo="M2">
-        <div class="boss-header">
-            <img src="img/bosses/m2_twinway.webp" class="boss-img">
-            <div><span class="boss-name">Caminho Twinway</span><span class="npc-info">Condutor de Almas</span></div>
-        </div>
-        <div class="detail-sec"><span class="label">Requisitos</span><div class="item-row"></div></div>
-    </div>
-    <div class="boss-card" data-mundo="M2">
-        <div class="boss-header">
-            <img src="img/bosses/m2_touro.webp" class="boss-img">
-            <div><span class="boss-name">Rei dos Touros Malvados</span><span class="npc-info">Condutor de Almas</span></div>
-        </div>
-        <div class="detail-sec"><span class="label">Requisitos</span><div class="item-row"></div></div>
-    </div>
-
-    <div class="boss-card" data-mundo="M5">
-        <div class="boss-header">
-            <img src="img/bosses/m5_gufa.webp" class="boss-img">
-            <div><span class="boss-name">Campo de Gelo</span><span class="npc-info">Gufa</span></div>
-        </div>
-        <div class="detail-sec"><span class="label">Requisitos</span><div class="item-row"></div></div>
-    </div>
-    <div class="boss-card" data-mundo="M5">
-        <div class="boss-header">
-            <img src="img/bosses/m5_ruina.webp" class="boss-img">
-            <div><span class="boss-name">Ruína do Demônio</span><span class="npc-info">Gufa</span></div>
-        </div>
-        <div class="detail-sec"><span class="label">Requisitos</span><div class="item-row"></div></div>
-    </div>
-    <div class="boss-card" data-mundo="M5">
-        <div class="boss-header">
-            <img src="img/bosses/m5_aranha.webp" class="boss-img">
-            <div><span class="boss-name">Demônio Aracnídeo</span><span class="npc-info">Gufa</span></div>
-        </div>
-        <div class="detail-sec"><span class="label">Requisitos</span><div class="item-row"></div></div>
-    </div>
-    <div class="boss-card" data-mundo="M5">
-        <div class="boss-header">
-            <img src="img/bosses/m5_templo.webp" class="boss-img">
-            <div><span class="boss-name">Templo Ilusório</span><span class="npc-info">Bancada de Criação</span></div>
-        </div>
-        <div class="detail-sec"><span class="label">Requisitos</span><div class="item-row"></div></div>
-    </div>
-
-    <div class="boss-card" data-mundo="M3">
-        <div class="boss-header">
-            <img src="img/bosses/m3_tatu.webp" class="boss-img">
-            <div><span class="boss-name">Necrópole Nefariox</span><span class="npc-info">Hyeokjun</span></div>
-        </div>
-        <div class="detail-sec"><span class="label">Requisitos</span><div class="item-row"></div></div>
-    </div>
-    <div class="boss-card" data-mundo="M3">
-        <div class="boss-header">
-            <img src="img/bosses/m3_planicia_kaya.webp" class="boss-img">
-            <div><span class="boss-name">Planície das Víboras
