@@ -8,7 +8,7 @@
  *::-webkit-scrollbar-thumb {background: #ff9800; border-radius: 10px;}
  *::-webkit-scrollbar-track {background: #1a1a1a;}
  
- /* Trava de Layout */
+ /* ESSENCIAL: Impede que padding ou bordas alterem a largura total de 325px */
  * { box-sizing: border-box; }
 
  body {
@@ -17,17 +17,17 @@
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
     padding: 10px;
-    width: 325px;       /* Mantido seu padrão */
-    height: 580px;      /* Altura fixa para não variar entre páginas */
+    width: 325px;       /* Sua largura original */
+    height: 580px;      /* Altura travada para o widget */
     border: 1px solid #ff9800;
     border-radius: 8px;
-    overflow: hidden;   /* Impede o widget de esticar */
+    overflow: hidden;   /* Impede que o corpo do HTML cresça além do widget */
  }
 
  .header { position: sticky; top: 0; background: #0f0f0f; padding-bottom: 10px; border-bottom: 1px solid #333; z-index: 10; }
  h4 { margin: 0 0 8px 0; color: #ff9800; text-align: center; text-transform: uppercase; font-size: 13px; }
-
- /* Menu de Navegação */
+ 
+ /* MENU DE NAVEGAÇÃO */
  .nav-menu { display: flex; gap: 5px; margin-bottom: 10px; }
  .nav-btn { flex: 1; text-decoration: none; text-align: center; font-size: 10px; font-weight: bold; padding: 6px; border-radius: 3px; transition: 0.3s; }
  .btn-active { background: #ff9800; color: #000; }
@@ -38,7 +38,7 @@
  input { flex: 2; }
  select { flex: 1.5; cursor: pointer; }
 
- /* Área de scroll ajustada para a altura fixa do body */
+ /* AREA DE SCROLL: Altura calculada para preencher o espaço restante */
  .scroll { height: 430px; overflow-y: auto; margin-top: 10px; }
  
  .section-title { font-size: 10px; color: #ff9800; text-transform: uppercase; margin: 12px 0 5px 0; font-weight: bold; border-left: 2px solid #ff9800; padding-left: 5px; }
@@ -60,7 +60,7 @@
 <div class="header">
  <h4>MIR4 Boss Tracker</h4>
  <div class="nav-menu">
-  <a href="index.html" class="nav-btn btn-active">BOSSES</a>
+  <a href="index.html" class="nav-btn btn-active">BOSSES DE CAMPO</a>
   <a href="Summonboss.html" class="nav-btn btn-inactive">INVOCAÇÃO</a>
  </div>
  <div class="search-container">
