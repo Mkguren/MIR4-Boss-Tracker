@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <style>
- /* ESTILIZAÇÃO GLOBAL */
+ /* Estilos mantidos conforme sua aprovação para performance e fluidez */
  *::-webkit-scrollbar {width: 4px; height: 4px;}
  *::-webkit-scrollbar-thumb {background: #ff9800; border-radius: 10px;}
  *::-webkit-scrollbar-track {background: #1a1a1a;}
@@ -66,15 +66,15 @@
 
  .boss-header { display: flex; align-items: center; padding: 8px; gap: 10px; }
  .boss-img { width: 42px; height: 42px; border: 1px solid #444; border-radius: 4px; object-fit: cover; background: #111; }
- .boss-name { font-size: 11px; font-weight: bold; color: #fff; display: block; }
- .npc-info { font-size: 9px; color: #ff9800; display: block; }
+ .boss-name { font-size: 10px; font-weight: bold; color: #fff; display: block; }
+ .npc-info { font-size: 8px; color: #ff9800; display: block; }
 
  .detail-sec { padding: 8px; border-top: 1px solid #222; background: rgba(0,0,0,0.2); }
  .label { font-size: 8px; color: #777; text-transform: uppercase; margin-bottom: 5px; display: block; font-weight: bold; }
- .item-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
- .item-slot { width: 32px; height: 32px; background: #1a1a1a; border: 1px solid #333; border-radius: 3px; position: relative; }
+ .item-row { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 5px; }
+ .item-slot { width: 30px; height: 30px; background: #1a1a1a; border: 1px solid #333; border-radius: 3px; position: relative; }
  .item-slot img { width: 100%; height: 100%; padding: 2px; }
- .qty { position: absolute; bottom: -2px; right: 0px; font-size: 9px; background: rgba(0,0,0,0.85); color: #00e676; padding: 0 2px; font-weight: bold; border-radius: 2px; }
+ .qty { position: absolute; bottom: -2px; right: 0px; font-size: 8px; background: rgba(0,0,0,0.85); color: #00e676; padding: 0 1px; font-weight: bold; border-radius: 2px; }
  
  .hidden { display: none !important; }
 </style>
@@ -118,99 +118,53 @@
    <img src="img/bosses/m8_pakua.webp" loading="lazy" class="boss-img">
    <div><span class="boss-name">Salão de Pedra de Pakua</span><span class="npc-info">Buman - Convés do Navio</span></div>
   </div>
-  <div class="detail-sec">
-   <span class="label">Requisitos</span>
-   <div class="item-row"><div class="item-slot"><img src="img/itens/m8_item.webp"></div></div>
+ </div>
+ <div class="boss-card" data-mundo="M8">
+  <div class="boss-header">
+   <img src="img/bosses/m8_mina.webp" loading="lazy" class="boss-img">
+   <div><span class="boss-name">3F Mina Abandonada</span><span class="npc-info">Yong Munki - Pakua</span></div>
   </div>
  </div>
 
  <div class="boss-card" data-mundo="M7">
   <div class="boss-header">
+   <img src="img/bosses/m7_lunula.webp" loading="lazy" class="boss-img">
+   <div><span class="boss-name">Desfiladeiro Lunula</span><span class="npc-info">Braço Direito - 2F Lunula</span></div>
+  </div>
+ </div>
+ <div class="boss-card" data-mundo="M7">
+  <div class="boss-header">
    <img src="img/bosses/m7_prisao.webp" loading="lazy" class="boss-img">
    <div><span class="boss-name">Prisão Subterrânea</span><span class="npc-info">Buman - Convés do Navio</span></div>
   </div>
-  <div class="detail-sec">
-   <span class="label">Requisitos</span>
-   <div class="item-row"><div class="item-slot"><img src="img/itens/m7_item.webp"></div></div>
-  </div>
  </div>
 
- <div class="boss-card" data-mundo="M5">
+ <div class="boss-card" data-mundo="M4">
   <div class="boss-header">
-   <img src="img/bosses/m5_gufa.webp" loading="lazy" class="boss-img">
-   <div><span class="boss-name">Campo de Gelo Gufa</span><span class="npc-info">NPC: Gufa</span></div>
-  </div>
-  <div class="detail-sec">
-   <span class="label">Requisitos</span>
-   <div class="item-row">
-    <div class="item-slot"><img src="img/itens/m5_item1.webp"><span class="qty">60</span></div>
-    <div class="item-slot"><img src="img/itens/m5_item2.webp"><span class="qty">100</span></div>
-   </div>
+   <img src="img/bosses/m4_sabuk.webp" loading="lazy" class="boss-img">
+   <div><span class="boss-name">Província de Sabuk</span><span class="npc-info">NPC: Dangpo</span></div>
   </div>
  </div>
-
- <div class="boss-card" data-mundo="M3">
+ <div class="boss-card" data-mundo="M4">
   <div class="boss-header">
-   <img src="img/bosses/m3_tatu.webp" loading="lazy" class="boss-img">
-   <div><span class="boss-name">Tatu Sombrio</span><span class="npc-info">Necrópole Nefariox</span></div>
-  </div>
-  <div class="detail-sec">
-   <span class="label">Requisitos</span>
-   <div class="item-row"><div class="item-slot"><img src="img/itens/m3_item.webp"><span class="qty">20</span></div></div>
+   <img src="img/bosses/m4_paraiso.webp" loading="lazy" class="boss-img">
+   <div><span class="boss-name">Paraíso das Espadas</span><span class="npc-info">NPC: Dangpo / Karungka</span></div>
   </div>
  </div>
-
- <div class="boss-card" data-mundo="M6">
+ <div class="boss-card" data-mundo="M4">
   <div class="boss-header">
-   <img src="img/bosses/m6_jogyu.webp" loading="lazy" class="boss-img">
-   <div><span class="boss-name">Jo Gyu</span><span class="npc-info">Cidade de Bicheon</span></div>
-  </div>
-  <div class="detail-sec">
-   <span class="label">Requisitos</span>
-   <div class="item-row"><div class="item-slot"><img src="img/itens/m6_item.webp"><span class="qty">20</span></div></div>
+   <img src="img/bosses/m4_monge.webp" loading="lazy" class="boss-img">
+   <div><span class="boss-name">Monge de Sangue Negro</span><span class="npc-info">Buman - Convés do Navio</span></div>
   </div>
  </div>
 
-</div>
-
-<script>
-function trocarMenu(alvo) {
-  const menus = ['menuPrincipal', 'menuMC', 'menu155'];
-  menus.forEach(m => document.getElementById(m).classList.add('hidden'));
-
-  if (alvo === 'mc') {
-    document.getElementById('menuMC').classList.remove('hidden');
-    filter('MC', document.querySelector('#menuMC .mc'));
-  } else if (alvo === 'm155') {
-    document.getElementById('menu155').classList.remove('hidden');
-    filter('M155', document.querySelector('#menu155 .m155'));
-  } else {
-    document.getElementById('menuPrincipal').classList.remove('hidden');
-    filter('all', document.querySelector('#menuPrincipal .all'));
-  }
-}
-
-function filter(termo, btn) {
-  document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-  
-  const cards = document.querySelectorAll('.boss-card');
-  window.requestAnimationFrame(() => {
-    cards.forEach(card => {
-      const mundo = card.getAttribute('data-mundo') || "";
-      const match = (termo === 'all' || mundo.includes(termo));
-      card.classList.toggle('hidden', !match);
-    });
-  });
-}
-
-window.onload = () => {
-  document.querySelectorAll('img').forEach(img => {
-    img.onerror = () => {
-      img.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';
-    };
-  });
-};
-</script>
-</body>
-</html>
+ <div class="boss-card" data-mundo="M2">
+  <div class="boss-header">
+   <img src="img/bosses/m2_seocheon.webp" loading="lazy" class="boss-img">
+   <div><span class="boss-name">Feitoria Seocheon</span><span class="npc-info">Condutor de Almas</span></div>
+  </div>
+ </div>
+ <div class="boss-card" data-mundo="M2">
+  <div class="boss-header">
+   <img src="img/bosses/m2_twinway.webp" loading="lazy" class="boss-img">
+   <div><span class="boss-name">Caminho Twinway</span><span class="npc
