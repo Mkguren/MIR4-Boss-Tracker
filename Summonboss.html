@@ -3,12 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <style>
- /* Estilização Global da Barra de Rolagem - IGUAL AO INDEX */
+ /* Estilização Global da Barra de Rolagem */
  *::-webkit-scrollbar {width: 4px; height: 4px;}
  *::-webkit-scrollbar-thumb {background: #ff9800; border-radius: 10px;}
  *::-webkit-scrollbar-track {background: #1a1a1a;}
 
- /* TRAVA DE LAYOUT - IDÊNTICA AO INDEX */
  * { box-sizing: border-box; }
 
  body {
@@ -27,34 +26,44 @@
  .header { position: sticky; top: 0; background: #0f0f0f; padding-bottom: 10px; border-bottom: 1px solid #333; z-index: 10; }
  h4 { margin: 0 0 8px 0; color: #ff9800; text-align: center; text-transform: uppercase; font-size: 13px; }
 
- /* MENU DE NAVEGAÇÃO */
  .nav-menu { display: flex; gap: 5px; margin-bottom: 10px; }
  .nav-btn { flex: 1; text-decoration: none; text-align: center; font-size: 10px; font-weight: bold; padding: 6px; border-radius: 3px; transition: 0.3s; }
  .btn-active { background: #ff9800; color: #000; }
  .btn-inactive { background: #252525; color: #fff; border: 1px solid #444; }
 
- /* BOTÕES DE FILTRO POR MUNDO (8 MUNDOS) */
- .filter-container { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 5px; justify-content: center; }
- .f-btn { flex: 0 1 35px; border: none; padding: 4px 0; font-size: 8px; font-weight: bold; cursor: pointer; border-radius: 3px; text-transform: uppercase; opacity: 0.5; transition: 0.2s; text-align: center; }
+ /* FILTROS: Ajustados para 5 botões por linha (2 linhas no total) */
+ .filter-container { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
+ .f-btn { 
+    flex: 1 1 calc(20% - 4px); /* 20% para caberem 5 botões exatamente */
+    border: none; 
+    padding: 8px 0; 
+    font-size: 9px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    border-radius: 3px; 
+    text-transform: uppercase; 
+    opacity: 0.5; 
+    transition: 0.2s; 
+    text-align: center; 
+ }
  .f-btn.active { opacity: 1; box-shadow: 0 0 8px rgba(255,152,0,0.5); transform: scale(1.05); }
  
- /* Cores baseadas na sua imagem de referência */
- .all { background: #444; color: #fff; flex: 0 1 45px; }
- .m8 { background: #f28d8d; color: #000; } .m7 { background: #add8e6; color: #000; } 
- .m4 { background: #90ee90; color: #000; } .m2 { background: #ffcc80; color: #000; } 
- .m5 { background: #ffcc80; color: #000; } .m3 { background: #a5d6a7; color: #000; } 
- .m6 { background: #ce93d8; color: #000; } .m155 { background: #ff5252; color: #fff; flex: 0 1 40px; }
+ .all { background: #444; color: #fff; }
+ .m1 { background: #e1bee7; color: #000; } .m2 { background: #ffcc80; color: #000; } 
+ .m3 { background: #a5d6a7; color: #000; } .m4 { background: #90ee90; color: #000; } 
+ .m5 { background: #ffe082; color: #000; } .m6 { background: #ce93d8; color: #000; } 
+ .m7 { background: #add8e6; color: #000; } .m8 { background: #f28d8d; color: #000; } 
+ .m155 { background: #ff5252; color: #fff; }
 
- /* AREA DE SCROLL */
- .scroll { height: 400px; overflow-y: auto; margin-top: 10px; padding-right: 5px; }
+ .scroll { height: 385px; overflow-y: auto; margin-top: 10px; padding-right: 5px; }
 
- /* CARDS DE BOSS */
  .boss-card { background: rgba(255,255,255,0.03); border: 1px solid #222; border-radius: 5px; margin-bottom: 12px; border-left: 4px solid transparent; }
  
- [data-mundo="M8"]{border-left-color:#f28d8d} [data-mundo="M7"]{border-left-color:#add8e6}
- [data-mundo="M4"]{border-left-color:#90ee90} [data-mundo="M2"]{border-left-color:#ffcc80}
- [data-mundo="M5"]{border-left-color:#ffcc80} [data-mundo="M3"]{border-left-color:#a5d6a7}
- [data-mundo="M6"]{border-left-color:#ce93d8} [data-mundo="M155"]{border-left-color:#ff5252}
+ [data-mundo="M1"]{border-left-color:#e1bee7} [data-mundo="M2"]{border-left-color:#ffcc80}
+ [data-mundo="M3"]{border-left-color:#a5d6a7} [data-mundo="M4"]{border-left-color:#90ee90}
+ [data-mundo="M5"]{border-left-color:#ffe082} [data-mundo="M6"]{border-left-color:#ce93d8}
+ [data-mundo="M7"]{border-left-color:#add8e6} [data-mundo="M8"]{border-left-color:#f28d8d}
+ [data-mundo="M155"]{border-left-color:#ff5252}
 
  .boss-header { display: flex; align-items: center; padding: 8px; gap: 10px; }
  .boss-img { width: 42px; height: 42px; border: 1px solid #444; border-radius: 4px; object-fit: cover; }
@@ -62,7 +71,7 @@
  .npc-info { font-size: 9px; color: #ff9800; display: block; }
 
  .detail-sec { padding: 8px; border-top: 1px solid #222; background: rgba(0,0,0,0.2); }
- .label { font-size: 8px; color: #777; text-transform: uppercase; margin-bottom: 5px; display: block; letter-spacing: 1px; }
+ .label { font-size: 8px; color: #777; text-transform: uppercase; margin-bottom: 5px; display: block; }
  .item-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
  .item-slot { width: 32px; height: 32px; background: #1a1a1a; border: 1px solid #333; border-radius: 3px; position: relative; }
  .item-slot img { width: 100%; height: 100%; padding: 2px; }
@@ -82,13 +91,14 @@
 
  <div class="filter-container">
   <button class="f-btn all active" onclick="filter('all', this)">Tudo</button>
-  <button class="f-btn m8" onclick="filter('M8', this)">M8</button>
-  <button class="f-btn m7" onclick="filter('M7', this)">M7</button>
-  <button class="f-btn m6" onclick="filter('M6', this)">M6</button>
-  <button class="f-btn m5" onclick="filter('M5', this)">M5</button>
-  <button class="f-btn m4" onclick="filter('M4', this)">M4</button>
-  <button class="f-btn m3" onclick="filter('M3', this)">M3</button>
+  <button class="f-btn m1" onclick="filter('M1', this)">M1</button>
   <button class="f-btn m2" onclick="filter('M2', this)">M2</button>
+  <button class="f-btn m3" onclick="filter('M3', this)">M3</button>
+  <button class="f-btn m4" onclick="filter('M4', this)">M4</button>
+  <button class="f-btn m5" onclick="filter('M5', this)">M5</button>
+  <button class="f-btn m6" onclick="filter('M6', this)">M6</button>
+  <button class="f-btn m7" onclick="filter('M7', this)">M7</button>
+  <button class="f-btn m8" onclick="filter('M8', this)">M8</button>
   <button class="f-btn m155" onclick="filter('M155', this)">155+</button>
  </div>
 </div>
@@ -112,7 +122,7 @@
    </div>
   </div>
  </div>
-</div>
+ </div>
 
 <script>
 function filter(mundo, btn) {
