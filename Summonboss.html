@@ -1,15 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
 <style>
- /* Estilo para esconder elementos */
- .hidden { display: none !important; }
+ /* Estilização Global da Barra de Rolagem */
+ *::-webkit-scrollbar {width: 4px; height: 4px;}
+ *::-webkit-scrollbar-thumb {background: #ff9800; border-radius: 10px;}
+ *::-webkit-scrollbar-track {background: #1a1a1a;}
 
- /* Ajuste para o botão voltar ter destaque */
- .btn-voltar { 
-    background: #444 !important; 
-    color: #fff !important; 
-    flex: 1 1 100% !important; /* Ocupa a largura toda ou destaque */
-    margin-bottom: 4px;
+ * { box-sizing: border-box; }
+
+ body {
+    background: #0f0f0f;
+    color: #ddd;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 10px;
+    width: 325px; /* Mantido igual ao index */
+    height: 580px;
+    border: 1px solid #ff9800;
+    border-radius: 8px;
+    overflow: hidden;
  }
+ 
+ .header { position: sticky; top: 0; background: #0f0f0f; padding-bottom: 10px; border-bottom: 1px solid #333; z-index: 10; }
+ h4 { margin: 0 0 8px 0; color: #ff9800; text-align: center; text-transform: uppercase; font-size: 13px; }
+
+ .nav-menu { display: flex; gap: 5px; margin-bottom: 10px; }
+ .nav-btn { flex: 1; text-decoration: none; text-align: center; font-size: 10px; font-weight: bold; padding: 6px; border-radius: 3px; transition: 0.3s; }
+ .btn-active { background: #ff9800; color: #000; }
+ .btn-inactive { background: #252525; color: #fff; border: 1px solid #444; }
+
+ /* CONTAINER DE FILTROS - DUAS LINHAS */
+ .filter-container { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
+ .f-btn { 
+    flex: 1 1 calc(20% - 4px); 
+    border: none; 
+    padding: 8px 0; 
+    font-size: 9px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    border-radius: 3px; 
+    text-transform: uppercase; 
+    opacity: 0.5; 
+    transition: 0.2s; 
+    text-align: center; 
+ }
+ .f-btn.active { opacity: 1; box-shadow: 0 0 8px rgba(255,152,0,0.5); transform: scale(1.05); }
+ 
+ .all { background: #444; color: #fff; }
+ .m1 { background: #e1bee7; color: #000; } .m2 { background: #ffcc80; color: #000; } 
+ .m3 { background: #a5d6a7; color: #000; } .m4 { background: #90ee90; color: #000; } 
+ .m5 { background: #ffe082; color: #000; } .m6 { background: #ce93d8; color: #000; } 
+ .m7 { background: #add8e6; color: #000; } .m8 { background: #f28d8d; color: #000; } 
+ .m155 { background: #ff5252; color: #fff; }
+
+ /* BOTÃO VOLTAR ESPECIAL */
+ .btn-voltar { background: #444; color: #fff; flex: 1 1 100%; margin-bottom: 4px; }
+
+ .scroll { height: 385px; overflow-y: auto; margin-top: 10px; padding-right: 5px; }
+
+ /* ESTILO ORIGINAL DOS CARDS REATIVADO */
+ .boss-card { background: rgba(255,255,255,0.03); border: 1px solid #222; border-radius: 5px; margin-bottom: 12px; border-left: 4px solid transparent; }
+ 
+ [data-mundo="M1"]{border-left-color:#e1bee7} [data-mundo="M2"]{border-left-color:#ffcc80}
+ [data-mundo="M3"]{border-left-color:#a5d6a7} [data-mundo="M4"]{border-left-color:#90ee90}
+ [data-mundo="M5"]{border-left-color:#ffe082} [data-mundo="M6"]{border-left-color:#ce93d8}
+ [data-mundo="M7"]{border-left-color:#add8e6} [data-mundo="M8"]{border-left-color:#f28d8d}
+ [data-mundo="M155"]{border-left-color:#ff5252}
+
+ .boss-header { display: flex; align-items: center; padding: 8px; gap: 10px; }
+ .boss-img { width: 42px; height: 42px; border: 1px solid #444; border-radius: 4px; object-fit: cover; }
+ .boss-name { font-size: 11px; font-weight: bold; color: #fff; display: block; }
+ .npc-info { font-size: 9px; color: #ff9800; display: block; }
+
+ .detail-sec { padding: 8px; border-top: 1px solid #222; background: rgba(0,0,0,0.2); }
+ .label { font-size: 8px; color: #777; text-transform: uppercase; margin-bottom: 5px; display: block; }
+ .item-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+ .item-slot { width: 32px; height: 32px; background: #1a1a1a; border: 1px solid #333; border-radius: 3px; position: relative; }
+ .item-slot img { width: 100%; height: 100%; padding: 2px; }
+ .qty { position: absolute; bottom: -2px; right: 0px; font-size: 9px; background: rgba(0,0,0,0.85); color: #00e676; padding: 0 2px; font-weight: bold; border-radius: 2px; }
+ 
+ .hidden { display: none !important; }
 </style>
+</head>
+<body>
 
 <div class="header">
  <h4>MIR4 Boss Tracker</h4>
@@ -38,6 +113,38 @@
   <button class="f-btn m155" onclick="filter('Vales', this)">Vales</button>
   <button class="f-btn m155" onclick="filter('Fogo', this)">Fogo</button>
   <button class="f-btn m155" onclick="filter('Gelo', this)">Gelo</button>
+  <button class="f-btn m155" onclick="filter('M155', this)">Todos</button>
+ </div>
+</div>
+
+<div class="scroll" id="bossList">
+ <div class="boss-card" data-mundo="M8">
+  <div class="boss-header">
+   <img src="img/bosses/pakua.png" class="boss-img" onerror="this.src='https://via.placeholder.com/42?text=M8'">
+   <div><span class="boss-name">Salão de Pedra de Pakua</span><span class="npc-info">NPC: Buman - Convés</span></div>
+  </div>
+  <div class="detail-sec">
+   <span class="label">Requisitos</span>
+   <div class="item-row">
+    <div class="item-slot"><img src="img/itens/item_escama_r.png"><span class="qty">20</span></div>
+    <div class="item-slot"><img src="img/itens/item_estatua_r.png"><span class="qty">100</span></div>
+   </div>
+   <span class="label">Recompensas</span>
+   <div class="item-row">
+    <div class="item-slot"><img src="img/itens/drop_bau_e.png"></div>
+   </div>
+  </div>
+ </div>
+
+ <div class="boss-card" data-mundo="M155-Unseo">
+  <div class="boss-header">
+   <img src="img/bosses/unseo.png" class="boss-img" onerror="this.src='https://via.placeholder.com/42?text=155'">
+   <div><span class="boss-name">Boss de Unseo</span><span class="npc-info">Mapa: Campo Unseo</span></div>
+  </div>
+  <div class="detail-sec">
+   <span class="label">Requisitos</span>
+   <div class="item-row"><div class="item-slot"><img src="img/itens/item_req.png"></div></div>
+  </div>
  </div>
 </div>
 
@@ -45,12 +152,10 @@
 function trocarMenu(tipo) {
   const principal = document.getElementById('menuPrincipal');
   const sub = document.getElementById('menu155');
-  
   if (tipo === 'sub') {
     principal.classList.add('hidden');
     sub.classList.remove('hidden');
-    // Filtra automaticamente por qualquer boss que seja 155 ao entrar
-    filter('M155', sub.querySelector('.m155')); 
+    filter('M155', sub.children[5]); // Filtra todos 155 ao entrar
   } else {
     sub.classList.add('hidden');
     principal.classList.remove('hidden');
@@ -59,14 +164,11 @@ function trocarMenu(tipo) {
 }
 
 function filter(termo, btn) {
-  // Remove active de todos os botões de ambos os menus
   document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  
   const cards = document.querySelectorAll('.boss-card');
   cards.forEach(card => {
     const mundo = card.getAttribute('data-mundo') || "";
-    // Verifica se o termo de busca está no data-mundo (Ex: "M1" ou "Unseo")
     if(termo === 'all' || mundo.includes(termo)) {
       card.classList.remove('hidden');
     } else {
@@ -75,3 +177,5 @@ function filter(termo, btn) {
   });
 }
 </script>
+</body>
+</html>
