@@ -8,7 +8,7 @@
  *::-webkit-scrollbar-thumb {background:#ff9800;border-radius:10px;}
  *::-webkit-scrollbar-track {background: #1a1a1a;}
 
- /* TRAVA DE LAYOUT - IGUAL AO INDEX */
+ /* TRAVA DE LAYOUT - IDÊNTICA AO INDEX */
  * { box-sizing: border-box; }
 
  body {
@@ -17,37 +17,39 @@
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
     padding: 10px;
-    width: 325px;       /* Mesma largura do index */
-    height: 580px;      /* Mesma altura do index */
+    width: 325px;       /* Ajustado para 325px igual ao index */
+    height: 580px;      /* Altura fixa */
     border: 1px solid #ff9800;
     border-radius: 8px;
-    overflow: hidden;   /* Trava o widget */
+    overflow: hidden;
     position: relative;
 }
  
- .header { border-bottom: 1px solid #333; padding-bottom: 10px; }
+ /* HEADER - REPLICANDO O ESTILO DO INDEX */
+ .header { position: sticky; top: 0; background: #0f0f0f; padding-bottom: 10px; border-bottom: 1px solid #333; z-index: 10; }
  h4 { margin: 0 0 8px 0; color: #ff9800; text-align: center; text-transform: uppercase; font-size: 13px; }
 
- /* MENU DE NAVEGAÇÃO - IGUAL AO INDEX */
+ /* MENU DE NAVEGAÇÃO - COPIADO DO INDEX */
  .nav-menu { display: flex; gap: 5px; margin-bottom: 10px; }
  .nav-btn { flex: 1; text-decoration: none; text-align: center; font-size: 10px; font-weight: bold; padding: 6px; border-radius: 3px; transition: 0.3s; }
  .btn-active { background: #ff9800; color: #000; }
  .btn-inactive { background: #252525; color: #fff; border: 1px solid #444; }
 
- .search-container { display: flex; gap: 5px; width: 100%; margin-top: 5px; }
+ /* CONTAINER DE BUSCA - IGUALADO AO INDEX */
+ .search-container { display: flex; gap: 5px; width: 100%; }
  input { flex: 1; padding: 7px; background: #252525; border: 1px solid #444; color: #fff; border-radius: 4px; font-size: 11px; outline: none; }
 
- /* AREA DE SCROLL - AJUSTADA */
+ /* AREA DE SCROLL - MESMA ALTURA DO INDEX */
  .scroll { height: 430px; overflow-y: auto; margin-top: 10px; padding-right: 2px; }
 
- /* ESTILOS DOS CARDS (Mantidos exatamente como os seus) */
- .boss-card { background: rgba(255,255,255,0.03); border: 1px solid #333; border-radius: 6px; padding: 10px; margin-bottom: 10px; border-left: 3px solid #ff9800; }
+ /* ESTILOS DOS CARDS DE INVOCAÇÃO (Mantidos sem alteração na lógica) */
+ .boss-card { background: rgba(255,255,255,0.03); border: 1px solid #333; border-left: 4px solid #ff9800; border-radius: 4px; padding: 8px; margin-bottom: 10px; }
  .boss-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
  .boss-img { width: 45px; height: 45px; border-radius: 4px; border: 1px solid #444; object-fit: cover; }
- .boss-name { display: block; color: #fff; font-weight: bold; font-size: 13px; }
- .npc-info { font-size: 10px; color: #aaa; }
+ .boss-name { display: block; color: #fff; font-weight: bold; font-size: 12px; }
+ .npc-info { font-size: 10px; color: #777; }
  .detail-sec { background: rgba(0,0,0,0.2); padding: 8px; border-radius: 4px; }
- .label { font-size: 9px; color: #ff9800; text-transform: uppercase; font-weight: bold; display: block; margin-bottom: 5px; }
+ .label { font-size: 9px; color: #ff9800; text-transform: uppercase; font-weight: bold; display: block; margin-bottom: 5px; border-left: 2px solid #ff9800; padding-left: 5px; }
  .item-row { display: flex; gap: 8px; margin-bottom: 8px; }
  .item-slot { position: relative; width: 35px; height: 35px; background: #1a1a1a; border: 1px solid #444; border-radius: 4px; display: flex; align-items: center; justify-content: center; }
  .item-slot img { width: 28px; height: 28px; }
@@ -63,24 +65,25 @@
   <a href="Summonboss.html" class="nav-btn btn-active">INVOCAÇÃO</a>
  </div>
  <div class="search-container">
-  <input type="text" id="filterInput" placeholder="Filtrar por mapa ou boss..." onkeyup="filterBosses()">
+  <input type="text" id="filterInput" placeholder="Buscar mapa ou boss de invocação..." onkeyup="filterBosses()">
  </div>
 </div>
 
 <div class="scroll" id="bossList">
- <div class="boss-card" data-mundo="M7">
+ <div class="boss-card">
   <div class="boss-header">
    <img src="img/boss_pakua.png" class="boss-img" onerror="this.src='https://via.placeholder.com/45?text=BOSS'">
-   <div><span class="boss-name">Pakua das Sombras</span><span class="npc-info">NPC: Do-Yoon - Convés</span></div>
+   <div><span class="boss-name">Pakua das Sombras</span><span class="npc-info">NPC: Do-Yoon - Convés do Navio</span></div>
   </div>
   <div class="detail-sec">
    <span class="label">Requisitos</span>
    <div class="item-row">
-    <div class="item-slot"><img src="img/item_estatua_r.png"><span class=\"qty\">100</span></div>
+    <div class="item-slot"><img src="img/item_estatua_r.png"><span class="qty">100</span></div>
    </div>
    <span class="label">Recompensas</span>
    <div class="item-row">
     <div class="item-slot"><img src="img/drop_bau_e.png"></div>
+    <div class="item-slot"><img src="img/drop_bau_l.png"></div>
    </div>
   </div>
  </div>
