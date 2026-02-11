@@ -54,7 +54,6 @@
  .m8 { background: #f28d8d; color: #000; } .m155 { background: #ff5252; color: #fff; }
 
  .btn-voltar { background: #444; color: #fff; flex: 1 1 100%; margin-bottom: 4px; font-size: 10px; }
-
  .scroll { height: 385px; overflow-y: auto; margin-top: 10px; padding-right: 5px; scroll-behavior: smooth; }
 
  .boss-card { background: rgba(255,255,255,0.03); border: 1px solid #222; border-radius: 5px; margin-bottom: 12px; border-left: 4px solid transparent; }
@@ -71,7 +70,7 @@
  .npc-info { font-size: 9px; color: #ff9800; display: block; }
 
  .detail-sec { padding: 8px; border-top: 1px solid #222; background: rgba(0,0,0,0.2); }
- .label { font-size: 8px; color: #777; text-transform: uppercase; margin-bottom: 5px; display: block; }
+ .label { font-size: 8px; color: #777; text-transform: uppercase; margin-bottom: 5px; display: block; font-weight: bold; }
  .item-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
  .item-slot { width: 32px; height: 32px; background: #1a1a1a; border: 1px solid #333; border-radius: 3px; position: relative; }
  .item-slot img { width: 100%; height: 100%; padding: 2px; }
@@ -84,11 +83,6 @@
 
 <div class="header">
  <h4>MIR4 Boss Tracker</h4>
- <div class="nav-menu">
-  <a href="index.html" class="nav-btn btn-inactive">BOSSES DE CAMPO</a>
-  <a href="Summonboss.html" class="nav-btn btn-active">INVOCAÇÃO</a>
- </div>
-
  <div id="menuPrincipal" class="filter-container">
   <button class="f-btn all active" onclick="filter('all', this)">Tudo</button>
   <button class="f-btn mc" onclick="trocarMenu('mc')">MC</button>
@@ -119,64 +113,67 @@
 
 <div class="scroll" id="bossList">
 
+ <div class="boss-card" data-mundo="M8">
+  <div class="boss-header">
+   <img src="img/bosses/m8_pakua.webp" loading="lazy" class="boss-img">
+   <div><span class="boss-name">Salão de Pedra de Pakua</span><span class="npc-info">Buman - Convés do Navio</span></div>
+  </div>
+  <div class="detail-sec">
+   <span class="label">Requisitos</span>
+   <div class="item-row"><div class="item-slot"><img src="img/itens/m8_item.webp"></div></div>
+  </div>
+ </div>
+
+ <div class="boss-card" data-mundo="M7">
+  <div class="boss-header">
+   <img src="img/bosses/m7_prisao.webp" loading="lazy" class="boss-img">
+   <div><span class="boss-name">Prisão Subterrânea</span><span class="npc-info">Buman - Convés do Navio</span></div>
+  </div>
+  <div class="detail-sec">
+   <span class="label">Requisitos</span>
+   <div class="item-row"><div class="item-slot"><img src="img/itens/m7_item.webp"></div></div>
+  </div>
+ </div>
+
  <div class="boss-card" data-mundo="M5">
   <div class="boss-header">
-   <img src="img/bosses/m5_gufa.png" loading="lazy" class="boss-img">
-   <div><span class="boss-name">Ruína do Demônio</span><span class="npc-info">Campo de Gelo - Gufa</span></div>
+   <img src="img/bosses/m5_gufa.webp" loading="lazy" class="boss-img">
+   <div><span class="boss-name">Campo de Gelo Gufa</span><span class="npc-info">NPC: Gufa</span></div>
   </div>
   <div class="detail-sec">
    <span class="label">Requisitos</span>
    <div class="item-row">
-    <div class="item-slot"><img src="img/itens/item1_m5.png"><span class="qty">60</span></div>
-    <div class="item-slot"><img src="img/itens/item2_m5.png"><span class="qty">100</span></div>
+    <div class="item-slot"><img src="img/itens/m5_item1.webp"><span class="qty">60</span></div>
+    <div class="item-slot"><img src="img/itens/m5_item2.webp"><span class="qty">100</span></div>
    </div>
   </div>
  </div>
 
  <div class="boss-card" data-mundo="M3">
   <div class="boss-header">
-   <img src="img/bosses/m3_tatu.png" loading="lazy" class="boss-img">
+   <img src="img/bosses/m3_tatu.webp" loading="lazy" class="boss-img">
    <div><span class="boss-name">Tatu Sombrio</span><span class="npc-info">Necrópole Nefariox</span></div>
   </div>
   <div class="detail-sec">
    <span class="label">Requisitos</span>
-   <div class="item-row">
-    <div class="item-slot"><img src="img/itens/item1_m3.png"><span class="qty">20</span></div>
-   </div>
+   <div class="item-row"><div class="item-slot"><img src="img/itens/m3_item.webp"><span class="qty">20</span></div></div>
   </div>
  </div>
 
  <div class="boss-card" data-mundo="M6">
   <div class="boss-header">
-   <img src="img/bosses/m6_jo.png" loading="lazy" class="boss-img">
+   <img src="img/bosses/m6_jogyu.webp" loading="lazy" class="boss-img">
    <div><span class="boss-name">Jo Gyu</span><span class="npc-info">Cidade de Bicheon</span></div>
   </div>
   <div class="detail-sec">
    <span class="label">Requisitos</span>
-   <div class="item-row">
-    <div class="item-slot"><img src="img/itens/item1_m6.png"><span class="qty">20</span></div>
-   </div>
-  </div>
- </div>
-
- <div class="boss-card" data-mundo="PURGATORIO">
-  <div class="boss-header">
-   <img src="img/bosses/purgatorio_icon.png" loading="lazy" class="boss-img">
-   <div><span class="boss-name">Missão Mensal Purgatório</span><span class="npc-info">Mapa Especial: Purgatório 1F</span></div>
-  </div>
-  <div class="detail-sec">
-   <span class="label">Objetivos Mensais</span>
-   <div class="item-row">
-    <div class="item-slot"><img src="img/itens/bau_purgatorio.png"></div>
-    <div class="item-slot"><img src="img/itens/purgatorio_scroll.png"></div>
-   </div>
+   <div class="item-row"><div class="item-slot"><img src="img/itens/m6_item.webp"><span class="qty">20</span></div></div>
   </div>
  </div>
 
 </div>
 
 <script>
-// Troca de menus
 function trocarMenu(alvo) {
   const menus = ['menuPrincipal', 'menuMC', 'menu155'];
   menus.forEach(m => document.getElementById(m).classList.add('hidden'));
@@ -193,7 +190,6 @@ function trocarMenu(alvo) {
   }
 }
 
-// Filtro Otimizado
 function filter(termo, btn) {
   document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
   if(btn) btn.classList.add('active');
@@ -208,7 +204,6 @@ function filter(termo, btn) {
   });
 }
 
-// Limpa carregamento infinito da aba caso imagens não existam
 window.onload = () => {
   document.querySelectorAll('img').forEach(img => {
     img.onerror = () => {
