@@ -101,4 +101,45 @@
   ["L143","Faluk","143+","M5-Sabuk",["03:30","06:30","09:30","12:30","15:30","18:30","21:30","00:30"],"C3"],
   ["L143","Assombracao","143+","M5-Templo",["01:30","04:30","07:30","10:30","13:30","16:30","19:30","22:30"],"C3"],
   ["L150","Gyo Besta","150+","M3-Necropole",["02:30","08:30","14:30","20:30"],"C3"],
-  ["L150","Tatu Sombrio","150+","M3-Planicie",["01:30","03:30","05:30","07:30","09:30","11:30","13:30","15:30","17:30","19:30","
+  ["L150","Tatu Sombrio","150+","M3-Planicie",["01:30","03:30","05:30","07:30","09:30","11:30","13:30","15:30","17:30","19:30","21:30","23:30"],"C3"],
+  ["L150","Budu","150+","M3-Rockcut",["03:30","09:30","15:30","21:30"],"C3"],
+  ["L150","Mara","150+","M3-Rockcut",["02:30","05:30","08:30","11:30","14:30","17:30","20:30","23:30"],"C3"],
+  ["L150","Cheol Mokgang","150+","M6-Bicheon",["00:30","02:30","04:30","06:30","08:30","10:30","12:30","14:30","16:30","18:30","20:30","22:30"],"C3"],
+  ["L150","Asura","150+","M6-Bicheon",["04:30","10:30","16:30","22:30"],"C3"],
+  ["L150","Wuihan","150+","M6-Bosques",["05:30","11:30","17:30","23:30"],"C3"],
+  ["L150","Mina Demoniaca","150+","M6-Abisso",["01:30","03:30","05:30","07:30","09:30","11:30","13:30","15:30","17:30","19:30","21:30","23:30"],"C3"],
+  ["L150","Yeticlops","150+","M6-Labirinto",["06:30","12:30","18:30","00:30"],"C3"],
+  ["L155","Jihwa","155+","M1-Unseo",["02:30","05:30","08:30","11:30","14:30","17:30","20:30","23:30"],"C1"],
+  ["L155","Tatu Gigante","155+","M1-Vales",["03:30","06:30","09:30","12:30","15:30","18:30","21:30","00:30"],"C1"],
+  ["L155","Yaksha","155+","M1-Vales",["03:30","09:30","15:30","21:30"],"C1"],
+  ["L155","Bulhu","155+","M1-Fogo",["04:30","10:30","16:30","22:30"],"C1"],
+  ["L155","Gwe Mukang","155+","M2-Gelo",["05:30","11:30","17:30","23:30"],"C1"],
+  ["L155","Molgrash","155+","M2-Prisao",["01:30","04:30","07:30","10:30","13:30","16:30","19:30","22:30"],"C1"],
+  ["L155","Maeongryong","155+","M2-Prisao",["06:30","12:30","18:30","00:30"],"C1"],
+  ["L155","WI Kwangryong","155+","M2-Palacio",["02:30","05:30","08:30","11:30","14:30","17:30","20:30","23:30"],"C1"]
+ ];
+
+ var alertedTimes = new Set();
+ function up(){
+  var c=document.getElementById('lb'),q=document.getElementById('ib').value.toLowerCase(),f=document.getElementById('sh').value,now=new Date(),win=[],hA="",hN="",anyA=false;
+  for(var i=0;i<=10;i++){ var d=new Date(now.getTime()+(i*60000)); win.push(("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2)); }
+  for(var i=0;i<ds.length;i++){
+   var b=ds[i];
+   if((b[1]+b[3]).toLowerCase().indexOf(q)==-1||(f&&b[4].indexOf(f)==-1))continue;
+   var isA=false, tH="";
+   for(var j=0;j<b[4].length;j++){
+     var act=(win.indexOf(b[4][j])>-1);
+     if(act){ isA=true; var alertKey = b[1] + b[4][j]; if(!alertedTimes.has(alertKey)){ anyA=true; alertedTimes.add(alertKey); } }
+     tH+='<span class="badge '+(act?'alert-active':'')+'">'+b[4][j]+'</span> ';
+   }
+   var card='<div class="item '+b[0]+' '+(isA?'item-alert':'')+'"><span class="camada">'+b[5]+' ('+b[3].split('-')[0]+')</span><span class="name">'+b[1]+' <span class="lvl-orange">'+b[2]+'</span></span><span class="loc">'+b[3]+'</span><div class="time-box">'+tH+'</div></div>';
+   if(isA)hA+=card;else hN+=card;
+  }
+  c.innerHTML=(hA?'<div class="section-title">Prox. Bosses</div>'+hA:'')+'<div class="section-title">Todos os Bosses</div>'+hN;
+  if(anyA){ bp(); }
+  if(now.getMinutes() == 0 && now.getSeconds() < 30) alertedTimes.clear();
+ }
+ setInterval(up,30000); window.onload=up;
+</script>
+</body>
+</html>
