@@ -32,19 +32,20 @@
     .boss-name { font-size: 10px; font-weight: bold; color: #fff; display: block; }
     .npc-info { font-size: 8px; color: #ff9800; display: block; }
 
+    /* ITENS - PASTA img/craft/ */
     .items-container { 
         display: none; padding: 8px; background: rgba(0,0,0,0.4); 
         border-top: 1px solid #222; flex-direction: row; gap: 8px; overflow-x: auto;
     }
     .boss-card.expanded .items-container { display: flex; }
     .item-box { text-align: center; min-width: 40px; }
-    .item-img { width: 32px; height: 32px; border: 1px solid #333; border-radius: 3px; background: #1a1a1a; }
+    .item-img { width: 32px; height: 32px; border: 1px solid #333; border-radius: 3px; background: #1a1a1a; object-fit: cover; }
     
     .hidden { display: none !important; }
     *::-webkit-scrollbar { width: 4px; height: 4px; }
     *::-webkit-scrollbar-thumb { background: #ff9800; border-radius: 10px; }
 
-    /* Cores Laterais */
+    /* Cores das Bordas */
     .c-m2 { border-left-color: #ffcc80; } .c-m3 { border-left-color: #a5d6a7; }
     .c-m4 { border-left-color: #90ee90; } .c-m5 { border-left-color: #ffe082; }
     .c-m6 { border-left-color: #ce93d8; } .c-m7 { border-left-color: #add8e6; }
@@ -56,7 +57,6 @@
 
 <div class="header">
     <h4>MIR4 Boss Tracker</h4>
-    
     <div id="menuPrincipal" class="filter-container">
         <button class="f-btn active" style="background: #444;" onclick="filterBoss('all', this)">TUDO</button>
         <button class="f-btn" style="background:#607d8b;" onclick="trocarMenu('mc')">MC</button>
@@ -69,12 +69,10 @@
         <button class="f-btn" style="background:#f28d8d; color:#000;" onclick="filterBoss('C3-M8', this)">M8</button>
         <button class="f-btn" style="background:#ff5252;" onclick="trocarMenu('m155')">155+</button>
     </div>
-
     <div id="menuMC" class="filter-container hidden">
         <button class="btn-voltar" onclick="trocarMenu('principal')">← VOLTAR</button>
         <button class="f-btn active" style="background:#607d8b; flex:1;">BOSSES MC SISTEMA</button>
     </div>
-
     <div id="menu155" class="filter-container hidden">
         <button class="btn-voltar" onclick="trocarMenu('principal')">← VOLTAR</button>
         <button class="f-btn active" style="background:#ff5252; flex:1;">CAMADA 1 - UNSEO</button>
@@ -84,6 +82,7 @@
 <div class="scroll" id="bossContainer"></div>
 
 <script>
+    // Banco de dados preservado
     const bossData = [
         { id: "m7_lunula_lobo_fantasma.webp", name: "Lobo fantasmagorico", mundo: "C3-M7", info: "Braço Direito - 2F Desf. Lúnula", css: "c-m7", items: ["item_lobo_lunula_1.webp", "item_pilula_gelo_1.webp", "item_pipa.webp", "item_tesouro_terra.webp"] },
         { id: "m7_lunula_demonio_de_sangue.webp", name: "Poderoso demonio de sangue", mundo: "C3-M7", info: "Braço Direito - 2F Desf. Lúnula", css: "c-m7", items: ["item_berrante_lunula.webp", "item_pilula_gelo_1.webp", "item_pipa.webp", "item_tesouro_vento.webp"] },
@@ -122,7 +121,7 @@
         container.innerHTML = bossData.map(boss => `
             <div class="boss-card ${boss.css}" data-mundo="${boss.mundo}" onclick="this.classList.toggle('expanded')">
                 <div class="boss-header">
-                    <img src="img/bosses/${boss.id}" class="boss-img">
+                    <img src="img/${boss.id}" class="boss-img">
                     <div>
                         <span class="boss-name">${boss.name}</span>
                         <span class="npc-info">${boss.info}</span>
@@ -131,7 +130,7 @@
                 <div class="items-container">
                     ${boss.items.map(item => `
                         <div class="item-box">
-                            <img src="img/items/${item}" class="item-img" title="${item}">
+                            <img src="img/craft/${item}" class="item-img" title="${item}">
                         </div>
                     `).join('')}
                 </div>
@@ -139,46 +138,26 @@
         `).join('');
     }
 
+    // Funções de controle de UI
     function trocarMenu(alvo) {
         document.getElementById('menuPrincipal').classList.add('hidden');
         document.getElementById('menuMC').classList.add('hidden');
         document.getElementById('menu155').classList.add('hidden');
-
-        if (alvo === 'mc') {
-            document.getElementById('menuMC').classList.remove('hidden');
-            filterBoss('MC');
-        } else if (alvo === 'm155') {
-            document.getElementById('menu155').classList.remove('hidden');
-            filterBoss('C1-M1');
-        } else {
-            document.getElementById('menuPrincipal').classList.remove('hidden');
-            filterBoss('all', document.querySelector('#menuPrincipal .f-btn'));
-        }
+        if (alvo === 'mc') { document.getElementById('menuMC').classList.remove('hidden'); filterBoss('MC'); }
+        else if (alvo === 'm155') { document.getElementById('menu155').classList.remove('hidden'); filterBoss('C1-M1'); }
+        else { document.getElementById('menuPrincipal').classList.remove('hidden'); filterBoss('all', document.querySelector('#menuPrincipal .f-btn')); }
     }
 
     function filterBoss(termo, btn) {
-        if(btn) {
-            document.querySelectorAll('#menuPrincipal .f-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-        }
-        
-        const cards = document.querySelectorAll('.boss-card');
-        cards.forEach(card => {
+        if(btn) { document.querySelectorAll('#menuPrincipal .f-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); }
+        document.querySelectorAll('.boss-card').forEach(card => {
             const mundo = card.getAttribute('data-mundo');
-            if (termo === 'all' || mundo === termo) {
-                card.classList.remove('hidden');
-            } else {
-                card.classList.add('hidden');
-                card.classList.remove('expanded');
-            }
+            if (termo === 'all' || mundo === termo) card.classList.remove('hidden');
+            else { card.classList.add('hidden'); card.classList.remove('expanded'); }
         });
     }
 
-    // Inicialização
-    window.onload = () => {
-        renderBosses();
-        filterBoss('all');
-    };
+    window.onload = () => { renderBosses(); filterBoss('all'); };
 </script>
 </body>
 </html>
