@@ -19,7 +19,9 @@
             font-weight: bold; cursor: pointer; border-radius: 3px; text-transform: uppercase; 
             opacity: 0.6; transition: 0.2s; text-align: center; color: #fff;
         }
-        .f-btn.active { opacity: 1; outline: 1px solid #fff; box-shadow: 0 0 5px #ff9800; }
+        /* Correção Ponto 1: Botão Tudo Legível */
+        .f-btn.active { opacity: 1; outline: 1px solid #fff; box-shadow: 0 0 5px #ff9800; color: #000 !important; background: #fff !important; }
+        
         .btn-voltar { background: #444; color: #fff; flex: 1 1 100%; margin-bottom: 4px; font-size: 10px; border-radius: 3px; cursor: pointer; border: none; padding: 8px; }
         .scroll { height: 410px; overflow-y: auto; margin-top: 10px; padding-right: 5px; }
         
@@ -47,7 +49,7 @@
 <div class="header">
     <h4>MIR4 Boss Tracker</h4>
     <div id="menuPrincipal" class="filter-container">
-        <button class="f-btn active" onclick="filterBoss('all', this)">TUDO</button>
+        <button class="f-btn active" style="background:#fff;" onclick="filterBoss('all', this)">TUDO</button>
         <button class="f-btn" style="background:#607d8b;" onclick="trocarMenu('mc')">MC</button>
         <button class="f-btn" style="background:#ffcc80; color:#000;" onclick="filterBoss('C3-M2', this)">M2</button>
         <button class="f-btn" style="background:#a5d6a7; color:#000;" onclick="filterBoss('C3-M3', this)">M3</button>
@@ -59,7 +61,7 @@
         <button class="f-btn" style="background:#ff5252;" onclick="trocarMenu('m155')">155+</button>
     </div>
     <div id="menuVoltar" class="filter-container hidden">
-        <button class="btn-voltar" onclick="trocarMenu('principal')">← VOLTAR AO MENU</button>
+        <button class="btn-voltar" onclick="trocarMenu('principal')">← VOLTAR AO MENU PRINCIPAL</button>
     </div>
 </div>
 
@@ -71,97 +73,37 @@
     const version = new Date().getTime(); 
 
     const bossData = [
-        // C3-M8
+        // M8
         { id: "m8_pakua_rainha_viboras.webp", name: "Rainha das Víboras", mundo: "C3-M8", info: "Buman | Salão de Pedra", css: "c-m8", items: ["item_veneno_viboras.webp", "item_escama_viboras.webp", "item_pipa.webp"] },
         { id: "m8_pakua_arahan.webp", name: "Arahan", mundo: "C3-M8", info: "Buman | Salão de Pedra", css: "c-m8", items: ["item_malicia_arahan.webp", "item_rancor_arahan.webp", "item_tenacidade_arahan.webp", "item_pipa.webp"] },
         { id: "m8_mina_faccao_trovao.webp", name: "Facção do Trovão", mundo: "C3-M8", info: "Yong Munki | Mina 3F", css: "c-m8", items: ["item_trovao_celeste.webp", "item_pipa.webp"] },
         { id: "m8_mina_faccao_terrestre.webp", name: "Facção Terrestre", mundo: "C3-M8", info: "Yong Munki | Mina 3F", css: "c-m8", items: ["item_divindade_terrestre.webp", "item_pipa.webp"] },
         { id: "m8_mina_primeiro_anciao.webp", name: "Primeiro Ancião", mundo: "C3-M8", info: "Yong Munki | Mina 3F", css: "c-m8", items: ["item_energia_assombrada.webp", "item_flauta_bambu.webp", "item_selo_fogofernal.webp", "item_pipa.webp"] },
 
-        // C3-M7
+        // M7
         { id: "m7_lunula_lobo_fantasma.webp", name: "Lobo Fantasmagórico", mundo: "C3-M7", info: "Braço Direito | Lúnula 2F", css: "c-m7", items: ["item_lobo_lunula_1.webp", "item_pilula_de_gelo.webp", "item_pipa.webp"] },
         { id: "m7_lunula_demonio_de_sangue.webp", name: "Demônio de Sangue", mundo: "C3-M7", info: "Braço Direito | Lúnula 2F", css: "c-m7", items: ["item_berrante_lunula.webp", "item_pilula_de_gelo.webp", "item_pipa.webp"] },
         { id: "m7_prisao.webp", name: "Prisão Subterrânea", mundo: "C3-M7", info: "Buman | Navio", css: "c-m7", items: ["item_tartaruga_negra.webp", "item_tesouro_terra.webp", "item_tesouro_agua.webp", "item_pipa.webp"] },
         { id: "m4_paraiso_trovejante_nefariox.webp", name: "Trovejante Nefariox", mundo: "C3-M7", info: "Dangpo | Paraíso", css: "c-m7", items: ["item_pipa.webp"] },
 
-        // C3-M4
+        // M4
         { id: "m4_sabuk_tesouro_dourado.webp", name: "Tesouro Dourado", mundo: "C3-M4", info: "Dangpo | Prov. Sabuk", css: "c-m4", items: ["item_valor_saqueado.webp", "item_forca_vital.webp", "item_pipa.webp"] },
         { id: "m4_paraiso_sangue_contaminado.webp", name: "Sangue Contaminado", mundo: "C3-M4", info: "Karungka | Paraíso 2F", css: "c-m4", items: ["item_sangue_nefariox.webp", "item_pipa.webp"] },
         { id: "m4_monge.webp", name: "Monge de Sangue Negro", mundo: "C3-M4", info: "Buman | Navio", css: "c-m4", items: ["item_tomo_do_culto.webp", "item_pipa.webp"] },
 
-        // C3-M2
+        // M2
         { id: "m2_seocheon.webp", name: "Feitoria Seocheon", mundo: "C3-M2", info: "Condutor | Feitoria", css: "c-m2", items: ["item_feitoria_1.webp", "item_feitoria_2.webp", "item_pipa.webp"] },
         { id: "m2_montanha.webp", name: "Montanha de lunula", mundo: "C3-M2", info: "Condutor | Montanha", css: "c-m2", items: ["item_japamala_1.webp", "item_montanha_2.webp", "item_pipa.webp"] },
         { id: "m2_twinway.webp", name: "Caminho Twinway", mundo: "C3-M2", info: "Condutor | Twinway", css: "c-m2", items: ["item_flor_morta.webp", "item_pipa.webp"] },
         { id: "m2_touro.webp", name: "Rei dos Touros Malvados", mundo: "C3-M2", info: "Condutor | Touros", css: "c-m2", items: ["item_porco_martelo.webp", "item_pipa.webp"] },
 
-        // C3-M5
+        // M5
         { id: "m5_flauta_consoladora.webp", name: "Flauta Consoladora", mundo: "C3-M5", info: "Gufa | Campo de Gelo", css: "c-m5", items: ["item_bambu_magico.webp", "item_pipa.webp"] },
-        { id: "m5_ruina.webp", name: "Ruina do Demônio", mundo: "C3-M5", info: "Gufa | Ruína", css: "c-m5", items: ["item_fragmento_caos.webp", "item_pipa.webp"] },
+        { id: "m5_ruina.webp", name: "Ruina do Demônio", mundo: "C3-M5", info: "Gufa | Ruína", css: "c-m5", items: ["item_fragmento_caos.webp", "item_pipa.webp"] }, 
         { id: "m5_aranha.webp", name: "Demônio Aracnideo", mundo: "C3-M5", info: "Gufa | Aranha", css: "c-m5", items: ["item_pipa.webp"] },
         { id: "m5_templo.webp", name: "Templo Ilusório", mundo: "C3-M5", info: "Grande Muralha", css: "c-m5", items: ["item_po_ilusorio.webp", "item_pipa.webp"] },
 
-        // C3-M3
+        // M3
         { id: "m3_tatu.webp", name: "Necropole nefariox", mundo: "C3-M3", info: "Hyeokjun | Necrópole", css: "c-m3", items: ["item_coracao_tatu.webp", "item_casco_tatu.webp", "item_pipa.webp"] },
         { id: "m3_planicia_kaya.webp", name: "Planicie da viboras", mundo: "C3-M3", info: "Hyeokjun | Planície", css: "c-m3", items: ["item_escama_viboras.webp", "item_pipa.webp"] },
-        { id: "m3_covil_tatu.webp", name: "Covil do tatu sombrio", mundo: "C3-M3", info: "Hyeokjun | Covil", css: "c-m3", items: ["item_espada_lunula.webp", "item_flor_roma_rara.webp", "item_pipa.webp"] },
-        { id: "m3_espectro.webp", name: "Espectro do Osso", mundo: "C3-M3", info: "Hyeokjun | Espectro", css: "c-m3", items: ["item_pedra_acerto.webp", "item_pipa.webp"] },
-
-        // C3-M6
-        { id: "m6_hangga.webp", name: "Labirinto hangga", mundo: "C3-M6", info: "Gyeongbin | Labirinto", css: "c-m6", items: ["item_fragmento_equilibrio.webp", "item_pipa.webp"] },
-        { id: "m6_jogyu.webp", name: "Jo Gyu", mundo: "C3-M6", info: "Gyeongbin | Jo Gyu", css: "c-m6", items: ["item_sino_violeta.webp", "item_pipa.webp"] },
-        { id: "m6_mina.webp", name: "Mina Demoniaca", mundo: "C3-M6", info: "Gyeongbin | Mina", css: "c-m6", items: ["item_fragmento_ordem.webp", "item_pipa.webp"] },
-        { id: "m6_centopeia.webp", name: "Grande Centopeia", mundo: "C3-M6", info: "Gyeongbin | Centopeia", css: "c-m6", items: ["item_grande_centopeia.webp", "item_pipa.webp"] },
-
-        // C1-M1 / MC
-        { id: "c1_songkwang.webp", name: "Sete Vales", mundo: "C1-M1", info: "Heojeong | Unseo", css: "c-c1", items: ["item_pedra_antiga.webp", "item_pipa.webp"] },
-        { id: "c1_porung.webp", name: "Ilha Fogo Ardente", mundo: "C1-M1", info: "Heojeong | Unseo", css: "c-c1", items: ["item_fragmento_vazio.webp", "item_pipa.webp"] },
-        { id: "c2_kangmuhyeon.webp", name: "Campo de dragao noveno", mundo: "C1-M1", info: "Su Seunghy", css: "c-c1", items: ["item_pipa.webp"] },
-        { id: "c2_grandor.webp", name: "Riacho do sangue", mundo: "C1-M1", info: "Su Seunghy", css: "c-c1", items: ["item_pipa.webp"] },
-        { id: "mc_Larva_centopeia.webp", name: "Deserto Phantasia", mundo: "MC", info: "Buman | Navio", css: "c-mc", items: ["item_energia_demonio_vazio.webp", "item_pipa.webp"] }
-    ];
-
-    function renderBosses() {
-        const container = document.getElementById('bossContainer');
-        container.innerHTML = bossData.map(boss => `
-            <div class="boss-card ${boss.css}" data-mundo="${boss.mundo}" onclick="this.classList.toggle('expanded')">
-                <div class="boss-header">
-                    <img src="${pathBoss}${boss.id}?v=${version}" class="boss-img">
-                    <div>
-                        <span class="boss-name">${boss.name}</span>
-                        <span class="npc-info">${boss.info}</span>
-                    </div>
-                </div>
-                <div class="items-container">
-                    ${boss.items.map(item => `
-                        <div class="item-box">
-                            <img src="${pathCraft}${item}?v=${version}" class="item-img" onerror="this.src='https://via.placeholder.com/32x32/333/666?text=?'">
-                        </div>
-                    `).join('')}
-                </div>
-            </div>
-        `).join('');
-    }
-
-    function trocarMenu(alvo) {
-        document.getElementById('menuPrincipal').classList.toggle('hidden', alvo !== 'principal');
-        document.getElementById('menuVoltar').classList.toggle('hidden', alvo === 'principal');
-        if (alvo === 'mc') filterBoss('MC');
-        else if (alvo === 'm155') filterBoss('C1-M1');
-        else filterBoss('all');
-    }
-
-    function filterBoss(termo, btn) {
-        if(btn) { 
-            document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active')); 
-            btn.classList.add('active'); 
-        }
-        document.querySelectorAll('.boss-card').forEach(card => {
-            card.style.display = (termo === 'all' || card.dataset.mundo === termo) ? 'block' : 'none';
-        });
-    }
-
-    window.onload = () => { renderBosses(); filterBoss('all'); };
-</script>
-</body>
-</html>
+        { id: "m3_covil_tatu.webp", name:
