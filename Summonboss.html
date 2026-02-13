@@ -103,4 +103,62 @@
             <div class="item-box"><img src="img/craft/item_grande_centopeia.webp" class="item-img"></div>
             <div class="item-box"><img src="img/craft/item_livro_ceu_caotico.webp" class="item-img"></div>
             <div class="item-box"><img src="img/craft/item_selo_vigor_t2.webp" class="item-img"></div>
-            <div class
+            <div class="item-box"><img src="img/craft/item_tesouro_fogo.webp" class="item-img"></div>
+        </div>
+    </div>
+
+    <div class="boss-card c-m8" data-mundo="C3-M8" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/m8_pakua_rainha_viboras.webp" class="boss-img">
+            <div><span class="boss-name">Rainha das Víboras</span><span class="npc-info">Pakua</span></div>
+        </div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_veneno_viboras.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_escama_viboras.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_fruta_vermelha.webp" class="item-img"></div>
+        </div>
+    </div>
+
+    <div class="boss-card c-mc" data-mundo="MC" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/mc_Larva_centopeia.webp" class="boss-img">
+            <div><span class="boss-name">Larva Centopeia</span><span class="npc-info">Buman</span></div>
+        </div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_energia_demonio_vazio.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_fragmento_escuridao.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pedra_vazia.webp" class="item-img"></div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function filter(mundo, btn) {
+        const cards = document.querySelectorAll('.boss-card');
+        const buttons = document.querySelectorAll('.f-btn');
+        buttons.forEach(b => b.classList.remove('active'));
+        if(btn) btn.classList.add('active');
+        cards.forEach(card => {
+            card.style.display = (mundo === 'all' || card.getAttribute('data-mundo') === mundo) ? 'block' : 'none';
+        });
+    }
+
+    function trocarMenu(alvo) {
+        const principal = document.getElementById('menuPrincipal');
+        const voltar = document.getElementById('menuVoltar');
+        if (alvo === 'principal') {
+            principal.classList.remove('hidden');
+            voltar.classList.add('hidden');
+            filter('all', document.getElementById('btn-tudo'));
+        } else {
+            principal.classList.add('hidden');
+            voltar.classList.remove('hidden');
+            if (alvo === 'mc') filter('MC');
+        }
+    }
+</script>
+</body>
+</html>
