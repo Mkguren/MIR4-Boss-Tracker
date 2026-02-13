@@ -12,7 +12,7 @@
             border: 1px solid #ff9800; border-radius: 8px; overflow: hidden;
         }
 
-        /* Barra de Rolagem Laranja */
+        /* Barra de Rolagem Laranja Restaurada */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #1a1a1a; }
         ::-webkit-scrollbar-thumb { background: #ff9800; border-radius: 10px; }
@@ -44,7 +44,6 @@
         .item-img { width: 32px; height: 32px; border: 1px solid #333; border-radius: 3px; background: #1a1a1a; }
         .hidden { display: none !important; }
 
-        /* Cores de Mapas */
         .c-m2 { border-left-color: #ffcc80; } .c-m3 { border-left-color: #a5d6a7; }
         .c-m4 { border-left-color: #90ee90; } .c-m5 { border-left-color: #ffe082; }
         .c-m6 { border-left-color: #ce93d8; } .c-m7 { border-left-color: #add8e6; }
@@ -75,9 +74,22 @@
 
 <div class="scroll" id="bossContainer">
 
+    <div class="boss-card c-m6" data-mundo="C3-M6" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/m6_jogyu.webp" class="boss-img">
+            <div><span class="boss-name">Jo Gyu</span><span class="npc-info">Gyeongbin | Jo Gyu</span></div>
+        </div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_grande_centopeia.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_livro_ceu_caotico.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_selo_vigor_t2.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_tesouro_fogo.webp" class="item-img"></div>
+        </div>
+    </div>
+
     <div class="boss-card c-m8" data-mundo="C3-M8" onclick="this.classList.toggle('expanded')">
         <div class="boss-header">
-            <img src="img/bosses/m8_rainha_viboras.webp" class="boss-img">
+            <img src="img/bosses/m8_pakua_rainha_viboras.webp" class="boss-img">
             <div><span class="boss-name">Rainha das Víboras</span><span class="npc-info">Pakua | Salão de Pedra</span></div>
         </div>
         <div class="items-container">
@@ -90,7 +102,7 @@
 
     <div class="boss-card c-mc" data-mundo="MC" onclick="this.classList.toggle('expanded')">
         <div class="boss-header">
-            <img src="img/bosses/mc_larva_centopeia.webp" class="boss-img">
+            <img src="img/bosses/mc_Larva_centopeia.webp" class="boss-img">
             <div><span class="boss-name">Larva Centopeia</span><span class="npc-info">Buman | Deserto</span></div>
         </div>
         <div class="items-container">
@@ -98,6 +110,19 @@
             <div class="item-box"><img src="img/craft/item_fragmento_escuridao.webp" class="item-img"></div>
             <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
             <div class="item-box"><img src="img/craft/item_pedra_vazia.webp" class="item-img"></div>
+        </div>
+    </div>
+
+    <div class="boss-card c-m5" data-mundo="C3-M5" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/m5_ruina.webp" class="boss-img">
+            <div><span class="boss-name">Ruína do Demônio</span><span class="npc-info">Gufa | Ruína</span></div>
+        </div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_fruta_milenar.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pedra_agilidade.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_tesouro_luz.webp" class="item-img"></div>
         </div>
     </div>
 
