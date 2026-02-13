@@ -35,7 +35,6 @@
         .item-img { width: 32px; height: 32px; border: 1px solid #333; border-radius: 3px; background: #1a1a1a; }
         .hidden { display: none !important; }
         
-        /* Cores conforme o Mundo */
         .c-m2 { border-left-color: #ffcc80; } .c-m3 { border-left-color: #a5d6a7; }
         .c-m4 { border-left-color: #90ee90; } .c-m5 { border-left-color: #ffe082; }
         .c-m6 { border-left-color: #ce93d8; } .c-m7 { border-left-color: #add8e6; }
@@ -71,9 +70,13 @@
     const pathCraft = "img/craft/";
     const version = new Date().getTime(); 
 
-    // Lista extraída estritamente da Imagem 2 fornecida
     const bossData = [
-        { id: "m8_pakua_rainha_viboras.webp", name: "Rainha das Víboras", mundo: "C3-M8", local: "Salão de Pedra de Pakua", npc: "Buman - Convés do Navio", css: "c-m8", items: ["item_veneno_viboras.webp", "item_escama_viboras.webp"] },
-        { id: "m8_pakua_arahan.webp", name: "Arahan", mundo: "C3-M8", local: "Salão de Pedra de Pakua", npc: "Buman - Convés do Navio", css: "c-m8", items: ["item_malicia_arahan.webp", "item_rancor_arahan.webp", "item_tenacidade_arahan.webp"] },
-        { id: "m8_mina_faccao_trovao.webp", name: "Facção do Trovão", mundo: "C3-M8", local: "3F Mina Abandonada", npc: "Yong Munki - Pakua", css: "c-m8", items: ["item_trovao_celeste.webp"] },
-        { id: "m8_mina_faccao_terrestre.webp
+        // M8 - PAKUA / MINA
+        { id: "m8_pakua_rainha_viboras.webp", name: "Rainha das Víboras", mundo: "C3-M8", info: "Buman | Salão de Pedra", css: "c-m8", items: ["item_veneno_viboras.webp", "item_escama_viboras.webp"] },
+        { id: "m8_pakua_arahan.webp", name: "Arahan", mundo: "C3-M8", info: "Buman | Salão de Pedra", css: "c-m8", items: ["item_malicia_arahan.webp", "item_rancor_arahan.webp", "item_tenacidade_arahan.webp"] },
+        { id: "m8_mina_faccao_trovao.webp", name: "Facção do Trovão", mundo: "C3-M8", info: "Yong Munki | Mina 3F", css: "c-m8", items: ["item_trovao_celeste.webp"] },
+        { id: "m8_mina_faccao_terrestre.webp", name: "Facção Terrestre", mundo: "C3-M8", info: "Yong Munki | Mina 3F", css: "c-m8", items: ["item_divindade_terrestre.webp"] },
+        { id: "m8_mina_primeiro_anciao.webp", name: "Primeiro Ancião", mundo: "C3-M8", info: "Yong Munki | Mina 3F", css: "c-m8", items: ["item_energia_assombrada.webp", "item_flauta_bambu.webp", "item_selo_fogofernal.webp"] },
+        
+        // M7 - LÚNULA / PRISÃO / PARAÍSO
+        { id: "m7_lunula_lobo_fantasma.webp", name: "Lobo Fantasmagórico", mundo: "C3-M7", info: "Braço Direito | Lúnula 2F", css: "c-m7", items: ["item_lobo_lunula_1.webp", "item_pilula_
