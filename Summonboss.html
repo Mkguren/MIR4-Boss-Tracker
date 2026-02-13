@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MIR4 Boss Tracker - Validação Total</title>
+    <title>MIR4 Boss Tracker - Lista Completa</title>
     <style>
         * { box-sizing: border-box; }
         body {
@@ -64,6 +64,45 @@
 
 <div class="scroll" id="bossContainer">
 
+    <div class="boss-card c-m2" data-mundo="C3-M2" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/m2_seocheon.webp" class="boss-img">
+            <div><span class="boss-name">Zhang Liang</span><span class="npc-info">Feitoria - Seocheon</span></div>
+        </div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_feitoria_1.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_feitoria_2.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pedra_rara.webp" class="item-img"></div>
+        </div>
+    </div>
+
+    <div class="boss-card c-m3" data-mundo="C3-M3" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/m3_tatu.webp" class="boss-img">
+            <div><span class="boss-name">Tatu Sombrio Nefariox</span><span class="npc-info">Hyeokjun | Necrópole</span></div>
+        </div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_coracao_tatu.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_casco_tatu.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_japamala_1.webp" class="item-img"></div>
+        </div>
+    </div>
+
+    <div class="boss-card c-m4" data-mundo="C3-M4" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/m4_sabuk_tesouro_dourado.webp" class="boss-img">
+            <div><span class="boss-name">Tesouro Dourado</span><span class="npc-info">Dangpo | Sabuk</span></div>
+        </div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_valor_saqueado.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_forca_vital.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pilula_yin_yang.webp" class="item-img"></div>
+        </div>
+    </div>
+
     <div class="boss-card c-m5" data-mundo="C3-M5" onclick="this.classList.toggle('expanded')">
         <div class="boss-header">
             <img src="img/bosses/m5_ruina.webp" class="boss-img">
@@ -87,45 +126,6 @@
             <div class="item-box"><img src="img/craft/item_essencia_selvagem.webp" class="item-img"></div>
             <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
             <div class="item-box"><img src="img/craft/item_armadura_celestial.webp" class="item-img"></div>
-        </div>
-    </div>
-
-    <div class="boss-card c-m2" data-mundo="C3-M2" onclick="this.classList.toggle('expanded')">
-        <div class="boss-header">
-            <img src="img/bosses/m2_seocheon.webp" class="boss-img">
-            <div><span class="boss-name">Zhang Liang</span><span class="npc-info">Condutor Seocheon</span></div>
-        </div>
-        <div class="items-container">
-            <div class="item-box"><img src="img/craft/item_feitoria_1.webp" class="item-img"></div>
-            <div class="item-box"><img src="img/craft/item_feitoria_2.webp" class="item-img"></div>
-            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
-            <div class="item-box"><img src="img/craft/item_pedra_rara.webp" class="item-img"></div>
-        </div>
-    </div>
-
-    <div class="boss-card c-m3" data-mundo="C3-M3" onclick="this.classList.toggle('expanded')">
-        <div class="boss-header">
-            <img src="img/bosses/m3_tatu.webp" class="boss-img">
-            <div><span class="boss-name">Necrópole Nefariox</span><span class="npc-info">Hyeokjun | Necrópole</span></div>
-        </div>
-        <div class="items-container">
-            <div class="item-box"><img src="img/craft/item_coracao_tatu.webp" class="item-img"></div>
-            <div class="item-box"><img src="img/craft/item_casco_tatu.webp" class="item-img"></div>
-            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
-            <div class="item-box"><img src="img/craft/item_essencia_purificada.webp" class="item-img"></div>
-        </div>
-    </div>
-
-    <div class="boss-card c-m4" data-mundo="C3-M4" onclick="this.classList.toggle('expanded')">
-        <div class="boss-header">
-            <img src="img/bosses/m4_sabuk_tesouro_dourado.webp" class="boss-img">
-            <div><span class="boss-name">Tesouro Dourado</span><span class="npc-info">Dangpo | Sabuk</span></div>
-        </div>
-        <div class="items-container">
-            <div class="item-box"><img src="img/craft/item_valor_saqueado.webp" class="item-img"></div>
-            <div class="item-box"><img src="img/craft/item_forca_vital.webp" class="item-img"></div>
-            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
-            <div class="item-box"><img src="img/craft/item_pilula_yin_yang.webp" class="item-img"></div>
         </div>
     </div>
 
@@ -155,6 +155,19 @@
         </div>
     </div>
 
+    <div class="boss-card c-m7" data-mundo="C3-M7" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/m7_lunula_lobo_fantasma.webp" class="boss-img">
+            <div><span class="boss-name">Lobo Fantasmagórico</span><span class="npc-info">Braço Direito | Lúnula</span></div>
+        </div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_lobo_lunula_1.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pilula_de_gelo.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_po_lunula.webp" class="item-img"></div>
+        </div>
+    </div>
+
     <div class="boss-card c-m8" data-mundo="C3-M8" onclick="this.classList.toggle('expanded')">
         <div class="boss-header">
             <img src="img/bosses/m8_pakua_rainha_viboras.webp" class="boss-img">
@@ -165,6 +178,45 @@
             <div class="item-box"><img src="img/craft/item_escama_viboras.webp" class="item-img"></div>
             <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
             <div class="item-box"><img src="img/craft/item_fruta_vermelha.webp" class="item-img"></div>
+        </div>
+    </div>
+
+    <div class="boss-card c-m8" data-mundo="C3-M8" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/m8_pakua_arahan.webp" class="boss-img">
+            <div><span class="boss-name">Arahan</span><span class="npc-info">Pakua | Salão Pedra</span></div>
+        </div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_malicia_arahan.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_rancor_arahan.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_tenacidade_arahan.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
+        </div>
+    </div>
+
+    <div class="boss-card c-m8" data-mundo="C3-M8" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/m8_mina_primeiro_anciao.webp" class="boss-img">
+            <div><span class="boss-name">Primeiro Ancião</span><span class="npc-info">Yong Munki | Mina 3F</span></div>
+        </div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_energia_assombrada.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_flauta_bambu.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_selo_fogofernal.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
+        </div>
+    </div>
+
+    <div class="boss-card c-m8" data-mundo="C3-M8" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/m8_mina_faccao_trovao.webp" class="boss-img">
+            <div><span class="boss-name">Gok Danhwa</span><span class="npc-info">Yong Munki | Mina 3F</span></div>
+        </div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_trovao_celeste.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_malicia_trovao.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_fragmento_trovao.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
         </div>
     </div>
 
@@ -184,7 +236,7 @@
     <div class="boss-card c-c1" data-mundo="C1-M1" onclick="this.classList.toggle('expanded')">
         <div class="boss-header">
             <img src="img/bosses/c1_songkwang.webp" class="boss-img">
-            <div><span class="boss-name">Sete Vales</span><span class="npc-info">Heojeong | Unseo</span></div>
+            <div><span class="boss-name">Sete Vales - Songkwang</span><span class="npc-info">Heojeong | Unseo</span></div>
         </div>
         <div class="items-container">
             <div class="item-box"><img src="img/craft/item_pedra_antiga.webp" class="item-img"></div>
