@@ -19,13 +19,13 @@
             font-weight: bold; cursor: pointer; border-radius: 3px; text-transform: uppercase; 
             opacity: 0.6; transition: 0.2s; text-align: center; color: #fff;
         }
-        /* Correção Ponto 1: Botão Tudo Legível */
+        /* Correção Ponto 1: Legibilidade do botão branco */
         .f-btn.active { opacity: 1; outline: 1px solid #fff; box-shadow: 0 0 5px #ff9800; color: #000 !important; background: #fff !important; }
         
-        .btn-voltar { background: #444; color: #fff; flex: 1 1 100%; margin-bottom: 4px; font-size: 10px; border-radius: 3px; cursor: pointer; border: none; padding: 10px; width: 100%; }
+        .btn-voltar { background: #444; color: #fff; flex: 1 1 100%; margin-bottom: 4px; font-size: 10px; border-radius: 3px; cursor: pointer; border: none; padding: 10px; }
         .scroll { height: 410px; overflow-y: auto; margin-top: 10px; padding-right: 5px; }
         
-        .boss-card { background: rgba(255,255,255,0.05); border: 1px solid #222; border-radius: 5px; margin-bottom: 8px; border-left: 4px solid #444; cursor: pointer; display: block; }
+        .boss-card { background: rgba(255,255,255,0.05); border: 1px solid #222; border-radius: 5px; margin-bottom: 8px; border-left: 4px solid #444; cursor: pointer; }
         .boss-header { display: flex; align-items: center; padding: 8px; gap: 10px; }
         .boss-img { width: 42px; height: 42px; border: 1px solid #444; border-radius: 4px; object-fit: cover; background: #222; }
         .boss-name { font-size: 10px; font-weight: bold; color: #fff; display: block; }
@@ -37,7 +37,7 @@
         .item-img { width: 32px; height: 32px; border: 1px solid #333; border-radius: 3px; background: #1a1a1a; }
         .hidden { display: none !important; }
         
-        /* Cores das Bordas */
+        /* Cores de Identificação por Mapa */
         .c-m2 { border-left-color: #ffcc80; } .c-m3 { border-left-color: #a5d6a7; }
         .c-m4 { border-left-color: #90ee90; } .c-m5 { border-left-color: #ffe082; }
         .c-m6 { border-left-color: #ce93d8; } .c-m7 { border-left-color: #add8e6; }
@@ -62,7 +62,7 @@
         <button class="f-btn" style="background:#ff5252;" onclick="trocarMenu('m155')">155+</button>
     </div>
     <div id="menuVoltar" class="filter-container hidden">
-        <button class="btn-voltar" onclick="trocarMenu('principal')">← VOLTAR AO MENU PRINCIPAL</button>
+        <button class="btn-voltar" onclick="trocarMenu('principal')">← VOLTAR AO CAMPO</button>
     </div>
 </div>
 
@@ -93,49 +93,24 @@
         </div>
     </div>
 
-    <div class="boss-card c-m8" data-mundo="C3-M8" onclick="this.classList.toggle('expanded')">
-        <div class="boss-header">
-            <img src="img/bosses/m8_mina_primeiro_anciao.webp" class="boss-img">
-            <div><span class="boss-name">Primeiro Ancião</span><span class="npc-info">Yong Munki | Mina 3F</span></div>
-        </div>
-        <div class="items-container">
-            <div class="item-box"><img src="img/craft/item_energia_assombrada.webp" class="item-img"></div>
-            <div class="item-box"><img src="img/craft/item_flauta_bambu.webp" class="item-img"></div>
-            <div class="item-box"><img src="img/craft/item_selo_fogofernal.webp" class="item-img"></div>
-        </div>
-    </div>
-
-    <div class="boss-card c-m7" data-mundo="C3-M7" onclick="this.classList.toggle('expanded')">
-        <div class="boss-header">
-            <img src="img/bosses/m7_prisao.webp" class="boss-img">
-            <div><span class="boss-name">Prisão Subterrânea</span><span class="npc-info">Buman | Navio</span></div>
-        </div>
-        <div class="items-container">
-            <div class="item-box"><img src="img/craft/item_tartaruga_negra.webp" class="item-img"></div>
-            <div class="item-box"><img src="img/craft/item_tesouro_terra.webp" class="item-img"></div>
-            <div class="item-box"><img src="img/craft/item_tesouro_agua.webp" class="item-img"></div>
-            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
-        </div>
-    </div>
-
-    <div class="boss-card c-m7" data-mundo="C3-M7" onclick="this.classList.toggle('expanded')">
-        <div class="boss-header">
-            <img src="img/bosses/m7_lunula_lobo_fantasma.webp" class="boss-img">
-            <div><span class="boss-name">Lobo Fantasmagórico</span><span class="npc-info">Braço Direito | Lúnula 2F</span></div>
-        </div>
-        <div class="items-container">
-            <div class="item-box"><img src="img/craft/item_lobo_lunula_1.webp" class="item-img"></div>
-            <div class="item-box"><img src="img/craft/item_pilula_de_gelo.webp" class="item-img"></div>
-        </div>
-    </div>
-
     <div class="boss-card c-m5" data-mundo="C3-M5" onclick="this.classList.toggle('expanded')">
         <div class="boss-header">
             <img src="img/bosses/m5_ruina.webp" class="boss-img">
             <div><span class="boss-name">Ruína do Demônio</span><span class="npc-info">Gufa | Ruína</span></div>
         </div>
         <div class="items-container">
-            <div class="item-box"><img src="img/craft/item_fragmento_caos.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_po_ilusorio.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
+        </div>
+    </div>
+
+    <div class="boss-card c-m5" data-mundo="C3-M5" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/m5_flauta_consoladora.webp" class="boss-img">
+            <div><span class="boss-name">Flauta Consoladora</span><span class="npc-info">Gufa | Campo de Gelo</span></div>
+        </div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_bambu_magico.webp" class="item-img"></div>
             <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
         </div>
     </div>
@@ -155,10 +130,59 @@
     <div class="boss-card c-mc" data-mundo="MC" onclick="this.classList.toggle('expanded')">
         <div class="boss-header">
             <img src="img/bosses/mc_Larva_centopeia.webp" class="boss-img">
-            <div><span class="boss-name">Deserto Phantasia</span><span class="npc-info">Buman | Deserto</span></div>
+            <div><span class="boss-name">Deserto Phantasia</span><span class="npc-info">Buman | Navio</span></div>
         </div>
         <div class="items-container">
             <div class="item-box"><img src="img/craft/item_energia_demonio_vazio.webp" class="item-img"></div>
             <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
         </div>
     </div>
+
+    <div class="boss-card c-c1" data-mundo="C1-M1" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/c1_songkwang.webp" class="boss-img">
+            <div><span class="boss-name">Sete Vales</span><span class="npc-info">Heojeong | Unseo</span></div>
+        </div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_pedra_antiga.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function filter(mundo, btn) {
+        const cards = document.querySelectorAll('.boss-card');
+        const buttons = document.querySelectorAll('.f-btn');
+        
+        buttons.forEach(b => b.classList.remove('active'));
+        if(btn) btn.classList.add('active');
+
+        cards.forEach(card => {
+            if (mundo === 'all' || card.getAttribute('data-mundo') === mundo) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    function trocarMenu(alvo) {
+        const principal = document.getElementById('menuPrincipal');
+        const voltar = document.getElementById('menuVoltar');
+        
+        if (alvo === 'principal') {
+            principal.classList.remove('hidden');
+            voltar.classList.add('hidden');
+            filter('all', document.getElementById('btn-tudo'));
+        } else {
+            principal.classList.add('hidden');
+            voltar.classList.remove('hidden');
+            if (alvo === 'mc') filter('MC');
+            if (alvo === 'm155') filter('C1-M1');
+        }
+    }
+</script>
+</body>
+</html>
