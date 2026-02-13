@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MIR4 Boss Tracker</title>
+    <title>MIR4 Boss Tracker - Versão Completa</title>
     <style>
         * { box-sizing: border-box; }
         body {
@@ -35,7 +35,7 @@
         .item-img { width: 32px; height: 32px; border: 1px solid #333; border-radius: 3px; background: #1a1a1a; }
         .hidden { display: none !important; }
         
-        /* Cores Laterais */
+        /* Cores de Identificação por Mapa */
         .c-m2 { border-left-color: #ffcc80; } .c-m3 { border-left-color: #a5d6a7; }
         .c-m4 { border-left-color: #90ee90; } .c-m5 { border-left-color: #ffe082; }
         .c-m6 { border-left-color: #ce93d8; } .c-m7 { border-left-color: #add8e6; }
@@ -72,23 +72,9 @@
     const version = new Date().getTime(); 
 
     const bossData = [
-        // M2
-        { id: "m2_touro.webp", name: "Rei dos Touros Malvados", mundo: "C3-M2", info: "Seocheon", css: "c-m2", items: ["item_porco_martelo.webp", "item_pipa.webp", "item_pedra_ant.webp"] },
-        { id: "m2_seocheon.webp", name: "Zhang Liang", mundo: "C3-M2", info: "Seocheon", css: "c-m2", items: ["item_feitoria_1.webp", "item_feitoria_2.webp", "item_pipa.webp"] },
-        { id: "m2_montanha.webp", name: "Zhang Bao", mundo: "C3-M2", info: "Lúnula", css: "c-m2", items: ["item_japamala_1.webp", "item_montanha_2.webp", "item_pipa.webp"] },
-        { id: "m2_twinway.webp", name: "Caminho do Emaranhado", mundo: "C3-M2", info: "Twinway", css: "c-m2", items: ["item_flor_morta.webp", "item_pipa.webp", "item_pedra_cresci.webp"] },
-        { id: "m2_caverna_touro.webp", name: "Capitão Touro", mundo: "C3-M2", info: "Caverna Touro", css: "c-m2", items: ["item_pipa.webp"] },
-
-        // M3
-        { id: "m3_covil_tatu.webp", name: "Covil do Tatu Sombrio", mundo: "C3-M3", info: "Necrópole", css: "c-m3", items: ["item_flor_roma_rara.webp", "item_pipa.webp", "item_espada_lunula.webp"] },
-        { id: "m3_espectro.webp", name: "Espectro do Osso de Aço", mundo: "C3-M3", info: "Necrópole", css: "c-m3", items: ["item_flor_roma_rara.webp", "item_pipa.webp", "item_pedra_acerto.webp"] },
-        { id: "m3_mina_nefariox.webp", name: "Capitão Nefariox", mundo: "C3-M3", info: "Mina Nefariox", css: "c-m3", items: ["item_pipa.webp"] },
-        { id: "m3_nefariox_oculto.webp", name: "Nefariox de Elite", mundo: "C3-M3", info: "Vale Nefariox", css: "c-m3", items: ["item_pipa.webp"] },
-
-        // M4
-        { id: "m4_sabuk_tesouro_dourado.webp", name: "Tesouro Dourado - Supra Resistente", mundo: "C3-M4", info: "Dangpo", css: "c-m4", items: ["item_valor_saqueado.webp", "item_forca_vital.webp", "item_pipa.webp"] },
-        { id: "m4_labirinto_sabuk.webp", name: "Líder de Esquadrão", mundo: "C3-M4", info: "Lab. Sabuk", css: "c-m4", items: ["item_pipa.webp"] },
-        { id: "m4_castelo_sabuk.webp", name: "General Sabuk", mundo: "C3-M4", info: "Castelo Sabuk", css: "c-m4", items: ["item_pipa.webp"] },
-
-        // M5
-        { id: "m5_labirinto_bichon.webp", name: "Guerreiro Amaldiçoado", mundo: "C3-M5", info: "Lab. Bichon", css: "c-m
+        // --- C3-M2 ---
+        { id: "m2_touro.webp", name: "Rei dos Touros Malvados", mundo: "C3-M2", info: "Feitoria Seocheon", css: "c-m2", items: ["item_porco_martelo.webp", "item_pipa.webp", "item_pedra_ant.webp"] },
+        { id: "m2_seocheon.webp", name: "Zhang Liang", mundo: "C3-M2", info: "Feitoria Seocheon", css: "c-m2", items: ["item_feitoria_1.webp", "item_feitoria_2.webp", "item_pipa.webp"] },
+        { id: "m2_montanha.webp", name: "Zhang Bao", mundo: "C3-M2", info: "Montanha Lúnula", css: "c-m2", items: ["item_japamala_1.webp", "item_montanha_2.webp", "item_pipa.webp"] },
+        { id: "m2_twinway.webp", name: "Caminho do Emaranhado", mundo: "C3-M2", info: "Caminho Twinway", css: "c-m2", items: ["item_flor_morta.webp", "item_pipa.webp", "item_pedra_cresci.webp"] },
+        { id: "m2_caverna_touro.webp", name: "Capitão Touro Malvado", mundo: "C3-M2", info: "Caverna dos Touros", css:
