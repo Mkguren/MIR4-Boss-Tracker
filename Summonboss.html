@@ -2,6 +2,8 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIR4 Boss Tracker - Revisado</title>
 <style>
     * { box-sizing: border-box; }
     body {
@@ -15,9 +17,9 @@
     .f-btn { 
         flex: 1 1 calc(20% - 4px); border: none; padding: 8px 0; font-size: 8px; 
         font-weight: bold; cursor: pointer; border-radius: 3px; text-transform: uppercase; 
-        opacity: 0.5; transition: 0.2s; text-align: center; color: #fff;
+        opacity: 0.6; transition: 0.2s; text-align: center; color: #fff;
     }
-    .f-btn.active { opacity: 1; outline: 1px solid #fff; }
+    .f-btn.active { opacity: 1; outline: 1px solid #fff; box-shadow: 0 0 5px #ff9800; }
     .btn-voltar { background: #444; color: #fff; flex: 1 1 100%; margin-bottom: 4px; font-size: 10px; border-radius: 3px; cursor: pointer; border: none; padding: 8px; }
     .scroll { height: 410px; overflow-y: auto; margin-top: 10px; padding-right: 5px; }
     .boss-card { background: rgba(255,255,255,0.05); border: 1px solid #222; border-radius: 5px; margin-bottom: 8px; border-left: 4px solid #444; cursor: pointer; }
@@ -31,6 +33,7 @@
     .item-img { width: 32px; height: 32px; border: 1px solid #333; border-radius: 3px; background: #1a1a1a; }
     .hidden { display: none !important; }
     
+    /* Cores das Bordas baseadas no Mundo */
     .c-m2 { border-left-color: #ffcc80; } .c-m3 { border-left-color: #a5d6a7; }
     .c-m4 { border-left-color: #90ee90; } .c-m5 { border-left-color: #ffe082; }
     .c-m6 { border-left-color: #ce93d8; } .c-m7 { border-left-color: #add8e6; }
@@ -55,29 +58,33 @@
         <button class="f-btn" style="background:#ff5252;" onclick="trocarMenu('m155')">155+</button>
     </div>
     <div id="menuVoltar" class="filter-container hidden">
-        <button class="btn-voltar" onclick="trocarMenu('principal')">← VOLTAR AO MENU</button>
+        <button class="btn-voltar" onclick="trocarMenu('principal')">← VOLTAR</button>
     </div>
 </div>
 
 <div class="scroll" id="bossContainer"></div>
 
 <script>
-    const pathBoss = "img/"; 
+    const pathBoss = "img/";
     const pathCraft = "img/craft/";
 
+    // Revisão Item por Item baseada em suas tabelas
     const bossData = [
-        // TODOS OS IDS EM MINÚSCULO CONFORME SOLICITADO
-        { id: "m7_lunula_lobo_fantasma.webp", name: "Lobo fantasmagorico", mundo: "C3-M7", info: "2F Desf. Lúnula", css: "c-m7", items: ["item_lobo_lunula_1.webp", "item_pilula_gelo_1.webp", "item_pipa.webp", "item_tesouro_terra.webp"] },
-        { id: "m7_lunula_demonio_de_sangue.webp", name: "Poderoso demonio de sangue", mundo: "C3-M7", info: "2F Desf. Lúnula", css: "c-m7", items: ["item_berrante_lunula.webp", "item_pilula_gelo_1.webp", "item_pipa.webp", "item_tesouro_vento.webp"] },
-        { id: "m7_prisao.webp", name: "Prisão Subterrânea", mundo: "C3-M7", info: "Buman - Navio", css: "c-m7", items: ["item_pipa.webp", "item_tesouro_agua.webp", "item_pilula_gelo_1.webp"] },
-        { id: "m8_mina_faccao_trovao.webp", name: "Gok Danhwa", mundo: "C3-M8", info: "Yong Munki", css: "c-m8", items: ["item_trovao_celeste.webp", "item_energia_assombrada.webp", "item_pipa.webp", "item_tesouro_luz.webp"] },
-        { id: "m8_mina_faccao_terrestre.webp", name: "Gok Muyeop", mundo: "C3-M8", info: "Yong Munki", css: "c-m8", items: ["item_divindade_terrestre.webp", "item_energia_assombrada.webp", "item_coracao_tatu.webp", "item_pipa.webp"] },
-        { id: "m2_seocheon.webp", name: "Zhang liang", mundo: "C3-M2", info: "Feitoria Seocheon", css: "c-m2", items: ["item_feitoria_1.webp", "item_feitoria_2.webp", "item_pipa.webp", "item_pedra_rara.webp"] },
-        { id: "m2_touro.webp", name: "Rei dos touros malvados", mundo: "C3-M2", info: "Feitoria Seocheon", css: "c-m2", items: ["item_porco_martelo.webp", "item_pipa.webp", "item_pedra_ant.webp", "item_tesouro_terra.webp"] },
-        { id: "m4_sabuk_tesouro_dorado.webp", name: "Supra Resistente Nefariox", mundo: "C3-M4", info: "Sabuk - Dangpo", css: "c-m4", items: ["item_valor_saqueado.webp", "item_forca_vital.webp", "item_pipa.webp", "item_tesouro_fogo.webp"] },
-        { id: "m6_hangga.webp", name: "Hangga", mundo: "C3-M6", info: "Bicheon", css: "c-m6", items: ["item_lingote.webp", "item_pedra_amarela.webp", "item_pedra_epica.webp", "item_sino_relampago.webp"] },
-        { id: "m6_jogyu.webp", name: "Jo Gyu", mundo: "C3-M6", info: "Bicheon", css: "c-m6", items: ["item_grande_centopeia.webp", "item_livro_ceu_caotico.webp", "item_selo_vigor_t2.webp", "item_tesouro_fogo.webp"] },
-        { id: "mc_larva_centopeia.webp", name: "Deserto Phantasia", mundo: "MC", info: "Buman", css: "c-mc", items: ["item_pipa.webp", "item_tesouro_terra.webp"] }
+        { id: "m8_mina_primeiro_anciao.webp", name: "Espectro carmesim", mundo: "C3-M8", info: "Yong Munki - Pakua", css: "c-m8", items: ["item_flauta_bambu.webp", "item_selo_fogofernal.webp", "item_energia_assombrada.webp", "item_tesouro_vento.webp"] },
+        { id: "m7_lunula_lobo_fantasma.webp", name: "Lobo fantasmagorico", mundo: "C3-M7", info: "Braço Direito - 2F Desf. Lúnula", css: "c-m7", items: ["item_lobo_lunula_1.webp", "item_pilula_de_gelo_1.webp", "item_pipa.webp", "item_tesouro_terra.webp"] },
+        { id: "m7_lunula_demonio_de_sangue.webp", name: "Poderoso demonio de sangue", mundo: "C3-M7", info: "Braço Direito - 2F Desf. Lúnula", css: "c-m7", items: ["item_berrante_lunula.webp", "item_pilula_de_gelo_1.webp", "item_pipa.webp", "item_tesouro_vento.webp"] },
+        { id: "m7_prisao.webp", name: "Prisão subterranea", mundo: "C3-M7", info: "Buman - Convés do Navio", css: "c-m7", items: ["item_tartaruga_negra.webp", "item_tesouro_terra.webp", "item_tesouro_vento.webp", "item_pipa.webp"] },
+        { id: "m4_sabuk_tesouro_dourado.webp", name: "Majestoso Supra Resistente Nefariox", mundo: "C3-M4", info: "Dangpo - Provincia de Sabuk", css: "c-m4", items: ["item_valor_saqueado.webp", "item_forca_vital.webp", "item_pipa.webp", "item_tesouro_fogo.webp"] },
+        { id: "m4_paraiso_trovejante_nefariox.webp", name: "Santidade do Sonido Trovejante Nefariox", mundo: "C3-M4", info: "Dangpo - Provincia de Sabuk", css: "c-m4", items: ["item_pedra_travo.webp", "item_forca_vital.webp", "item_pipa.webp", "item_tesouro_agua.webp"] },
+        { id: "m4_paraiso_sangue_contaminado.webp", name: "Santidade Draco Divina Nefariox", mundo: "C3-M4", info: "Karungka - 2F Paraiso das Espadas", css: "c-m4", items: ["item_sangue_nefariox.webp", "item_forca_vital.webp", "item_pipa.webp", "item_tesouro_luz.webp"] },
+        { id: "m2_seocheon.webp", name: "Zhang liang", mundo: "C3-M2", info: "Condutor de Almas Feitoria Seocheon", css: "c-m2", items: ["item_feitoria_1.webp", "item_feitoria_2.webp", "item_pipa.webp", "item_tesouro_vento.webp"] },
+        { id: "m2_montanha.webp", name: "Zhang bao", mundo: "C3-M2", info: "Condutor de Almas Feitoria Seocheon", css: "c-m2", items: ["item_japamala_1.webp", "item_montanha_2.webp", "item_pipa.webp", "item_tesouro_vento.webp"] },
+        { id: "m2_twinway.webp", name: "Caminho do emaranhado", mundo: "C3-M2", info: "Condutor de Almas Feitoria Seocheon", css: "c-m2", items: ["item_flor_morta.webp", "item_pipa.webp", "item_pedra_cresci.webp", "item_tesouro_vento.webp"] },
+        { id: "m2_touro.webp", name: "Rei dos touros malvados", mundo: "C3-M2", info: "Condutor de Almas Feitoria Seocheon", css: "c-m2", items: ["item_porco_martelo.webp", "item_pipa.webp", "item_pedra_ant.webp", "item_tesouro_vento.webp"] },
+        { id: "m5_flauta_consoladora.webp", name: "Flauta consoladora de Almas", mundo: "C3-M5", info: "Campo de Gelo - Gufa", css: "c-m5", items: ["item_bambu_magico.webp", "item_essencia_selvagem.webp", "item_pipa.webp", "item_tesouro_vento.webp"] },
+        { id: "m3_tatu.webp", name: "Urungka", mundo: "C3-M3", info: "Necropole Nefariox - Hyeokjun", css: "c-m3", items: ["item_casco_tatu.webp", "item_pedra_energia.webp", "item_estatua_rara.webp", "item_tesouro_vento.webp"] },
+        { id: "m6_hangga.webp", name: "Hangga", mundo: "C3-M6", info: "Cidade de Bicheon - Gyeongbin", css: "c-m6", items: ["item_lingote_webp", "item_pedra_amarela.webp", "item_pedra_epica.webp", "item_tesouro_vento.webp"] },
+        { id: "mc_Larva_centopeia.webp", name: "Larva da agua do dragão celeste", mundo: "MC", info: "Buman - Convés do Navio", css: "c-mc", items: ["item_energia_demonio_vazio.webp", "item_pipa.webp", "item_tesouro_floresta.webp"] }
     ];
 
     function renderBosses() {
@@ -85,14 +92,18 @@
         container.innerHTML = bossData.map(boss => `
             <div class="boss-card ${boss.css}" data-mundo="${boss.mundo}" onclick="this.classList.toggle('expanded')">
                 <div class="boss-header">
-                    <img src="${pathBoss}${boss.id}" class="boss-img">
+                    <img src="${pathBoss}${boss.id}" class="boss-img" onerror="console.log('Erro ao ler: ' + this.src)">
                     <div>
                         <span class="boss-name">${boss.name}</span>
                         <span class="npc-info">${boss.info}</span>
                     </div>
                 </div>
                 <div class="items-container">
-                    ${boss.items.map(item => `<div class="item-box"><img src="${pathCraft}${item}" class="item-img"></div>`).join('')}
+                    ${boss.items.map(item => `
+                        <div class="item-box">
+                            <img src="${pathCraft}${item}" class="item-img" onerror="console.log('Erro item: ' + this.src)">
+                        </div>
+                    `).join('')}
                 </div>
             </div>
         `).join('');
