@@ -64,30 +64,15 @@
 <div class="scroll" id="bossContainer"></div>
 
 <script>
+    // TENTATIVA DE CAMINHO RELATIVO SIMPLIFICADO
     const pathBoss = "img/";
     const pathCraft = "img/craft/";
 
-    // IDs ATUALIZADOS CONFORME SEUS ARQUIVOS ENVIADOS
     const bossData = [
-        // M8 - Conferido arquivo: m8_mina_primeiro_anciao.webp
-        { id: "m8_mina_primeiro_anciao.webp", name: "Espectro Carmesim", mundo: "C3-M8", info: "Yong Munki - Pakua", css: "c-m8", items: ["item_flauta_bambu.webp", "item_selo_fogofernal.webp", "item_energia_assombrada.webp", "item_tesouro_vento.webp"] },
-        
-        // M2 - Conferido arquivos: m2_seocheon.webp, m2_montanha.webp, m2_touro.webp, m2_twinway.webp
-        { id: "m2_seocheon.webp", name: "Zhang Liang", mundo: "C3-M2", info: "Feitoria Seocheon", css: "c-m2", items: ["item_feitoria_1.webp", "item_feitoria_2.webp", "item_pipa.webp", "item_tesouro_vento.webp"] },
-        { id: "m2_montanha.webp", name: "Zhang Bao", mundo: "C3-M2", info: "Montanha de Lunula", css: "c-m2", items: ["item_japamala_1.webp", "item_montanha_2.webp", "item_pipa.webp", "item_tesouro_vento.webp"] },
-        { id: "m2_touro.webp", name: "Rei dos Touros Malvados", mundo: "C3-M2", info: "Rei dos Touros Malvados", css: "c-m2", items: ["item_porco_martelo.webp", "item_pipa.webp", "item_pedra_ant.webp", "item_tesouro_vento.webp"] },
-        { id: "m2_twinway.webp", name: "Caminho do Emaranhado", mundo: "C3-M2", info: "Caminho Twinway", css: "c-m2", items: ["item_flor_morta.webp", "item_pipa.webp", "item_pedra_cresci.webp", "item_tesouro_vento.webp"] },
-
-        // M3 - Conferido arquivos: m3_covil_tatu.webp, m3_espectro.webp
-        { id: "m3_covil_tatu.webp", name: "Covil do Tatu Sombrio", mundo: "C3-M3", info: "Necropole Nefariox", css: "c-m3", items: ["item_flor_roma_rara.webp", "item_pipa.webp", "item_espada_lunula.webp", "item_tesouro_vento.webp"] },
-        { id: "m3_espectro.webp", name: "Espectro do Osso de Aço", mundo: "C3-M3", info: "Necropole Nefariox", css: "c-m3", items: ["item_flor_roma_rara.webp", "item_pipa.webp", "item_pedra_acerto.webp", "item_tesouro_vento.webp"] },
-
-        // 155+ - Conferido arquivos: c1_songkwang.webp, c1_porung.webp
-        { id: "c1_songkwang.webp", name: "Sete Vales", mundo: "C1-M1", info: "Cidade Unseo", css: "c-c1", items: ["item_pipa.webp", "item_pedra_antiga.webp", "item_tesouro_fogo.webp"] },
-        { id: "c1_porung.webp", name: "Ilha Fogo Ardente", mundo: "C1-M1", info: "Cidade Unseo", css: "c-c1", items: ["item_pipa.webp", "item_fragmento_vazio.webp"] },
-
-        // MC - Atenção: Ajustado para o nome da sua tabela (confirmar se no GitHub está mc_larva_centopeia.webp ou mc_Larva_centopeia.webp)
-        { id: "mc_larva_centopeia.webp", name: "Larva da Água", mundo: "MC", info: "Buman - Navio", css: "c-mc", items: ["item_energia_demonio_vazio.webp", "item_pipa.webp", "item_tesouro_floresta.webp"] }
+        { id: "m2_touro.webp", name: "Rei dos Touros Malvados", mundo: "C3-M2", info: "M2 - Seocheon", css: "c-m2", items: ["item_porco_martelo.webp", "item_pipa.webp", "item_pedra_ant.webp"] },
+        { id: "c1_porung.webp", name: "Porung", mundo: "C1-M1", info: "155+ - Sete Vales", css: "c-c1", items: ["item_pipa.webp", "item_fragmento_vazio.webp"] },
+        { id: "mc_larva_centopeia.webp", name: "Larva do Deserto", mundo: "MC", info: "MC - Navio", css: "c-mc", items: ["item_energia_demonio_vazio.webp", "item_pipa.webp"] },
+        { id: "m8_mina_primeiro_anciao.webp", name: "Espectro Carmesim", mundo: "C3-M8", info: "M8 - Pakua", css: "c-m8", items: ["item_selo_fogofernal.webp", "item_pipa.webp"] }
     ];
 
     function renderBosses() {
@@ -95,14 +80,18 @@
         container.innerHTML = bossData.map(boss => `
             <div class="boss-card ${boss.css}" data-mundo="${boss.mundo}" onclick="this.classList.toggle('expanded')">
                 <div class="boss-header">
-                    <img src="${pathBoss}${boss.id}" class="boss-img">
+                    <img src="${pathBoss}${boss.id}" class="boss-img" alt="B" onerror="this.src='https://via.placeholder.com/42x42/FF0000/FFFFFF?text=X'">
                     <div>
                         <span class="boss-name">${boss.name}</span>
                         <span class="npc-info">${boss.info}</span>
                     </div>
                 </div>
                 <div class="items-container">
-                    ${boss.items.map(item => `<div class="item-box"><img src="${pathCraft}${item}" class="item-img"></div>`).join('')}
+                    ${boss.items.map(item => `
+                        <div class="item-box">
+                            <img src="${pathCraft}${item}" class="item-img" alt="I" onerror="this.src='https://via.placeholder.com/32x32/888888/FFFFFF?text=?'">
+                        </div>
+                    `).join('')}
                 </div>
             </div>
         `).join('');
@@ -113,7 +102,7 @@
         document.getElementById('menuVoltar').classList.toggle('hidden', alvo === 'principal');
         if (alvo === 'mc') filterBoss('MC');
         else if (alvo === 'm155') filterBoss('C1-M1');
-        else filterBoss('all', document.querySelector('.f-btn'));
+        else filterBoss('all');
     }
 
     function filterBoss(termo, btn) {
