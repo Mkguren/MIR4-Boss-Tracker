@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <style>
-    /* ESTRUTURA BASE */
     * { box-sizing: border-box; }
     body {
         background: #0f0f0f; color: #ddd; font-family: 'Segoe UI', sans-serif;
@@ -13,12 +12,7 @@
     .header { position: sticky; top: 0; background: #0f0f0f; padding-bottom: 10px; border-bottom: 1px solid #333; z-index: 10; }
     h4 { margin: 0 0 8px 0; color: #ff9800; text-align: center; text-transform: uppercase; font-size: 13px; }
 
-    /* NAVEGAÇÃO E FILTROS */
-    .nav-menu { display: flex; gap: 5px; margin-bottom: 10px; }
-    .nav-btn { flex: 1; text-decoration: none; text-align: center; font-size: 10px; font-weight: bold; padding: 6px; border-radius: 3px; }
-    .btn-active { background: #ff9800; color: #000; }
-    .btn-inactive { background: #252525; color: #fff; border: 1px solid #444; }
-
+    /* FILTROS */
     .filter-container { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
     .f-btn { 
         flex: 1 1 calc(20% - 4px); border: none; padding: 8px 0; font-size: 8px; 
@@ -26,175 +20,132 @@
         opacity: 0.5; transition: 0.2s; text-align: center; 
     }
     .f-btn.active { opacity: 1; box-shadow: 0 0 8px rgba(255,152,0,0.5); }
-    .all { background: #444; color: #fff; }
-    .mc-color { background: #607d8b; color: #fff; } 
-    .m155-color { background: #ff5252; color: #fff; }
     .btn-voltar { background: #444; color: #fff; flex: 1 1 100%; margin-bottom: 4px; font-size: 10px; }
 
-    /* ESTILO DOS CARDS */
-    .scroll { height: 385px; overflow-y: auto; margin-top: 10px; padding-right: 5px; }
+    /* CARDS */
+    .scroll { height: 430px; overflow-y: auto; margin-top: 10px; padding-right: 5px; }
     .boss-card { 
         background: rgba(255,255,255,0.03); border: 1px solid #222; border-radius: 5px; 
-        margin-bottom: 8px; border-left: 4px solid #444; cursor: pointer;
-        transition: background 0.2s; overflow: hidden;
+        margin-bottom: 8px; border-left: 4px solid #444; cursor: pointer; overflow: hidden;
     }
-    .boss-card:hover { background: rgba(255,255,255,0.08); }
-    
-    /* CORES LATERAIS POR MUNDO */
-    [data-mundo*="M2"]{border-left-color:#ffcc80} [data-mundo*="M3"]{border-left-color:#a5d6a7}
-    [data-mundo*="M4"]{border-left-color:#90ee90} [data-mundo*="M5"]{border-left-color:#ffe082}
-    [data-mundo*="M6"]{border-left-color:#ce93d8} [data-mundo*="M7"]{border-left-color:#add8e6}
-    [data-mundo*="M8"]{border-left-color:#f28d8d} [data-mundo*="MC"]{border-left-color:#607d8b}
-    [data-mundo*="C1"]{border-left-color:#ff5252}
-
     .boss-header { display: flex; align-items: center; padding: 8px; gap: 10px; }
     .boss-img { width: 42px; height: 42px; border: 1px solid #444; border-radius: 4px; object-fit: cover; }
     .boss-name { font-size: 10px; font-weight: bold; color: #fff; display: block; }
     .npc-info { font-size: 8px; color: #ff9800; display: block; }
 
-    /* EXPANSÃO E ITENS */
+    /* ITENS EXPANDIDOS */
     .items-container { 
-        display: none; padding: 8px; background: rgba(0,0,0,0.3); 
+        display: none; padding: 8px; background: rgba(0,0,0,0.4); 
         border-top: 1px solid #222; flex-direction: row; gap: 8px; overflow-x: auto;
     }
     .boss-card.expanded .items-container { display: flex; }
     .item-box { text-align: center; min-width: 45px; }
-    .item-img { width: 35px; height: 35px; border: 1px solid #444; border-radius: 3px; object-fit: cover; }
-    .item-qty { font-size: 8px; color: #aaa; display: block; margin-top: 2px; }
-
+    .item-img { width: 35px; height: 35px; border: 1px solid #333; border-radius: 3px; background: #1a1a1a; }
+    
     .hidden { display: none !important; }
     *::-webkit-scrollbar { width: 4px; height: 4px; }
     *::-webkit-scrollbar-thumb { background: #ff9800; }
+
+    /* CORES DINAMICAS */
+    .c-m2 { border-left-color: #ffcc80; } .c-m3 { border-left-color: #a5d6a7; }
+    .c-m4 { border-left-color: #90ee90; } .c-m5 { border-left-color: #ffe082; }
+    .c-m6 { border-left-color: #ce93d8; } .c-m7 { border-left-color: #add8e6; }
+    .c-m8 { border-left-color: #f28d8d; } .c-mc { border-left-color: #607d8b; }
+    .c-c1 { border-left-color: #ff5252; }
 </style>
 </head>
 <body>
 
 <div class="header">
     <h4>MIR4 Boss Tracker</h4>
-    <div class="nav-menu">
-        <a href="index.html" class="nav-btn btn-inactive">FIELD BOSS</a>
-        <a href="Summonboss.html" class="nav-btn btn-active">INVOCAÇÃO</a>
-    </div>
-
     <div id="menuPrincipal" class="filter-container">
         <button class="f-btn all active" onclick="filterBoss('all', this)">TUDO</button>
-        <button class="f-btn mc-color" onclick="trocarMenu('mc')">MC</button>
-        <button class="f-btn" style="background:#ffcc80" onclick="filterBoss('M2', this)">M2</button>
-        <button class="f-btn" style="background:#a5d6a7" onclick="filterBoss('M3', this)">M3</button>
-        <button class="f-btn" style="background:#90ee90" onclick="filterBoss('M4', this)">M4</button>
-        <button class="f-btn" style="background:#ffe082" onclick="filterBoss('M5', this)">M5</button>
-        <button class="f-btn" style="background:#ce93d8" onclick="filterBoss('M6', this)">M6</button>
-        <button class="f-btn" style="background:#add8e6" onclick="filterBoss('M7', this)">M7</button>
-        <button class="f-btn" style="background:#f28d8d" onclick="filterBoss('M8', this)">M8</button>
-        <button class="f-btn m155-color" onclick="trocarMenu('m155')">155+</button>
+        <button class="f-btn" style="background:#607d8b; color:#fff" onclick="trocarMenu('mc')">MC</button>
+        <button class="f-btn" style="background:#ffcc80" onclick="filterBoss('C3-M2', this)">M2</button>
+        <button class="f-btn" style="background:#a5d6a7" onclick="filterBoss('C3-M3', this)">M3</button>
+        <button class="f-btn" style="background:#90ee90" onclick="filterBoss('C3-M4', this)">M4</button>
+        <button class="f-btn" style="background:#ffe082" onclick="filterBoss('C3-M5', this)">M5</button>
+        <button class="f-btn" style="background:#ce93d8" onclick="filterBoss('C3-M6', this)">M6</button>
+        <button class="f-btn" style="background:#add8e6" onclick="filterBoss('C3-M7', this)">M7</button>
+        <button class="f-btn" style="background:#f28d8d" onclick="filterBoss('C3-M8', this)">M8</button>
+        <button class="f-btn" style="background:#ff5252; color:#fff" onclick="trocarMenu('m155')">155+</button>
     </div>
 
     <div id="menuMC" class="filter-container hidden">
         <button class="f-btn btn-voltar" onclick="trocarMenu('principal')">← VOLTAR</button>
-        <button id="btnMcPadrao" class="f-btn mc-color" onclick="filterBoss('MC', this)">BOSSES MC</button>
-        <button class="f-btn" style="background:#00bcd4; color:white;" onclick="filterBoss('HYDRA', this)">HYDRA</button>
-        <button class="f-btn" style="background:#7e57c2; color:white;" onclick="filterBoss('PURGA', this)">PURGATÓRIO</button>
+        <button class="f-btn active" style="background:#607d8b; color:#fff" onclick="filterBoss('MC', this)">MC BOSSES</button>
     </div>
 
     <div id="menu155" class="filter-container hidden">
         <button class="f-btn btn-voltar" onclick="trocarMenu('principal')">← VOLTAR</button>
-        <button id="btnC1Padrao" class="f-btn m155-color" onclick="filterBoss('C1', this)">CAMADA 1</button>
+        <button class="f-btn active" style="background:#ff5252; color:#fff" onclick="filterBoss('C1-M1', this)">CAMADA 1</button>
     </div>
 </div>
 
-<div class="scroll" id="bossList">
-    <div class="boss-card" data-mundo="C1" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/c1_songkwang.webp" class="boss-img"><div><span class="boss-name">Sete Vales</span><span class="npc-info">Camada 1 - Mundo Unseo</span></div></div><div class="items-container"></div></div>
-    <div class="boss-card" data-mundo="C1" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/c1_porung.webp" class="boss-img"><div><span class="boss-name">Ilha Fogo Ardente</span><span class="npc-info">Camada 1 - Mundo Unseo</span></div></div><div class="items-container"></div></div>
-    <div class="boss-card" data-mundo="C1" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/c2_kangmuhyeon.webp" class="boss-img"><div><span class="boss-name">Campo de dragao noveno</span><span class="npc-info">Camada 1 - Mundo Dragão Noveno</span></div></div><div class="items-container"></div></div>
-    <div class="boss-card" data-mundo="C1" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/c2_grandor.webp" class="boss-img"><div><span class="boss-name">Riacho do sangue</span><span class="npc-info">Camada 1 - Mundo Dragão Noveno</span></div></div><div class="items-container"></div></div>
-
-    <div class="boss-card" data-mundo="M8" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m8_pakua_rainha_viboras.webp" class="boss-img"><div><span class="boss-name">Rainha das Víboras</span><span class="npc-info">Camada 3 - Mundo 8</span></div></div><div class="items-container"></div></div>
-    <div class="boss-card" data-mundo="M8" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m8_pakua_arahan.webp" class="boss-img"><div><span class="boss-name">Arahan Supremo</span><span class="npc-info">Camada 3 - Mundo 8</span></div></div><div class="items-container"></div></div>
-    <div class="boss-card" data-mundo="M8" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m8_mina_faccao_trovao.webp" class="boss-img"><div><span class="boss-name">Facção Trovão</span><span class="npc-info">Camada 3 - Mundo 8</span></div></div><div class="items-container"></div></div>
-    <div class="boss-card" data-mundo="M8" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m8_mina_faccao_terrestre.webp" class="boss-img"><div><span class="boss-name">Facção Terrestre</span><span class="npc-info">Camada 3 - Mundo 8</span></div></div><div class="items-container"></div></div>
-    <div class="boss-card" data-mundo="M8" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m8_mina_primeiro_anciao.webp" class="boss-img"><div><span class="boss-name">Primeiro Ancião</span><span class="npc-info">Camada 3 - Mundo 8</span></div></div><div class="items-container"></div></div>
-
-    <div class="boss-card" data-mundo="M7" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m7_lunula_lobo_fantasma.webp" class="boss-img"><div><span class="boss-name">Lobo Fantasma</span><span class="npc-info">Camada 3 - Mundo 7</span></div></div><div class="items-container"></div></div>
-    <div class="boss-card" data-mundo="M7" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m7_lunula_demonio_de_sangue.webp" class="boss-img"><div><span class="boss-name">Demônio de Sangue</span><span class="npc-info">Camada 3 - Mundo 7</span></div></div><div class="items-container"></div></div>
-    <div class="boss-card" data-mundo="M7" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m7_prisao.webp" class="boss-img"><div><span class="boss-name">Prisão Subterrânea</span><span class="npc-info">Camada 3 - Mundo 7</span></div></div><div class="items-container"></div></div>
-
-    <div class="boss-card" data-mundo="M4" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m4_sabuk_tesouro_dorado.webp" class="boss-img"><div><span class="boss-name">Tesouro Dourado</span><span class="npc-info">Camada 3 - Mundo 4</span></div></div><div class="items-container"></div></div>
-    <div class="boss-card" data-mundo="M4" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m4_paraiso_trovejante_nefariox.webp" class="boss-img"><div><span class="boss-name">Trovejante Nefariox</span><span class="npc-info">Camada 3 - Mundo 4</span></div></div><div class="items-container"></div></div>
-    <div class="boss-card" data-mundo="M4" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m4_paraiso_sangue_contaminado.webp" class="boss-img"><div><span class="boss-name">Sangue Contaminado</span><span class="npc-info">Camada 3 - Mundo 4</span></div></div><div class="items-container"></div></div>
-    <div class="boss-card" data-mundo="M4" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m4_monge.webp" class="boss-img"><div><span class="boss-name">Monge Sangue Negro</span><span class="npc-info">Camada 3 - Mundo 4</span></div></div><div class="items-container"></div></div>
-
-    <div class="boss-card" data-mundo="M2" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m2_seocheon.webp" class="boss-img"><div><span class="boss-name">Feitoria Seocheon</span><span class="npc-info">Camada 3 - Mundo 2</span></div></div><div class="items-container"></div></div>
-    <div class="boss-card" data-mundo="M2" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m2_montanha.webp" class="boss-img"><div><span class="boss-name">Montanha de lunula</span><span class="npc-info">Camada 3 - Mundo 2</span></div></div><div class="items-container"></div></div>
-    <div class="boss-card" data-mundo="M2" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m2_twinway.webp" class="boss-img"><div><span class="boss-name">Caminho Twinway</span><span class="npc-info">Camada 3 - Mundo 2</span></div></div><div class="items-container"></div></div>
-    <div class="boss-card" data-mundo="M2" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m2_touro.webp" class="boss-img"><div><span class="boss-name">Rei dos Touros Maldados</span><span class="npc-info">Camada 3 - Mundo 2</span></div></div><div class="items-container"></div></div>
-
-    <div class="boss-card" data-mundo="M5" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m5_gufa.webp" class="boss-img"><div><span class="boss-name">Campo de Gelo</span><span class="npc-info">Camada 3 - Mundo 5</span></div></div><div class="items-container"></div></div>
-    <div class="boss-card" data-mundo="M5" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m5_ruina.webp" class="boss-img"><div><span class="boss-name">Ruína do Demônio</span><span class="npc-info">Camada 3 - Mundo 5</span></div></div><div class="items-container"></div></div>
-    <div class="boss-card" data-mundo="M5" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m5_aranha.webp" class="boss-img"><div><span class="boss-name">Demônio Aracnídeo</span><span class="npc-info">Camada 3 - Mundo 5</span></div></div><div class="items-container"></div></div>
-    <div class="boss-card" data-mundo="M5" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m5_templo.webp" class="boss-img"><div><span class="boss-name">Templo Ilusório</span><span class="npc-info">Camada 3 - Mundo 5</span></div></div><div class="items-container"></div></div>
-
-    <div class="boss-card" data-mundo="M3" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m3_tatu.webp" class="boss-img"><div><span class="boss-name">Necropole nefariox</span><span class="npc-info">Camada 3 - Mundo 3</span></div></div><div class="items-container"></div></div>
-    <div class="boss-card" data-mundo="M3" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m3_planicia_kaya.webp" class="boss-img"><div><span class="boss-name">Planicie da viboras</span><span class="npc-info">Camada 3 - Mundo 3</span></div></div><div class="items-container"></div></div>
-    <div class="boss-card" data-mundo="M3" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m3_covil_tatu.webp" class="boss-img"><div><span class="boss-name">Covil do tatu sombrio</span><span class="npc-info">Camada 3 - Mundo 3</span></div></div><div class="items-container"></div></div>
-    <div class="boss-card" data-mundo="M3" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m3_espectro.webp" class="boss-img"><div><span class="boss-name">Espectro do Osso</span><span class="npc-info">Camada 3 - Mundo 3</span></div></div><div class="items-container"></div></div>
-
-    <div class="boss-card" data-mundo="M6" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m6_hangga.webp" class="boss-img"><div><span class="boss-name">Labirinto hangga</span><span class="npc-info">Camada 3 - Mundo 6</span></div></div><div class="items-container"></div></div>
-    <div class="boss-card" data-mundo="M6" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m6_jogyu.webp" class="boss-img"><div><span class="boss-name">Jo Gyu</span><span class="npc-info">Camada 3 - Mundo 6</span></div></div><div class="items-container"></div></div>
-    <div class="boss-card" data-mundo="M6" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m6_mina.webp" class="boss-img"><div><span class="boss-name">Mina Demoníaca</span><span class="npc-info">Camada 3 - Mundo 6</span></div></div><div class="items-container"></div></div>
-    <div class="boss-card" data-mundo="M6" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/m6_centopeia.webp" class="boss-img"><div><span class="boss-name">Grande Centopeia</span><span class="npc-info">Camada 3 - Mundo 6</span></div></div><div class="items-container"></div></div>
-
-    <div class="boss-card" data-mundo="MC" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/mc_geral.webp" class="boss-img"><div><span class="boss-name">Invocação MC</span><span class="npc-info">Camada 3 - Mundo MC</span></div></div><div class="items-container"></div></div>
-    <div class="boss-card" data-mundo="HYDRA" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/mc_hydra.webp" class="boss-img"><div><span class="boss-name">Hydra</span><span class="npc-info">Camada 3 - Mundo MC</span></div></div><div class="items-container"></div></div>
-    <div class="boss-card" data-mundo="PURGA" onclick="toggleExpand(this)"><div class="boss-header"><img src="img/bosses/mc_purgatorio.webp" class="boss-img"><div><span class="boss-name">Purgatório</span><span class="npc-info">Camada 3 - Mundo MC</span></div></div><div class="items-container"></div></div>
-</div>
+<div class="scroll" id="bossContainer">
+    </div>
 
 <script>
-    // FUNÇÃO PARA EXPANDIR O CARD
-    function toggleExpand(card) {
-        card.classList.toggle('expanded');
+    // Banco de dados baseado em image_94ec28 e image_94ec83
+    const bossData = [
+        { id: "m7_lunula_lobo_fantasma.webp", name: "Lobo fantasmagorico", mundo: "C3-M7", info: "Camada 3 - Mundo 7", css: "c-m7", items: ["item_lobo_lunula_1.webp", "item_pilula_gelo_1.webp", "item_pipa.webp", "item_tesouro_terra.webp"] },
+        { id: "m7_lunula_demonio_de_sangue.webp", name: "Poderoso demonio de sangue", mundo: "C3-M7", info: "Camada 3 - Mundo 7", css: "c-m7", items: ["item_berrante_lunula.webp", "item_pilula_gelo_1.webp", "item_pipa.webp", "item_tesouro_vento.webp"] },
+        { id: "m8_mina_faccao_trovao.webp", name: "Gok Danhwa", mundo: "C3-M8", info: "Camada 3 - Mundo 8", css: "c-m8", items: ["item_trovao_celeste.webp", "item_energia_assombrada.webp", "item_pipa.webp"] },
+        { id: "m8_mina_faccao_terrestre.webp", name: "Gok Muyeop", mundo: "C3-M8", info: "Camada 3 - Mundo 8", css: "c-m8", items: ["item_divindade_terrestre.webp", "item_energia_assombrada.webp", "item_coracao_tatu.webp", "item_pipa.webp"] },
+        { id: "m8_mina_primeiro_anciao.webp", name: "Espectro carmesim", mundo: "C3-M8", info: "Camada 3 - Mundo 8", css: "c-m8", items: ["item_flauta_bambu.webp", "item_selo_fogofinternal.webp", "item_energia_assombrada.webp"] },
+        { id: "m2_seocheon.webp", name: "Zhang liang", mundo: "C3-M2", info: "Camada 3 - Mundo 2", css: "c-m2", items: ["item_feitoria_1.webp", "item_feitoria_2.webp", "item_pipa.webp", "item_pedra_rara.webp"] },
+        { id: "m2_montanha.webp", name: "Zhang bao", mundo: "C3-M2", info: "Camada 3 - Mundo 2", css: "c-m2", items: ["item_japamala_1.webp", "item_montanha_2.webp", "item_pipa.webp", "item_estatua_epica.webp"] },
+        { id: "m4_sabuk_tesouro_dorado.webp", name: "Supra Resistente Nefariox", mundo: "C3-M4", info: "Camada 3 - Mundo 4", css: "c-m4", items: ["item_valor_saqueado.webp", "item_forca_vital.webp", "item_pipa.webp", "item_tesouro_fogo.webp"] },
+        { id: "m5_flauta_consoladora.webp", name: "Flauta consoladora de Almas", mundo: "C3-M5", info: "Camada 3 - Mundo 5", css: "c-m5", items: ["item_bambu_magico.webp", "item_essencia_selvagem.webp", "item_pipa.webp", "item_armadura_celestial.webp"] },
+        { id: "c1_songkwang.webp", name: "Sete Vales", mundo: "C1-M1", info: "Camada 1 - Mundo Unseo", css: "c-c1", items: ["item_pipa.webp", "item_pedra_antiga.webp"] },
+        { id: "mc_Larva_centopeia.webp", name: "Deserto Phantasia", mundo: "MC", info: "Camada 3 - Mundo MC", css: "c-mc", items: ["item_pipa.webp"] }
+        // Adicione os demais seguindo o padrão da sua tabela image_94ec83
+    ];
+
+    function renderBosses() {
+        const container = document.getElementById('bossContainer');
+        container.innerHTML = bossData.map(boss => `
+            <div class="boss-card ${boss.css}" data-mundo="${boss.mundo}" onclick="this.classList.toggle('expanded')">
+                <div class="boss-header">
+                    <img src="img/bosses/${boss.id}" class="boss-img">
+                    <div>
+                        <span class="boss-name">${boss.name}</span>
+                        <span class="npc-info">${boss.info}</span>
+                    </div>
+                </div>
+                <div class="items-container">
+                    ${boss.items.map(item => `
+                        <div class="item-box">
+                            <img src="img/items/${item}" class="item-img" title="${item}">
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `).join('');
     }
 
-    // NAVEGAÇÃO ENTRE MENUS
     function trocarMenu(alvo) {
         document.getElementById('menuPrincipal').classList.add('hidden');
         document.getElementById('menuMC').classList.add('hidden');
         document.getElementById('menu155').classList.add('hidden');
-
-        if (alvo === 'mc') {
-            document.getElementById('menuMC').classList.remove('hidden');
-            filterBoss('MC', document.getElementById('btnMcPadrao'));
-        } else if (alvo === 'm155') {
-            document.getElementById('menu155').classList.remove('hidden');
-            filterBoss('C1', document.getElementById('btnC1Padrao'));
-        } else {
-            document.getElementById('menuPrincipal').classList.remove('hidden');
-            filterBoss('all', document.querySelector('#menuPrincipal .all'));
-        }
+        if (alvo === 'mc') document.getElementById('menuMC').classList.remove('hidden');
+        else if (alvo === 'm155') document.getElementById('menu155').classList.remove('hidden');
+        else document.getElementById('menuPrincipal').classList.remove('hidden');
+        filterBoss('all');
     }
 
-    // FILTRO DE BOSSES
     function filterBoss(termo, btn) {
-        document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
-        if(btn) btn.classList.add('active');
-
-        const cards = document.querySelectorAll('.boss-card');
-        cards.forEach(card => {
-            const mundo = card.getAttribute('data-mundo') || "";
-            if(termo === 'all' || mundo.includes(termo)) {
-                card.classList.remove('hidden');
-            } else {
-                card.classList.add('hidden');
-                card.classList.remove('expanded');
-            }
+        if(btn) {
+            document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+        document.querySelectorAll('.boss-card').forEach(card => {
+            const mundo = card.getAttribute('data-mundo');
+            card.style.display = (termo === 'all' || mundo.includes(termo)) ? 'block' : 'none';
         });
     }
 
-    // FALLBACK PARA IMAGENS
-    window.onload = () => {
-        document.querySelectorAll('img').forEach(img => {
-            img.onerror = () => { img.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='; };
-        });
-    };
+    window.onload = renderBosses;
 </script>
 </body>
 </html>
