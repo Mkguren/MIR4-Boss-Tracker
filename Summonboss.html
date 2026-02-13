@@ -1,79 +1,34 @@
-<script>
-    const pathBoss = "img/bosses/";
-    const pathCraft = "img/craft/";
-    const version = "1.0.2"; 
-
-    const bossData = [
-        // M8
-        { id: "m8_mina_primeiro_anciao.webp", name: "Espectro Carmesim", mundo: "C3-M8", info: "Yong Munki - Pakua", css: "c-m8", items: ["item_flauta_bambu.webp", "item_selo_fogofernal.webp", "item_energia_assombrada.webp", "item_tesouro_vento.webp"] },
-        
-        // M7
-        { id: "m7_lunula_lobo_fantasma.webp", name: "Lobo Fantasmagórico", mundo: "C3-M7", info: "2F Desf. Lúnula", css: "c-m7", items: ["item_lobo_lunula_1.webp", "item_pilula_gelo_1.webp", "item_pipa.webp", "item_tesouro_terra.webp"] },
-        { id: "m7_lunula_demonio_de_sangue.webp", name: "Demônio de Sangue", mundo: "C3-M7", info: "2F Desf. Lúnula", css: "c-m7", items: ["item_berrante_lunula.webp", "item_pilula_gelo_1.webp", "item_pipa.webp", "item_tesouro_vento.webp"] },
-        { id: "m7_prisao.webp", name: "Prisão Subterrânea", mundo: "C3-M7", info: "Buman - Navio", css: "c-m7", items: ["item_tartaruga_negra.webp", "item_tesouro_terra.webp", "item_tesouro_agua.webp", "item_pipa.webp"] },
-
-        // M4
-        { id: "m4_sabuk_tesouro_dourado.webp", name: "Supra Resistente Nefariox", mundo: "C3-M4", info: "Dangpo", css: "c-m4", items: ["item_valor_saqueado.webp", "item_forca_vital.webp", "item_pipa.webp", "item_tesouro_fogo.webp"] },
-
-        // M3
-        { id: "m3_covil_tatu.webp", name: "Covil do Tatu Sombrio", mundo: "C3-M3", info: "Necrópole Nefariox", css: "c-m3", items: ["item_flor_roma_rara.webp", "item_pipa.webp", "item_espada_lunula.webp", "item_tesouro_vento.webp"] },
-        { id: "m3_espectro.webp", name: "Espectro do Osso de Aço", mundo: "C3-M3", info: "Necrópole Nefariox", css: "c-m3", items: ["item_flor_roma_rara.webp", "item_pipa.webp", "item_pedra_acerto.webp", "item_tesouro_vento.webp"] },
-
-        // M2
-        { id: "m2_touro.webp", name: "Rei dos Touros Malvados", mundo: "C3-M2", info: "Feitoria Seocheon", css: "c-m2", items: ["item_porco_martelo.webp", "item_pipa.webp", "item_pedra_ant.webp", "item_tesouro_vento.webp"] },
-        { id: "m2_seocheon.webp", name: "Zhang Liang", mundo: "C3-M2", info: "Feitoria Seocheon", css: "c-m2", items: ["item_feitoria_1.webp", "item_feitoria_2.webp", "item_pipa.webp", "item_tesouro_vento.webp"] },
-        { id: "m2_montanha.webp", name: "Zhang Bao", mundo: "C3-M2", info: "Montanha Lúnula", css: "c-m2", items: ["item_japamala_1.webp", "item_montanha_2.webp", "item_pipa.webp", "item_tesouro_vento.webp"] },
-        { id: "m2_twinway.webp", name: "Caminho do Emaranhado", mundo: "C3-M2", info: "Caminho Twinway", css: "c-m2", items: ["item_flor_morta.webp", "item_pipa.webp", "item_pedra_cresci.webp", "item_tesouro_vento.webp"] },
-
-        // MC
-        { id: "mc_larva_centopeia.webp", name: "Larva da Água", mundo: "MC", info: "Buman - Navio", css: "c-mc", items: ["item_energia_demonio_vazio.webp", "item_pipa.webp", "item_tesouro_floresta.webp"] },
-
-        // 155+
-        { id: "c1_songkwang.webp", name: "Songkwang", mundo: "C1-M1", info: "Sete Vales", css: "c-c1", items: ["item_pipa.webp", "item_pedra_antiga.webp", "item_tesouro_fogo.webp"] },
-        { id: "c1_porung.webp", name: "Porung", mundo: "C1-M1", info: "Ilha Fogo Ardente", css: "c-c1", items: ["item_pipa.webp", "item_fragmento_vazio.webp", "item_tesouro_fogo.webp"] }
-    ];
-
-    function renderBosses() {
-        const container = document.getElementById('bossContainer');
-        container.innerHTML = bossData.map(boss => `
-            <div class="boss-card ${boss.css}" data-mundo="${boss.mundo}" onclick="this.classList.toggle('expanded')">
-                <div class="boss-header">
-                    <img src="${pathBoss}${boss.id}?v=${version}" class="boss-img">
-                    <div>
-                        <span class="boss-name">${boss.name}</span>
-                        <span class="npc-info">${boss.info}</span>
-                    </div>
-                </div>
-                <div class="items-container">
-                    ${boss.items.map(item => `
-                        <div class="item-box">
-                            <img src="${pathCraft}${item}?v=${version}" 
-                                 class="item-img" 
-                                 onerror="if(!this.src.includes('item_')) return; this.src=this.src.replace('item_', '');">
-                        </div>
-                    `).join('')}
-                </div>
-            </div>
-        `).join('');
-    }
-
-    function trocarMenu(alvo) {
-        document.getElementById('menuPrincipal').classList.toggle('hidden', alvo !== 'principal');
-        document.getElementById('menuVoltar').classList.toggle('hidden', alvo === 'principal');
-        if (alvo === 'mc') filterBoss('MC');
-        else if (alvo === 'm155') filterBoss('C1-M1');
-        else filterBoss('all');
-    }
-
-    function filterBoss(termo, btn) {
-        if(btn) { 
-            document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active')); 
-            btn.classList.add('active'); 
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIR4 Boss Tracker</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            background: #0f0f0f; color: #ddd; font-family: 'Segoe UI', sans-serif;
+            margin: 0; padding: 10px; width: 325px; height: 580px;
+            border: 1px solid #ff9800; border-radius: 8px; overflow: hidden;
         }
-        document.querySelectorAll('.boss-card').forEach(card => {
-            card.style.display = (termo === 'all' || card.dataset.mundo === termo) ? 'block' : 'none';
-        });
-    }
-
-    window.onload = () => { renderBosses(); filterBoss('all'); };
-</script>
+        .header { position: sticky; top: 0; background: #0f0f0f; padding-bottom: 10px; border-bottom: 1px solid #333; z-index: 10; }
+        h4 { margin: 0 0 8px 0; color: #ff9800; text-align: center; text-transform: uppercase; font-size: 13px; }
+        .filter-container { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
+        .f-btn { 
+            flex: 1 1 calc(20% - 4px); border: none; padding: 8px 0; font-size: 8px; 
+            font-weight: bold; cursor: pointer; border-radius: 3px; text-transform: uppercase; 
+            opacity: 0.6; transition: 0.2s; text-align: center; color: #fff;
+        }
+        .f-btn.active { opacity: 1; outline: 1px solid #fff; box-shadow: 0 0 5px #ff9800; }
+        .btn-voltar { background: #444; color: #fff; flex: 1 1 100%; margin-bottom: 4px; font-size: 10px; border-radius: 3px; cursor: pointer; border: none; padding: 8px; }
+        .scroll { height: 410px; overflow-y: auto; margin-top: 10px; padding-right: 5px; }
+        
+        /* Estilização dos Cards */
+        .boss-card { background: rgba(255,255,255,0.05); border: 1px solid #222; border-radius: 5px; margin-bottom: 8px; border-left: 4px solid #444; cursor: pointer; }
+        .boss-header { display: flex; align-items: center; padding: 8px; gap: 10px; }
+        .boss-img { width: 42px; height: 42px; border: 1px solid #444; border-radius: 4px; object-fit: cover; background: #222; }
+        .boss-name { font-size: 10px; font-weight: bold; color: #fff; display: block; }
+        .npc-info { font-size: 8px; color: #ff9800; display: block; }
+        
+        /* Container de Itens de Craft */
+        .items-container {
