@@ -34,7 +34,7 @@
         .hidden { display: none !important; }
         
         .c-m2 { border-left-color: #ffcc80; } .c-m3 { border-left-color: #a5d6a7; }
-        .c-m4 { border-left-color: #90ee90; } .c-m5 { border-left-color: #ffe082; }
+        .c-m4 { border-left-color: #90ee90; } .c-m7 { border-left-color: #add8e6; }
         .c-m8 { border-left-color: #f28d8d; } .c-mc { border-left-color: #607d8b; }
         .c-c1 { border-left-color: #ff5252; }
     </style>
@@ -49,7 +49,7 @@
         <button class="f-btn" style="background:#ffcc80; color:#000;" onclick="filterBoss('C3-M2', this)">M2</button>
         <button class="f-btn" style="background:#a5d6a7; color:#000;" onclick="filterBoss('C3-M3', this)">M3</button>
         <button class="f-btn" style="background:#90ee90; color:#000;" onclick="filterBoss('C3-M4', this)">M4</button>
-        <button class="f-btn" style="background:#ffe082; color:#000;" onclick="filterBoss('C3-M5', this)">M5</button>
+        <button class="f-btn" style="background:#add8e6; color:#000;" onclick="filterBoss('C3-M7', this)">M7</button>
         <button class="f-btn" style="background:#f28d8d; color:#000;" onclick="filterBoss('C3-M8', this)">M8</button>
         <button class="f-btn" style="background:#ff5252;" onclick="trocarMenu('m155')">155+</button>
     </div>
@@ -66,33 +66,33 @@
     const version = new Date().getTime(); 
 
     const bossData = [
-        // M8
+        // M8 - CORRETO
         { id: "m8_mina_primeiro_anciao.webp", name: "Espectro Carmesim", mundo: "C3-M8", info: "Yong Munki - Pakua", css: "c-m8", items: ["item_flauta_bambu.webp", "item_selo_fogofernal.webp", "item_energia_assombrada.webp", "item_tesouro_vento.webp"] },
         
-        // M7 (Ajustados)
-        { id: "m7_lunula_lobo_fantasma.webp", name: "Lobo Fantasmagórico", mundo: "C3-M7", info: "2F Desf. Lúnula", css: "c-m7", items: ["item_lobo_lunula_1.webp", "item_pilula_gelo_1.webp", "item_pipa.webp", "item_tesouro_terra.webp"] },
-        { id: "m7_lunula_demonio_de_sangue.webp", name: "Demônio de Sangue", mundo: "C3-M7", info: "2F Desf. Lúnula", css: "c-m7", items: ["item_berrante_lunula.webp", "item_pilula_gelo_1.webp", "item_pipa.webp", "item_tesouro_vento.webp"] },
+        // M7 - CORRETO (Ajustado Pílula de Gelo)
+        { id: "m7_lunula_lobo_fantasma.webp", name: "Lobo Fantasmagórico", mundo: "C3-M7", info: "2F Desf. Lúnula", css: "c-m7", items: ["item_lobo_lunula_1.webp", "item_pilula_de_gelo.webp", "item_pipa.webp", "item_tesouro_terra.webp"] },
+        { id: "m7_lunula_demonio_de_sangue.webp", name: "Demônio de Sangue", mundo: "C3-M7", info: "2F Desf. Lúnula", css: "c-m7", items: ["item_berrante_lunula.webp", "item_pilula_de_gelo.webp", "item_pipa.webp", "item_tesouro_vento.webp"] },
         { id: "m7_prisao.webp", name: "Prisão Subterrânea", mundo: "C3-M7", info: "Buman - Navio", css: "c-m7", items: ["item_tartaruga_negra.webp", "item_tesouro_terra.webp", "item_tesouro_agua.webp", "item_pipa.webp"] },
 
-        // M4 (Ajustado nome conforme solicitado)
+        // M4 - CORRETO (Nome ajustado para Tesouro Dourado)
         { id: "m4_sabuk_tesouro_dourado.webp", name: "Tesouro Dourado - Supra Resistente", mundo: "C3-M4", info: "Dangpo", css: "c-m4", items: ["item_valor_saqueado.webp", "item_forca_vital.webp", "item_pipa.webp", "item_tesouro_fogo.webp"] },
 
-        // M3
+        // M3 - CORRETO
         { id: "m3_covil_tatu.webp", name: "Covil do Tatu Sombrio", mundo: "C3-M3", info: "Necrópole Nefariox", css: "c-m3", items: ["item_flor_roma_rara.webp", "item_pipa.webp", "item_espada_lunula.webp", "item_tesouro_vento.webp"] },
         { id: "m3_espectro.webp", name: "Espectro do Osso de Aço", mundo: "C3-M3", info: "Necrópole Nefariox", css: "c-m3", items: ["item_flor_roma_rara.webp", "item_pipa.webp", "item_pedra_acerto.webp", "item_tesouro_vento.webp"] },
 
-        // M2 (Ajustado Twinway)
+        // M2 - CORRETO (Ajustado Caminho do Emaranhado)
         { id: "m2_touro.webp", name: "Rei dos Touros Malvados", mundo: "C3-M2", info: "Feitoria Seocheon", css: "c-m2", items: ["item_porco_martelo.webp", "item_pipa.webp", "item_pedra_ant.webp", "item_tesouro_vento.webp"] },
         { id: "m2_seocheon.webp", name: "Zhang Liang", mundo: "C3-M2", info: "Feitoria Seocheon", css: "c-m2", items: ["item_feitoria_1.webp", "item_feitoria_2.webp", "item_pipa.webp", "item_tesouro_vento.webp"] },
         { id: "m2_montanha.webp", name: "Zhang Bao", mundo: "C3-M2", info: "Montanha Lúnula", css: "c-m2", items: ["item_japamala_1.webp", "item_montanha_2.webp", "item_pipa.webp", "item_tesouro_vento.webp"] },
         { id: "m2_twinway.webp", name: "Caminho do Emaranhado", mundo: "C3-M2", info: "Caminho Twinway", css: "c-m2", items: ["item_flor_morta.webp", "item_pipa.webp", "item_pedra_cresci.webp", "item_tesouro_vento.webp"] },
 
-        // MC
+        // MC - CORRETO
         { id: "mc_larva_centopeia.webp", name: "Larva da Água", mundo: "MC", info: "Buman - Navio", css: "c-mc", items: ["item_energia_demonio_vazio.webp", "item_pipa.webp", "item_tesouro_floresta.webp"] },
 
-        // 155+ (C1-M1) - Ajustados Itens
-        { id: "c1_songkwang.webp", name: "Songkwang", mundo: "C1-M1", info: "Sete Vales", css: "c-c1", items: ["item_pipa.webp", "item_pedra_antiga.webp", "item_tesouro_fogo.webp", "item_lacre_unseo.webp"] },
-        { id: "c1_porung.webp", name: "Porung", mundo: "C1-M1", info: "Ilha Fogo Ardente", css: "c-c1", items: ["item_pipa.webp", "item_fragmento_vazio.webp", "item_tesouro_fogo.webp", "item_lacre_unseo.webp"] }
+        // 155+ - STANDBY (Apenas estrutura básica até você subir os arquivos)
+        { id: "c1_songkwang.webp", name: "Songkwang", mundo: "C1-M1", info: "Cidade Unseo", css: "c-c1", items: ["item_pipa.webp", "item_pedra_antiga.webp"] },
+        { id: "c1_porung.webp", name: "Porung", mundo: "C1-M1", info: "Cidade Unseo", css: "c-c1", items: ["item_pipa.webp", "item_tesouro_fogo.webp"] }
     ];
 
     function renderBosses() {
