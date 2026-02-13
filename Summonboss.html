@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MIR4 Boss Tracker</title>
+    <title>MIR4 Boss Tracker - Validação Total</title>
     <style>
         * { box-sizing: border-box; }
         body {
@@ -19,25 +19,21 @@
             font-weight: bold; cursor: pointer; border-radius: 3px; text-transform: uppercase; 
             opacity: 0.6; transition: 0.2s; text-align: center; color: #fff;
         }
-        /* Correção Ponto 1: Legibilidade do botão branco */
         .f-btn.active { opacity: 1; outline: 1px solid #fff; box-shadow: 0 0 5px #ff9800; color: #000 !important; background: #fff !important; }
-        
-        .btn-voltar { background: #444; color: #fff; flex: 1 1 100%; margin-bottom: 4px; font-size: 10px; border-radius: 3px; cursor: pointer; border: none; padding: 10px; }
+        .btn-voltar { background: #444; color: #fff; flex: 1 1 100%; margin-bottom: 4px; font-size: 10px; border-radius: 3px; cursor: pointer; border: none; padding: 10px; width: 100%; }
         .scroll { height: 410px; overflow-y: auto; margin-top: 10px; padding-right: 5px; }
-        
-        .boss-card { background: rgba(255,255,255,0.05); border: 1px solid #222; border-radius: 5px; margin-bottom: 8px; border-left: 4px solid #444; cursor: pointer; }
+        .boss-card { background: rgba(255,255,255,0.05); border: 1px solid #222; border-radius: 5px; margin-bottom: 8px; border-left: 4px solid #444; cursor: pointer; display: block; }
         .boss-header { display: flex; align-items: center; padding: 8px; gap: 10px; }
         .boss-img { width: 42px; height: 42px; border: 1px solid #444; border-radius: 4px; object-fit: cover; background: #222; }
         .boss-name { font-size: 10px; font-weight: bold; color: #fff; display: block; }
         .npc-info { font-size: 8px; color: #ff9800; display: block; }
-        
         .items-container { display: none; padding: 8px; background: rgba(0,0,0,0.5); border-top: 1px solid #222; flex-direction: row; gap: 8px; overflow-x: auto; }
         .expanded .items-container { display: flex; }
         .item-box { text-align: center; min-width: 40px; }
         .item-img { width: 32px; height: 32px; border: 1px solid #333; border-radius: 3px; background: #1a1a1a; }
         .hidden { display: none !important; }
         
-        /* Cores de Identificação por Mapa */
+        /* Cores de Mapas */
         .c-m2 { border-left-color: #ffcc80; } .c-m3 { border-left-color: #a5d6a7; }
         .c-m4 { border-left-color: #90ee90; } .c-m5 { border-left-color: #ffe082; }
         .c-m6 { border-left-color: #ce93d8; } .c-m7 { border-left-color: #add8e6; }
@@ -67,31 +63,6 @@
 </div>
 
 <div class="scroll" id="bossContainer">
-    
-    <div class="boss-card c-m8" data-mundo="C3-M8" onclick="this.classList.toggle('expanded')">
-        <div class="boss-header">
-            <img src="img/bosses/m8_pakua_rainha_viboras.webp" class="boss-img">
-            <div><span class="boss-name">Rainha das Víboras</span><span class="npc-info">Buman | Salão de Pedra</span></div>
-        </div>
-        <div class="items-container">
-            <div class="item-box"><img src="img/craft/item_veneno_viboras.webp" class="item-img"></div>
-            <div class="item-box"><img src="img/craft/item_escama_viboras.webp" class="item-img"></div>
-            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
-        </div>
-    </div>
-
-    <div class="boss-card c-m8" data-mundo="C3-M8" onclick="this.classList.toggle('expanded')">
-        <div class="boss-header">
-            <img src="img/bosses/m8_pakua_arahan.webp" class="boss-img">
-            <div><span class="boss-name">Arahan</span><span class="npc-info">Buman | Salão de Pedra</span></div>
-        </div>
-        <div class="items-container">
-            <div class="item-box"><img src="img/craft/item_malicia_arahan.webp" class="item-img"></div>
-            <div class="item-box"><img src="img/craft/item_rancor_arahan.webp" class="item-img"></div>
-            <div class="item-box"><img src="img/craft/item_tenacidade_arahan.webp" class="item-img"></div>
-            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
-        </div>
-    </div>
 
     <div class="boss-card c-m5" data-mundo="C3-M5" onclick="this.classList.toggle('expanded')">
         <div class="boss-header">
@@ -99,8 +70,10 @@
             <div><span class="boss-name">Ruína do Demônio</span><span class="npc-info">Gufa | Ruína</span></div>
         </div>
         <div class="items-container">
-            <div class="item-box"><img src="img/craft/item_po_ilusorio.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_fruta_milenar.webp" class="item-img"></div>
             <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pedra_agilidade.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_tesouro_luz.webp" class="item-img"></div>
         </div>
     </div>
 
@@ -111,7 +84,22 @@
         </div>
         <div class="items-container">
             <div class="item-box"><img src="img/craft/item_bambu_magico.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_essencia_selvagem.webp" class="item-img"></div>
             <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_armadura_celestial.webp" class="item-img"></div>
+        </div>
+    </div>
+
+    <div class="boss-card c-m2" data-mundo="C3-M2" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/m2_seocheon.webp" class="boss-img">
+            <div><span class="boss-name">Zhang Liang</span><span class="npc-info">Condutor Seocheon</span></div>
+        </div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_feitoria_1.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_feitoria_2.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pedra_rara.webp" class="item-img"></div>
         </div>
     </div>
 
@@ -124,17 +112,72 @@
             <div class="item-box"><img src="img/craft/item_coracao_tatu.webp" class="item-img"></div>
             <div class="item-box"><img src="img/craft/item_casco_tatu.webp" class="item-img"></div>
             <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_essencia_purificada.webp" class="item-img"></div>
+        </div>
+    </div>
+
+    <div class="boss-card c-m4" data-mundo="C3-M4" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/m4_sabuk_tesouro_dourado.webp" class="boss-img">
+            <div><span class="boss-name">Tesouro Dourado</span><span class="npc-info">Dangpo | Sabuk</span></div>
+        </div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_valor_saqueado.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_forca_vital.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pilula_yin_yang.webp" class="item-img"></div>
+        </div>
+    </div>
+
+    <div class="boss-card c-m6" data-mundo="C3-M6" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/m6_jogyu.webp" class="boss-img">
+            <div><span class="boss-name">Jo Gyu</span><span class="npc-info">Gyeongbin | Jo Gyu</span></div>
+        </div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_sino_violeta.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_fragmento_ordem.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_po_misterioso.webp" class="item-img"></div>
+        </div>
+    </div>
+
+    <div class="boss-card c-m7" data-mundo="C3-M7" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/m7_prisao.webp" class="boss-img">
+            <div><span class="boss-name">Prisão Subterrânea</span><span class="npc-info">Buman | Navio</span></div>
+        </div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_tartaruga_negra.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_tesouro_terra.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_tesouro_agua.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
+        </div>
+    </div>
+
+    <div class="boss-card c-m8" data-mundo="C3-M8" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/m8_pakua_rainha_viboras.webp" class="boss-img">
+            <div><span class="boss-name">Rainha das Víboras</span><span class="npc-info">Pakua | Salão Pedra</span></div>
+        </div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_veneno_viboras.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_escama_viboras.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_fruta_vermelha.webp" class="item-img"></div>
         </div>
     </div>
 
     <div class="boss-card c-mc" data-mundo="MC" onclick="this.classList.toggle('expanded')">
         <div class="boss-header">
             <img src="img/bosses/mc_Larva_centopeia.webp" class="boss-img">
-            <div><span class="boss-name">Deserto Phantasia</span><span class="npc-info">Buman | Navio</span></div>
+            <div><span class="boss-name">Larva Centopeia</span><span class="npc-info">Buman | Deserto</span></div>
         </div>
         <div class="items-container">
             <div class="item-box"><img src="img/craft/item_energia_demonio_vazio.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_fragmento_escuridao.webp" class="item-img"></div>
             <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pedra_vazia.webp" class="item-img"></div>
         </div>
     </div>
 
@@ -145,7 +188,9 @@
         </div>
         <div class="items-container">
             <div class="item-box"><img src="img/craft/item_pedra_antiga.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_fragmento_unseo.webp" class="item-img"></div>
             <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_selo_antigo.webp" class="item-img"></div>
         </div>
     </div>
 
@@ -155,23 +200,16 @@
     function filter(mundo, btn) {
         const cards = document.querySelectorAll('.boss-card');
         const buttons = document.querySelectorAll('.f-btn');
-        
         buttons.forEach(b => b.classList.remove('active'));
         if(btn) btn.classList.add('active');
-
         cards.forEach(card => {
-            if (mundo === 'all' || card.getAttribute('data-mundo') === mundo) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
+            card.style.display = (mundo === 'all' || card.getAttribute('data-mundo') === mundo) ? 'block' : 'none';
         });
     }
 
     function trocarMenu(alvo) {
         const principal = document.getElementById('menuPrincipal');
         const voltar = document.getElementById('menuVoltar');
-        
         if (alvo === 'principal') {
             principal.classList.remove('hidden');
             voltar.classList.add('hidden');
