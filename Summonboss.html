@@ -25,13 +25,11 @@
  .header { position: sticky; top: 0; background: #0f0f0f; padding-bottom: 10px; border-bottom: 1px solid #333; z-index: 10; }
  h4 { margin: 0 0 8px 0; color: #ff9800; text-align: center; text-transform: uppercase; font-size: 13px; }
  
- /* Navegação idêntica ao index.html */
  .nav-menu { display: flex; gap: 5px; margin-bottom: 10px; }
  .nav-btn { flex: 1; text-decoration: none; text-align: center; font-size: 10px; font-weight: bold; padding: 8px; border-radius: 3px; transition: 0.3s; }
  .btn-active { background: #ff9800; color: #000; }
  .btn-inactive { background: #252525; color: #fff; border: 1px solid #444; }
 
- /* Filtros */
  .filter-container { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
  .f-btn { flex: 1 1 calc(23% - 4px); border: none; padding: 5px 0; font-size: 8px; font-weight: bold; cursor: pointer; border-radius: 3px; color: #fff; background: #252525; border: 1px solid #444; }
  .f-btn.active { background: #ff9800; color: #000; border-color: #ff9800; }
@@ -51,7 +49,6 @@
  .item-box { min-width: 35px; text-align: center; }
  .item-img { width: 30px; height: 30px; border: 1px solid #333; border-radius: 3px; }
 
- /* Cores laterais por Mundo */
  .c3m8 { border-left-color: #ff5252; } .c3m7 { border-left-color: #f28d8d; }
  .c3m4 { border-left-color: #ffe082; } .c3m2 { border-left-color: #ffcc80; }
  .c3m5 { border-left-color: #ce93d8; } .c3m3 { border-left-color: #90ee90; }
@@ -75,11 +72,38 @@
     <button class="f-btn" onclick="filter('c3m6', this)">C3-M6</button>
     <button class="f-btn" onclick="filter('c3m5', this)">C3-M5</button>
     <button class="f-btn" onclick="filter('c3m3', this)">C3-M3</button>
+    <button class="f-btn" onclick="filter('c3m2', this)">C3-M2</button>
     <button class="f-btn" onclick="filter('c1m1', this)">155+</button>
  </div>
 </div>
 
 <div class="scroll" id="lb">
+    <div class="boss-card c3m8" data-mundo="c3m8" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/m8_pakua_rainha_viboras.webp" class="boss-img">
+            <div><span class="boss-name">Rainha das viboras monstruosas</span><span class="npc-info">Buman - Convés do Navio</span><span class="local-info">Salão de Pedra de Pakua</span></div>
+        </div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_folha_milenar.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_escama_viboras.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_veneno_viboras.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
+        </div>
+    </div>
+
+    <div class="boss-card c3m8" data-mundo="c3m8" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/m8_pakua_arahan.webp" class="boss-img">
+            <div><span class="boss-name">Arahan</span><span class="npc-info">Buman - Convés do Navio</span><span class="local-info">Salão de Pedra de Pakua</span></div>
+        </div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_estatua_porco.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_rancor_arahan.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_malicia_arahan.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_tenacidade_arahan.webp" class="item-img"></div>
+        </div>
+    </div>
+
     <div class="boss-card c3m8" data-mundo="c3m8" onclick="this.classList.toggle('expanded')">
         <div class="boss-header">
             <img src="img/bosses/m8_mina_primeiro_anciao.webp" class="boss-img">
@@ -122,13 +146,26 @@
     <div class="boss-card c3m7" data-mundo="c3m7" onclick="this.classList.toggle('expanded')">
         <div class="boss-header">
             <img src="img/bosses/m4_paraiso_trovejante_nefariox.webp" class="boss-img">
-            <div><span class="boss-name">Santidade do Sonido Trovejante Nefariox</span><span class="npc-info">Dangpo - Província de Sabuk</span><span class="local-info">Paraíso das Espadas</span></div>
+            <div><span class="boss-name">Santidade do Sonido Trovejante Nefariox</span><span class="npc-info">Dangpo - Sabuk</span><span class="local-info">Paraíso das Espadas</span></div>
         </div>
         <div class="items-container">
             <div class="item-box"><img src="img/craft/item_pedra_trovao.webp" class="item-img"></div>
             <div class="item-box"><img src="img/craft/item_forca_vital.webp" class="item-img"></div>
             <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
             <div class="item-box"><img src="img/craft/item_tesouro_agua.webp" class="item-img"></div>
+        </div>
+    </div>
+
+    <div class="boss-card c3m7" data-mundo="c3m7" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/m7_prisao.webp" class="boss-img">
+            <div><span class="boss-name">Prisão subterranea</span><span class="npc-info">Buman - Convés do Navio</span><span class="local-info">Prisão Subterrânea</span></div>
+        </div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_tartaruga_negra.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_tesouro_terra.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_tesouro_vento.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
         </div>
     </div>
 
@@ -145,10 +182,36 @@
         </div>
     </div>
 
+    <div class="boss-card c3m4" data-mundo="c3m4" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/m4_sabuk_tesouro_dourado.webp" class="boss-img">
+            <div><span class="boss-name">Majestoso Nefariox</span><span class="npc-info">Dangpo - Sabuk</span><span class="local-info">Província de Sabuk</span></div>
+        </div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_valor_saqueado.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_forca_vital.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_tesouro_fogo.webp" class="item-img"></div>
+        </div>
+    </div>
+
+    <div class="boss-card c3m4" data-mundo="c3m4" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/m4_paraiso_sangue_contaminado.webp" class="boss-img">
+            <div><span class="boss-name">Santidade Draco Divina</span><span class="npc-info">Karungka - 2F Paraíso</span><span class="local-info">Paraíso das Espadas</span></div>
+        </div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_sangue_nefariox.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_forca_vital.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_tesouro_luz.webp" class="item-img"></div>
+        </div>
+    </div>
+
     <div class="boss-card c3m3" data-mundo="c3m3" onclick="this.classList.toggle('expanded')">
         <div class="boss-header">
             <img src="img/bosses/m3_planicia_kaya.webp" class="boss-img">
-            <div><span class="boss-name">Kaya</span><span class="npc-info">Necropole Nefariox - Hyeokjun</span><span class="local-info">Planicie da viboras</span></div>
+            <div><span class="boss-name">Kaya</span><span class="npc-info">Hyeokjun - Necrópole</span><span class="local-info">Planície das víboras</span></div>
         </div>
         <div class="items-container">
             <div class="item-box"><img src="img/craft/item_ornamento_soldado.webp" class="item-img"></div>
@@ -158,24 +221,71 @@
         </div>
     </div>
 
-    <div class="boss-card c1m1" data-mundo="c1m1" onclick="this.classList.toggle('expanded')">
+    <div class="boss-card c3m3" data-mundo="c3m3" onclick="this.classList.toggle('expanded')">
         <div class="boss-header">
-            <img src="img/bosses/c1_songkwang.webp" class="boss-img">
-            <div><span class="boss-name">Songkwang</span><span class="npc-info">Cidade Unseo - Heojeong</span><span class="local-info">Sete Vales</span></div>
+            <img src="img/bosses/m3_tatu.webp" class="boss-img">
+            <div><span class="boss-name">Urungka</span><span class="npc-info">Hyeokjun - Necrópole</span><span class="local-info">Necrópole Nefariox</span></div>
         </div>
-        <div class="items-container"></div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_casco_tatu.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pedra_energia.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_estatua_rara.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_sino_violeta.webp" class="item-img"></div>
+        </div>
     </div>
-    
+
     <div class="boss-card c3m6" data-mundo="c3m6" onclick="this.classList.toggle('expanded')">
         <div class="boss-header">
             <img src="img/bosses/m6_hangga.webp" class="boss-img">
-            <div><span class="boss-name">Hangga</span><span class="npc-info">Cidade de Bicheon - Gyeongbin</span><span class="local-info">Labirinto hangga</span></div>
+            <div><span class="boss-name">Hangga</span><span class="npc-info">Gyeongbin - Bicheon</span><span class="local-info">Labirinto Hangga</span></div>
         </div>
         <div class="items-container">
             <div class="item-box"><img src="img/craft/item_lingote.webp" class="item-img"></div>
             <div class="item-box"><img src="img/craft/item_pedra_amarela.webp" class="item-img"></div>
             <div class="item-box"><img src="img/craft/item_pedra_epica.webp" class="item-img"></div>
             <div class="item-box"><img src="img/craft/item_sino_relampago.webp" class="item-img"></div>
+        </div>
+    </div>
+
+    <div class="boss-card c3m6" data-mundo="c3m6" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/m6_jogyu.webp" class="boss-img">
+            <div><span class="boss-name">Jo Gyu</span><span class="npc-info">Gyeongbin - Bicheon</span><span class="local-info">Jo Gyu</span></div>
+        </div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_grande_centopeia.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_livro_ceu_caotico.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_selo_vigor_t2.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_tesouro_fogo.webp" class="item-img"></div>
+        </div>
+    </div>
+
+    <div class="boss-card c1m1" data-mundo="c1m1" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/c1_songkwang.webp" class="boss-img">
+            <div><span class="boss-name">Songkwang</span><span class="npc-info">Heojeong - Unseo</span><span class="local-info">Sete Vales</span></div>
+        </div>
+        <div class="items-container"></div>
+    </div>
+
+    <div class="boss-card c1m1" data-mundo="c1m1" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/c1_porung.webp" class="boss-img">
+            <div><span class="boss-name">Porung</span><span class="npc-info">Heojeong - Unseo</span><span class="local-info">Ilha Fogo Ardente</span></div>
+        </div>
+        <div class="items-container"></div>
+    </div>
+
+    <div class="boss-card c3m2" data-mundo="c3m2" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/m2_montanha.webp" class="boss-img">
+            <div><span class="boss-name">Zhang bao</span><span class="npc-info">Seocheon</span><span class="local-info">Montanha de lúnula</span></div>
+        </div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_japamala_1.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_montanha_2.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_estatua_epica.webp" class="item-img"></div>
         </div>
     </div>
 
