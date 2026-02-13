@@ -2,39 +2,51 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIR4 Boss Tracker</title>
 <style>
-    /* Estilos preservados para manter o layout original */
     * { box-sizing: border-box; }
     body {
-        background: #0f0f0f; color: #ddd; font-family: 'Segoe UI', sans-serif;
+        background: #0f0f0f; color: #ddd; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         margin: 0; padding: 10px; width: 325px; height: 580px;
         border: 1px solid #ff9800; border-radius: 8px; overflow: hidden;
     }
     .header { position: sticky; top: 0; background: #0f0f0f; padding-bottom: 10px; border-bottom: 1px solid #333; z-index: 10; }
-    h4 { margin: 0 0 8px 0; color: #ff9800; text-align: center; text-transform: uppercase; font-size: 13px; }
+    h4 { margin: 0 0 8px 0; color: #ff9800; text-align: center; text-transform: uppercase; font-size: 13px; letter-spacing: 1px; }
+
     .filter-container { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
     .f-btn { 
         flex: 1 1 calc(20% - 4px); border: none; padding: 8px 0; font-size: 8px; 
         font-weight: bold; cursor: pointer; border-radius: 3px; text-transform: uppercase; 
-        opacity: 0.5; transition: 0.2s; text-align: center; color: #fff;
+        opacity: 0.6; transition: 0.2s; text-align: center; color: #fff;
     }
-    .f-btn.active { opacity: 1; box-shadow: 0 0 8px rgba(255,152,0,0.5); border: 1px solid #fff; }
+    .f-btn.active { opacity: 1; outline: 1px solid #fff; box-shadow: 0 0 5px #ff9800; }
     .btn-voltar { background: #444; color: #fff; flex: 1 1 100%; margin-bottom: 4px; font-size: 10px; border-radius: 3px; cursor: pointer; border: none; padding: 8px; }
+
     .scroll { height: 410px; overflow-y: auto; margin-top: 10px; padding-right: 5px; }
-    .boss-card { background: rgba(255,255,255,0.03); border: 1px solid #222; border-radius: 5px; margin-bottom: 8px; border-left: 4px solid #444; cursor: pointer; }
+    .boss-card { 
+        background: rgba(255,255,255,0.05); border: 1px solid #222; border-radius: 5px; 
+        margin-bottom: 8px; border-left: 4px solid #444; cursor: pointer; display: block;
+    }
+    
     .boss-header { display: flex; align-items: center; padding: 8px; gap: 10px; }
-    .boss-img { width: 42px; height: 42px; border: 1px solid #444; border-radius: 4px; object-fit: cover; background: #1a1a1a; }
+    .boss-img { width: 42px; height: 42px; border: 1px solid #444; border-radius: 4px; object-fit: cover; background: #000; }
     .boss-name { font-size: 10px; font-weight: bold; color: #fff; display: block; }
     .npc-info { font-size: 8px; color: #ff9800; display: block; }
-    .items-container { display: none; padding: 8px; background: rgba(0,0,0,0.4); border-top: 1px solid #222; flex-direction: row; gap: 8px; overflow-x: auto; }
+
+    .items-container { 
+        display: none; padding: 8px; background: rgba(0,0,0,0.5); 
+        border-top: 1px solid #222; flex-direction: row; gap: 8px; overflow-x: auto;
+    }
     .boss-card.expanded .items-container { display: flex; }
     .item-box { text-align: center; min-width: 40px; }
-    .item-img { width: 32px; height: 32px; border: 1px solid #333; border-radius: 3px; background: #1a1a1a; object-fit: cover; }
+    .item-img { width: 32px; height: 32px; border: 1px solid #333; border-radius: 3px; background: #1a1a1a; }
+    
     .hidden { display: none !important; }
     *::-webkit-scrollbar { width: 4px; }
     *::-webkit-scrollbar-thumb { background: #ff9800; border-radius: 10px; }
 
-    /* Bordas por Mundo */
+    /* Cores Laterais */
     .c-m2 { border-left-color: #ffcc80; } .c-m3 { border-left-color: #a5d6a7; }
     .c-m4 { border-left-color: #90ee90; } .c-m5 { border-left-color: #ffe082; }
     .c-m6 { border-left-color: #ce93d8; } .c-m7 { border-left-color: #add8e6; }
@@ -58,25 +70,21 @@
         <button class="f-btn" style="background:#f28d8d; color:#000;" onclick="filterBoss('C3-M8', this)">M8</button>
         <button class="f-btn" style="background:#ff5252;" onclick="trocarMenu('m155')">155+</button>
     </div>
-    
-    <div id="menuMC" class="filter-container hidden">
-        <button class="btn-voltar" onclick="trocarMenu('principal')">← VOLTAR</button>
-    </div>
-    <div id="menu155" class="filter-container hidden">
-        <button class="btn-voltar" onclick="trocarMenu('principal')">← VOLTAR</button>
+
+    <div id="menuVoltar" class="filter-container hidden">
+        <button class="btn-voltar" onclick="trocarMenu('principal')">← VOLTAR AO MENU PRINCIPAL</button>
     </div>
 </div>
 
-<div class="scroll" id="bossContainer"></div>
+<div class="scroll" id="bossContainer">
+    </div>
 
 <script>
-    // Configuração de Base URL para o GitHub Pages
-    // Isso garante que o código saiba onde buscar as imagens independente da página
-    const baseBoss = "img/";
-    const baseCraft = "img/craft/";
+    // Caminhos relativos para o GitHub Pages
+    const pathBoss = "img/";
+    const pathCraft = "img/craft/";
 
     const bossData = [
-        // Mantendo sua lista de 31 bosses mapeados 1:1
         { id: "m7_lunula_lobo_fantasma.webp", name: "Lobo fantasmagorico", mundo: "C3-M7", info: "2F Desf. Lúnula", css: "c-m7", items: ["item_lobo_lunula_1.webp", "item_pilula_gelo_1.webp", "item_pipa.webp", "item_tesouro_terra.webp"] },
         { id: "m7_lunula_demonio_de_sangue.webp", name: "Poderoso demonio de sangue", mundo: "C3-M7", info: "2F Desf. Lúnula", css: "c-m7", items: ["item_berrante_lunula.webp", "item_pilula_gelo_1.webp", "item_pipa.webp", "item_tesouro_vento.webp"] },
         { id: "m7_prisao.webp", name: "Prisão Subterrânea", mundo: "C3-M7", info: "Buman - Navio", css: "c-m7", items: ["item_pipa.webp"] },
@@ -93,4 +101,87 @@
         { id: "m5_flauta_consoladora_alma.webp", name: "Flauta de Almas", mundo: "C3-M5", info: "Gufa", css: "c-m5", items: ["item_bambu_magico.webp", "item_essencia_selvagem.webp", "item_pipa.webp", "item_armadura_celestial.webp"] },
         { id: "m5_ruina.webp", name: "Ruína do Demônio", mundo: "C3-M5", info: "Gufa", css: "c-m5", items: ["item_fruta_milenar.webp", "item_pipa.webp", "item_pedra_agilidade.webp", "item_tesouro_luz.webp"] },
         { id: "m5_aranha.webp", name: "Aracnideo Etereo", mundo: "C3-M5", info: "Gufa", css: "c-m5", items: ["item_tomo_do_culto.webp", "item_pipa.webp", "item_pedra_acerto.webp", "item_tesouro_vento.webp"] },
-        { id: "m5_templo.webp", name: "Templo ilusorio", mundo: "C3-M5", info: "
+        { id: "m5_templo.webp", name: "Templo ilusorio", mundo: "C3-M5", info: "Grande Muralha", css: "c-m5", items: ["item_casco_tatu.webp", "item_po_ilusorio.webp", "item_pipa.webp", "item_tesouro_agua.webp"] },
+        { id: "m3_tatu.webp", name: "Urungka", mundo: "C3-M3", info: "Necropole", css: "c-m3", items: ["item_casco_tatu.webp", "item_pedra_energia.webp", "item_estatua_rara.webp", "item_sino_violeta.webp"] },
+        { id: "m3_planicia_kaya.webp", name: "Kaya", mundo: "C3-M3", info: "Necropole", css: "c-m3", items: ["item_ornamento_soldado.webp", "item_montanha_2.webp", "item_tesouro_floresta.webp"] },
+        { id: "m3_covil_tatu.webp", name: "Tatu sombrio", mundo: "C3-M3", info: "Necropole", css: "c-m3", items: ["item_flor_roma_rara.webp", "item_pipa.webp", "item_espada_lunula.webp", "item_tesouro_terra.webp"] },
+        { id: "m3_espectro.webp", name: "Espectro Osso de Aço", mundo: "C3-M3", info: "Necropole", css: "c-m3", items: ["item_flor_roma_rara.webp", "item_pipa.webp", "item_pedra_acerto.webp", "item_tesouro_agua.webp"] },
+        { id: "m6_hangga.webp", name: "Hangga", mundo: "C3-M6", info: "Bicheon", css: "c-m6", items: ["item_lingote.webp", "item_pedra_amarela.webp", "item_pedra_epica.webp", "item_sino_relampago.webp"] },
+        { id: "m6_jogyu.webp", name: "Jo Gyu", mundo: "C3-M6", info: "Bicheon", css: "c-m6", items: ["item_grande_centopeia.webp", "item_livro_ceu_caotico.webp", "item_selo_vigor_t2.webp", "item_tesouro_fogo.webp"] },
+        { id: "m6_mina.webp", name: "Mina Demoniaca", mundo: "C3-M6", info: "Bicheon", css: "c-m6", items: ["item_flor_roma_rara.webp", "item_pipa.webp", "item_cristal_mana.webp", "item_tesouro_luz.webp"] },
+        { id: "m6_centopeia.webp", name: "Grande Centopeia", mundo: "C3-M6", info: "Bicheon", css: "c-m6", items: ["item_flor_roma_rara.webp", "item_pipa.webp", "item_pedra_agilidade.webp", "item_tesouro_vento.webp"] },
+        { id: "c1_songkwang.webp", name: "Sete Vales", mundo: "C1-M1", info: "Unseo", css: "c-c1", items: ["item_pipa.webp", "item_pedra_antiga.webp"] },
+        { id: "c1_porung.webp", name: "Ilha Fogo Ardente", mundo: "C1-M1", info: "Unseo", css: "c-c1", items: ["item_pipa.webp"] },
+        { id: "c2_kangmuhyeon.webp", name: "Campo dragao noveno", mundo: "C1-M1", info: "Dragão Noveno", css: "c-c1", items: ["item_pipa.webp"] },
+        { id: "c2_grandor.webp", name: "Riacho do sangue", mundo: "C1-M1", info: "Dragão Noveno", css: "c-c1", items: ["item_pipa.webp"] },
+        { id: "mc_Larva_centopeia.webp", name: "Deserto Phantasia", mundo: "MC", info: "Buman", css: "c-mc", items: ["item_pipa.webp"] }
+    ];
+
+    function renderBosses() {
+        const container = document.getElementById('bossContainer');
+        let html = '';
+        
+        bossData.forEach(boss => {
+            html += `
+                <div class="boss-card ${boss.css}" data-mundo="${boss.mundo}" onclick="this.classList.toggle('expanded')">
+                    <div class="boss-header">
+                        <img src="${pathBoss}${boss.id}" class="boss-img" alt="Boss">
+                        <div>
+                            <span class="boss-name">${boss.name}</span>
+                            <span class="npc-info">${boss.info}</span>
+                        </div>
+                    </div>
+                    <div class="items-container">
+                        ${boss.items.map(item => `
+                            <div class="item-box">
+                                <img src="${pathCraft}${item}" class="item-img" alt="Item">
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+    }
+
+    function trocarMenu(alvo) {
+        if (alvo === 'mc') {
+            document.getElementById('menuPrincipal').classList.add('hidden');
+            document.getElementById('menuVoltar').classList.remove('hidden');
+            filterBoss('MC');
+        } else if (alvo === 'm155') {
+            document.getElementById('menuPrincipal').classList.add('hidden');
+            document.getElementById('menuVoltar').classList.remove('hidden');
+            filterBoss('C1-M1');
+        } else {
+            document.getElementById('menuPrincipal').classList.remove('hidden');
+            document.getElementById('menuVoltar').classList.add('hidden');
+            filterBoss('all', document.querySelector('.f-btn'));
+        }
+    }
+
+    function filterBoss(termo, btn) {
+        if(btn) {
+            document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+        
+        const cards = document.querySelectorAll('.boss-card');
+        cards.forEach(card => {
+            const mundo = card.getAttribute('data-mundo');
+            if (termo === 'all' || mundo === termo) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // Inicializa sem erros
+    window.onload = function() {
+        renderBosses();
+        filterBoss('all');
+    };
+</script>
+</body>
+</html>
