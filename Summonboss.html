@@ -12,12 +12,11 @@
             border: 1px solid #ff9800; border-radius: 8px; overflow: hidden;
         }
 
-        /* Estilização da Barra de Rolagem Laranja */
+        /* Barra de Rolagem Laranja */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #1a1a1a; }
         ::-webkit-scrollbar-thumb { background: #ff9800; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #e68a00; }
-
+        
         .header { position: sticky; top: 0; background: #0f0f0f; padding-bottom: 10px; border-bottom: 1px solid #333; z-index: 10; }
         h4 { margin: 0 0 8px 0; color: #ff9800; text-align: center; text-transform: uppercase; font-size: 13px; }
         
@@ -29,14 +28,13 @@
         }
         .f-btn.active { opacity: 1; outline: 1px solid #fff; box-shadow: 0 0 5px #ff9800; color: #000 !important; background: #fff !important; }
 
-        /* Botão Voltar Restaurado */
         .btn-voltar { background: #444; color: #fff; flex: 1 1 100%; margin-bottom: 4px; font-size: 10px; border-radius: 3px; cursor: pointer; border: none; padding: 10px; }
         
-        .scroll { height: 410px; overflow-y: auto; margin-top: 10px; padding-right: 5px; scrollbar-gutter: stable; }
+        .scroll { height: 410px; overflow-y: auto; margin-top: 10px; padding-right: 5px; }
         
         .boss-card { background: rgba(255,255,255,0.05); border: 1px solid #222; border-radius: 5px; margin-bottom: 8px; border-left: 4px solid #444; cursor: pointer; display: block; }
         .boss-header { display: flex; align-items: center; padding: 8px; gap: 10px; }
-        .boss-img { width: 42px; height: 42px; border: 1px solid #444; border-radius: 4px; object-fit: cover; background: #222; }
+        .boss-img { width: 42px; height: 42px; border: 1px solid #444; border-radius: 4px; object-fit: cover; }
         .boss-name { font-size: 10px; font-weight: bold; color: #fff; display: block; }
         .npc-info { font-size: 8px; color: #ff9800; display: block; }
         
@@ -45,8 +43,8 @@
         .item-box { text-align: center; min-width: 40px; }
         .item-img { width: 32px; height: 32px; border: 1px solid #333; border-radius: 3px; background: #1a1a1a; }
         .hidden { display: none !important; }
-        
-        /* Cores dos Mapas */
+
+        /* Cores de Mapas */
         .c-m2 { border-left-color: #ffcc80; } .c-m3 { border-left-color: #a5d6a7; }
         .c-m4 { border-left-color: #90ee90; } .c-m5 { border-left-color: #ffe082; }
         .c-m6 { border-left-color: #ce93d8; } .c-m7 { border-left-color: #add8e6; }
@@ -96,9 +94,10 @@
             <div><span class="boss-name">Jo Gyu</span><span class="npc-info">Gyeongbin | Jo Gyu</span></div>
         </div>
         <div class="items-container">
-            <div class="item-box"><img src="img/craft/item_sino_violeta.webp" class="item-img"></div>
-            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
-            <div class="item-box"><img src="img/craft/item_po_misterioso.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_grande_centopeia.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_livro_ceu_caotico.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_selo_vigor_t2.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_tesouro_fogo.webp" class="item-img"></div>
         </div>
     </div>
 
@@ -112,6 +111,32 @@
             <div class="item-box"><img src="img/craft/item_escama_viboras.webp" class="item-img"></div>
             <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
             <div class="item-box"><img src="img/craft/item_fruta_vermelha.webp" class="item-img"></div>
+        </div>
+    </div>
+
+    <div class="boss-card c-m2" data-mundo="C3-M2" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/m2_seocheon.webp" class="boss-img">
+            <div><span class="boss-name">Zhang Liang</span><span class="npc-info">Seocheon | Feitoria</span></div>
+        </div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_feitoria_1.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_feitoria_2.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pedra_rara.webp" class="item-img"></div>
+        </div>
+    </div>
+
+    <div class="boss-card c-mc" data-mundo="MC" onclick="this.classList.toggle('expanded')">
+        <div class="boss-header">
+            <img src="img/bosses/mc_Larva_centopeia.webp" class="boss-img">
+            <div><span class="boss-name">Larva Centopeia</span><span class="npc-info">Buman | Deserto</span></div>
+        </div>
+        <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_energia_demonio_vazio.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_fragmento_escuridao.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pipa.webp" class="item-img"></div>
+            <div class="item-box"><img src="img/craft/item_pedra_vazia.webp" class="item-img"></div>
         </div>
     </div>
 
