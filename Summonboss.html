@@ -47,7 +47,10 @@
  .local-info { font-size: 8px; color: #777; display: block; }
 
  .items-container { display: none; padding: 8px; background: rgba(0,0,0,0.3); border-top: 1px solid #222; flex-direction: row; gap: 8px; overflow-x: auto; }
- .expanded .items-container { display: flex; }
+ 
+ /* CORREÇÃO: Seletor ajustado para mostrar itens quando o card for clicado */
+ .boss-card.expanded .items-container { display: flex; }
+ 
  .item-box { min-width: 35px; text-align: center; }
  .item-img { width: 30px; height: 30px; border: 1px solid #333; border-radius: 3px; }
 
@@ -229,6 +232,7 @@
     <div class="boss-card c1m1" data-mundo="c1m1" onclick="this.classList.toggle('expanded')">
         <div class="boss-header"><img src="img/bosses/c2_kangmuhyeon.webp" class="boss-img"><div><span class="boss-name">32. Kang Muhyeon</span><span class="npc-info">NPC: Su Seunghyeon</span><span class="local-info">Campo de dragao noveno</span></div></div>
         <div class="items-container">
+            <div class="item-box"><img src="img/craft/item_Provisao_rebelde.webp" class="item-img"></div>
             <div class="item-box"><img src="img/craft/item_pedaco_gelo.webp" class="item-img"></div>
             <div class="item-box"><img src="img/craft/item_pedaco_dragao_divino.webp" class="item-img"></div>
             <div class="item-box"><img src="img/craft/item_pedra_vigor.webp" class="item-img"></div>
